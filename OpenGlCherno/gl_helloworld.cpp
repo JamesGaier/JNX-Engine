@@ -1,29 +1,25 @@
 #include <GLFW/glfw3.h>
 
-int main(void)
-{
-	GLFWwindow* window;
-
+int main ( ) {
+	
 	/* Initialize the library */
-	if (!glfwInit())
+	if ( !glfwInit ( ) )
 		return -1;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
+	GLFWwindow* window = glfwCreateWindow ( 640, 480, "Hello World", NULL, NULL );
+	if ( !window ) {
+		glfwTerminate ( );
 		return -1;
 	}
 
 	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent ( window );
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(window))
-	{
+	while ( !glfwWindowShouldClose ( window ) ) {
 		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear ( GL_COLOR_BUFFER_BIT );
 
 		glBegin ( GL_TRIANGLES );
 		glVertex2f ( -0.5f, -0.5f );
@@ -32,12 +28,12 @@ int main(void)
 		glEnd ( );
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+		glfwSwapBuffers ( window );
 
 		/* Poll for and process events */
-		glfwPollEvents();
+		glfwPollEvents ( );
 	}
 
-	glfwTerminate();
+	glfwTerminate ( );
 	return 0;
 }
