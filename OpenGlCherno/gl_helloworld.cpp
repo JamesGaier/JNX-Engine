@@ -1,4 +1,8 @@
+//OpenGL includes
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+//C++ includes
+#include <iostream>
 
 int main ( ) {
 	
@@ -15,7 +19,11 @@ int main ( ) {
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent ( window );
-
+	
+	if ( glewInit ( ) != GLEW_OK ) {
+		std::cout << "GLEW init failed!" << std::endl;
+	}
+	
 	/* Loop until the user closes the window */
 	while ( !glfwWindowShouldClose ( window ) ) {
 		/* Render here */
