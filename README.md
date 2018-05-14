@@ -1,2 +1,2 @@
-# OpenGL
-A basic OpenGL rendering system
+# JNX Game Engine
+A basic OpenGL game engine
