@@ -1,2 +1,11 @@
 # JNX Game Engine
-<p id="center_text">A basic OpenGL game engine</p></br></br>proposed features:<ul><li>anti aliasing</li><li>light mapping</li><li>normal mapping</li><li>obj support</li><li>physics engine</li><li>gui</li></ul>
+A basic OpenGL game engine
+
+## Proposed Features:
+<ul><li>Anti-Aliasing</li>
+  <li>Light Mapping</li>
+  <li>Normal Maps</li>
+  <li>.obj Support</li>
+  <li>Physics Engine</li>
+  <li>GUI</li>
+</ul>
