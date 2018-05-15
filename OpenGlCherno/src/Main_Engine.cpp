@@ -56,10 +56,6 @@ int main() {
 			2, 3, 0
 	};
 
-	unsigned int vao;
-	GLCALL(glGenVertexArrays(1, &vao));
-	GLCALL(glBindVertexArray(vao));
-
 	VertexBuffer* vb = new VertexBuffer(vertex_buffer, VERTEX_BUFFER_COUNT * sizeof(float));
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2);
@@ -70,10 +66,8 @@ int main() {
 	IndexBuffer* ib = new IndexBuffer(indicies, INDICE_COUNT);
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
-	GLCALL(glUseProgram(shader->renderer_id()));
-
-	GLCALL(int location = glGetUniformLocation(shader->renderer_id(), "u_Color"));
-	ASSERT(location != -1);
+	shader->use_program();
+	int location = shader->uniform_location("u_Color");
 
 	double lastPrint = glfwGetTime();
 	unsigned numFrames = 0;

@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Renderer.h"
 #include <GL/glew.h>
 #include <iostream>
 #include <string>
@@ -14,6 +15,16 @@ Shader::Shader(const std::string& filename) {
 
 Shader::~Shader() {
 	glDeleteProgram(m_shaderID);
+}
+
+void Shader::use_program() const{ 
+	GLCALL(glUseProgram(m_shaderID)); 
+}
+
+int Shader::uniform_location(const char* name) const {
+	GLCALL(int location = glGetUniformLocation(m_shaderID, name));
+	ASSERT(location != -1);
+	return location;
 }
 
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {

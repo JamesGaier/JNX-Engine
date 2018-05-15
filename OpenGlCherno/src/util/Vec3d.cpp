@@ -37,7 +37,7 @@ Vec3d Vec3d::operator+(const Vec3d & rhs) const {
 }
 
 Vec3d Vec3d::operator-(const Vec3d & rhs) const {
-	return *this + (rhs*-1);
+	return *this + (-1 * rhs);
 }
 
 Vec3d Vec3d::operator*(const double& rhs) const {
@@ -45,10 +45,40 @@ Vec3d Vec3d::operator*(const double& rhs) const {
 }
 
 Vec3d Vec3d::operator/(const double& rhs) const {
-	return this->operator*(1 / rhs);
+	return (*this)*(1 / rhs);
+}
+
+//Array {x, y, z}
+double Vec3d::operator[](const int & rhs) const {
+	switch(rhs) {
+		case 0:return x;
+		case 1: return y;
+		case 2:return z;
+		default:
+			return -1;
+	}
+}
+
+Vec3d operator*(const double & lhs, const Vec3d & rhs) {
+	return rhs * lhs;
 }
 
 std::ostream & operator<<(std::ostream & out, const Vec3d & rhs) {
-	out << "(" << rhs.x << ", " << rhs.y << ", " << rhs.z << ")";
+	out << "(" << rhs[0] << ", " << rhs[1] << ", " << rhs[2] << ")";
 	return out;
+}
+
+std::istream & operator>>(std::istream & input, Vec3d & rhs) {
+	
+	double value;
+	input >> value;
+	rhs.setX(value);
+
+	input >> value;
+	rhs.setY(value);
+
+	input >> value;
+	rhs.setZ(value);
+
+	return input;
 }

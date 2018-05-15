@@ -18,6 +18,9 @@ public:
 	Shader(const std::string& filename);
 	~Shader();
 
+	void use_program() const;
+	int uniform_location(const char* name) const;
+
 	inline unsigned renderer_id() const { return m_shaderID; }
 };
 

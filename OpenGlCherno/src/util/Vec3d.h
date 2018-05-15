@@ -21,9 +21,15 @@ public:
 	Vec3d operator-(const Vec3d& rhs) const;
 	Vec3d operator*(const double& rhs) const;
 	Vec3d operator/(const double& rhs) const;
-
-	//Input and Output
-	friend std::ostream& operator<<(std::ostream& output, const Vec3d& rhs);
+	
+	//Accessor
+	double operator[](const int& rhs) const;
 };
+//Other Math
+Vec3d operator*(const double& lhs, const Vec3d& rhs);
+
+//Input and Output
+std::ostream& operator<<(std::ostream& output, const Vec3d& rhs);
+std::istream& operator>>(std::istream& input, Vec3d& rhs);
 
 #endif
