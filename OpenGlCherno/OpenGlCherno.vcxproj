@@ -23,6 +23,7 @@
     <ProjectGuid>{DEBAFC6A-9E6B-48A6-9D1A-875BA7094B81}</ProjectGuid>
     <RootNamespace>OpenGlCherno</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>JNXGameEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,10 +147,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gl_helloworld.cpp" />
+    <ClCompile Include="src\rendering\Shader.cpp" />
+    <ClCompile Include="src\rendering\buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\rendering\buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Main_Engine.cpp" />
+    <ClCompile Include="src\rendering\Renderer.cpp" />
+    <ClCompile Include="src\util\Vec3d.cpp" />
+    <ClCompile Include="src\rendering\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\rendering\Shader.h" />
+    <ClInclude Include="src\rendering\buffers\IndexBuffer.h" />
+    <ClInclude Include="src\rendering\buffers\VertexBuffer.h" />
+    <ClInclude Include="src\rendering\Renderer.h" />
+    <ClInclude Include="src\util\Vec3d.h" />
+    <ClInclude Include="src\rendering\VertexArray.h" />
+    <ClInclude Include="src\rendering\VertexBufferLayout.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
