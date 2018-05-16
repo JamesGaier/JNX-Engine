@@ -154,6 +154,8 @@
     <ClCompile Include="src\rendering\Renderer.cpp" />
     <ClCompile Include="src\util\Vec3d.cpp" />
     <ClCompile Include="src\rendering\VertexArray.cpp" />
+    <ClCompile Include="src\vendor\stb_image.cpp" />
+    <ClCompile Include="src\rendering\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -165,7 +167,9 @@
     <ClInclude Include="src\rendering\Renderer.h" />
     <ClInclude Include="src\util\Vec3d.h" />
     <ClInclude Include="src\rendering\VertexArray.h" />
-    <ClInclude Include="src\rendering\VertexBufferLayout.h" />
+    <ClInclude Include="src\rendering\buffers\VertexBufferLayout.h" />
+    <ClInclude Include="src\vendor\stb_image.h" />
+    <ClInclude Include="src\rendering\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

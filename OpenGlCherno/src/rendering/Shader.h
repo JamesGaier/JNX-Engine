@@ -21,6 +21,8 @@ public:
 	void use_program() const;
 	int uniform_location(const char* name) const;
 
+	void setUniform4f(const int& location, const float& a, const float& b, const float& c, const float& d) const;
+
 	inline unsigned renderer_id() const { return m_shaderID; }
 };
 

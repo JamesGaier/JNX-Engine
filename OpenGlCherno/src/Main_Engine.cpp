@@ -3,6 +3,7 @@
 #include "rendering/buffers/IndexBuffer.h"
 #include "rendering/VertexArray.h"
 #include "rendering/Shader.h"
+#include "rendering/Texture.h"
 //OpenGL includes
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -66,22 +67,20 @@ int main() {
 	IndexBuffer* ib = new IndexBuffer(indicies, INDICE_COUNT);
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
-	shader->use_program();
-	int location = shader->uniform_location("u_Color");
+	int loc_color4f = shader->uniform_location("u_Color");
+
+	Renderer* rend = new Renderer;
 
 	double lastPrint = glfwGetTime();
 	unsigned numFrames = 0;
 	/* Loop until the user closes the window */
 	while(!glfwWindowShouldClose(window)) {
-
-		GLCALL(glClear(GL_COLOR_BUFFER_BIT));
-		/* Render here */
-		GLCALL(glUniform4f(location, 0.1f, 0.1f, .5f, 1.0f));
 		
-		va->Bind();
-		ib->Bind();
-		GLCALL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-
+		rend->clear();
+		/* Render here */
+		shader->use_program();
+		shader->setUniform4f(loc_color4f, .1f, .3f, .7f, 1);
+		rend->draw(va, ib, shader);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
 

@@ -27,6 +27,10 @@ int Shader::uniform_location(const char* name) const {
 	return location;
 }
 
+void Shader::setUniform4f(const int & location, const float & a, const float & b, const float & c, const float & d) const {
+	GLCALL(glUniform4f(location,a,b,c,d));
+}
+
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 	std::ifstream input(file_path);
 	if(!input) {
