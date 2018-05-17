@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
+    <None Include="res\shaders\textured.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\rendering\Shader.h" />

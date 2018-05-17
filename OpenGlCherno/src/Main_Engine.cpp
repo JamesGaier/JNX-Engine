@@ -34,6 +34,8 @@ int main() {
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
+	GLCALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 	if(glewInit() != GLEW_OK) {
 		std::cout << "GLEW init failed!" << std::endl;
 	} else {
@@ -67,7 +69,6 @@ int main() {
 	IndexBuffer* ib = new IndexBuffer(indicies, INDICE_COUNT);
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
-	int loc_color4f = shader->uniform_location("u_Color");
 
 	Renderer* rend = new Renderer;
 
@@ -79,7 +80,7 @@ int main() {
 		rend->clear();
 		/* Render here */
 		shader->use_program();
-		shader->setUniform4f(loc_color4f, .1f, .3f, .7f, 1);
+		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
 		rend->draw(va, ib, shader);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);

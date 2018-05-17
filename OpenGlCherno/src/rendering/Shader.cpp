@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <unordered_map>
 
 Shader::Shader(const std::string& filename) {
 
@@ -21,14 +22,32 @@ void Shader::use_program() const{
 	GLCALL(glUseProgram(m_shaderID)); 
 }
 
-int Shader::uniform_location(const char* name) const {
-	GLCALL(int location = glGetUniformLocation(m_shaderID, name));
+int Shader::uniform_location(const std::string& name){
+	
+	auto got = uniformCache.find(name);
+
+	if(got != uniformCache.end()) {
+		return got->second;
+	}
+	
+	GLCALL(int location = glGetUniformLocation(m_shaderID, name.c_str()));
 	ASSERT(location != -1);
+
+	uniformCache[name]=location;
+
 	return location;
 }
 
-void Shader::setUniform4f(const int & location, const float & a, const float & b, const float & c, const float & d) const {
-	GLCALL(glUniform4f(location,a,b,c,d));
+void Shader::setUniform1f(const std::string & name, const float & val) { 
+	GLCALL(glUniform1f(uniform_location(name), val)); 
+}
+
+void Shader::setUniform1i(const std::string & name, const int & val) { 
+	GLCALL(glUniform1i(uniform_location(name), val)); 
+}
+
+void Shader::setUniform4f(const std::string& name, const float & a, const float & b, const float & c, const float & d) {
+	GLCALL(glUniform4f(uniform_location(name), a, b, c, d));
 }
 
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {

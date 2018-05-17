@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
+    <None Include="res\shaders\textured.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\Vec3d.h">
