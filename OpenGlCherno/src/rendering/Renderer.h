@@ -20,6 +20,7 @@ bool gl_check_error(const char* func, const char* file, const unsigned int line)
 class VertexArray;
 class Shader;
 
+//To Consider: Renderer may not need to be a class
 class Renderer {
 
 public:

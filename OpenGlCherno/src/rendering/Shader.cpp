@@ -50,6 +50,10 @@ void Shader::setUniform4f(const std::string& name, const float & a, const float 
 	GLCALL(glUniform4f(uniform_location(name), a, b, c, d));
 }
 
+void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix) {
+	GLCALL(glUniformMatrix4fv(uniform_location(name), 1, GL_FALSE, &matrix[0][0]));
+}
+
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 	std::ifstream input(file_path);
 	if(!input) {

@@ -7,6 +7,8 @@
 //OpenGL includes
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 //C++ includes
 #include <iostream>
 #include <string>
@@ -59,6 +61,8 @@ int main() {
 			2, 3, 0
 	};
 
+	glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f);
+
 	VertexBuffer* vb = new VertexBuffer(vertex_buffer, VERTEX_BUFFER_COUNT * sizeof(float));
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2);
@@ -81,6 +85,7 @@ int main() {
 		/* Render here */
 		shader->use_program();
 		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
+		shader->setUniformMat4f("u_MVP", proj);
 		rend->draw(va, ib, shader);
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
