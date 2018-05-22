@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\rendering\Shader.cpp" />
     <ClCompile Include="src\rendering\buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\rendering\buffers\VertexBuffer.cpp" />
@@ -274,6 +275,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\rendering\Shader.h" />
     <ClInclude Include="src\rendering\buffers\IndexBuffer.h" />
     <ClInclude Include="src\rendering\buffers\VertexBuffer.h" />

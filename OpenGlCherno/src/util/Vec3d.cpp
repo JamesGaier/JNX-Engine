@@ -8,8 +8,22 @@ Vec3d::Vec3d(double x, double y, double z) {
 	setZ(z);
 }
 
+Vec3d::Vec3d(double all) {
+	setX(all);
+	setY(all);
+	setZ(all);
+}
+
+Vec3d::Vec3d() {
+	setX(0);
+	setY(0);
+	setZ(0);
+}
+
 Vec3d::Vec3d(const Vec3d & copy) {
-	Vec3d(copy.x, copy.y, copy.z);
+	setX(copy.x);
+	setY(copy.y);
+	setZ(copy.z);
 }
 
 void Vec3d::setX(double x) {
@@ -25,11 +39,11 @@ void Vec3d::setZ(double z) {
 }
 
 double Vec3d::magnitudeSquared() const {
-	return this->x*this->x + this->y*this->y + this->z*this->z;
+	return x*x + y*y + z*z;
 }
 
 Vec3d Vec3d::normalized() const {
-	return this->operator/(sqrt(this->magnitudeSquared()));
+	return *this/(sqrt(magnitudeSquared()));
 }
 
 Vec3d Vec3d::operator+(const Vec3d & rhs) const {
@@ -41,7 +55,7 @@ Vec3d Vec3d::operator-(const Vec3d & rhs) const {
 }
 
 Vec3d Vec3d::operator*(const double& rhs) const {
-	return Vec3d(this->x*rhs, this->y*rhs, this->z*rhs);
+	return Vec3d(x*rhs, y*rhs, z*rhs);
 }
 
 Vec3d Vec3d::operator/(const double& rhs) const {

@@ -7,7 +7,9 @@ class Vec3d {
 private:
 	double x, y, z;
 public:
-	Vec3d(double x = 0, double y = 0, double z = 0);
+	Vec3d(double x, double y, double z);
+	Vec3d(double all); // Set all to the same value
+	Vec3d(); //Zero vector
 	Vec3d(const Vec3d& copy);
 	void setX(double x);
 	void setY(double y);
