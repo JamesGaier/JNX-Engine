@@ -12,6 +12,8 @@ Shader::Shader(const std::string& filename) {
 	auto* source = parse_shader(filename);
 	m_shaderID = create_shader(source);
 	delete source;
+
+	std::cout << "Shader created from " << filename << std::endl;
 }
 
 Shader::~Shader() {

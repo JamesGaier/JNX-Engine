@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <obj_loader/OBJ_Loader.h>
 //C++ includes
 #include <iostream>
 #include <string>
@@ -18,6 +19,8 @@ http://docs.gl/
 http://www.glfw.org/docs/latest/
 http://glew.sourceforge.net/basic.html
 */
+
+#define UTAH 1
 
 int main() {
 
@@ -46,26 +49,57 @@ int main() {
 		std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
 	}
 
-
-	const unsigned int VERTEX_BUFFER_COUNT = 8;
-	const float* const vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
+	unsigned int VERTEX_BUFFER_COUNT = 8;
+	float* vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
 		-0.5f, -0.5f,
 			0.5f, -0.5f,
 			0.5f, 0.5f,
 			-0.5f, 0.5f,
 	};
 
-	const unsigned int INDICE_COUNT = 6;
-	const unsigned int* indicies = new unsigned int[INDICE_COUNT] {
+	unsigned int INDICE_COUNT = 6;
+	unsigned int* indicies = new unsigned int[INDICE_COUNT] {
 		0, 1, 2,
 			2, 3, 0
 	};
 
+	objl::Loader loader;
+
+	if(UTAH && loader.LoadFile("res/models/utah_teapot.obj")) {
+	
+		std::cout << "Found a teapot from Utah" << std::endl;
+
+		delete[] vertex_buffer;
+		
+		VERTEX_BUFFER_COUNT = loader.LoadedVertices.size() * 3;
+		vertex_buffer = new float[VERTEX_BUFFER_COUNT];
+
+		int currentIndex = 0;
+		for(unsigned i = 0; i < loader.LoadedVertices.size(); i++) {
+			objl::Vector3 data = loader.LoadedVertices[i].Position;
+			vertex_buffer[currentIndex] = data.X;
+			vertex_buffer[currentIndex + 1] = data.Y;
+			vertex_buffer[currentIndex + 2] = data.Z;
+			currentIndex += 3;
+		}
+
+		delete[] indicies;
+
+		INDICE_COUNT = loader.LoadedIndices.size();
+		indicies = new unsigned int[INDICE_COUNT];
+
+		for(unsigned i = 0; i < loader.LoadedIndices.size(); i++) {
+			*(indicies + i) = loader.LoadedIndices[i];
+		}
+
+		std::cout << "Successfully loaded Utah teapot" << std::endl;
+	}
+	
 	glm::mat4 proj = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f);
 
 	VertexBuffer* vb = new VertexBuffer(vertex_buffer, VERTEX_BUFFER_COUNT * sizeof(float));
 	VertexBufferLayout* vbl = new VertexBufferLayout;
-	vbl->push<float>(2);
+	vbl->push<float>(2 + UTAH);
 	
 	VertexArray* va = new VertexArray;
 	va->addBuffer(vb, vbl);
@@ -76,6 +110,7 @@ int main() {
 
 	Renderer* rend = new Renderer;
 
+	std::cout << std::endl;
 	double lastPrint = glfwGetTime();
 	unsigned numFrames = 0;
 	/* Loop until the user closes the window */

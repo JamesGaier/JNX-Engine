@@ -5,6 +5,7 @@ class VertexBuffer {
 private:
 	unsigned int m_rendererID;
 public:
+	//Size means you use sizeof in the parameter
 	VertexBuffer(const void* data, const unsigned int size);
 	~VertexBuffer();
 
