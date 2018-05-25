@@ -2,6 +2,7 @@
 #define _VEC3D
 
 #include <iostream>
+#include <glm/glm.hpp>
 
 class Vec3d {
 private:
@@ -26,6 +27,7 @@ public:
 	
 	//Accessor
 	double operator[](const int& rhs) const;
+	operator glm::vec3() const;
 };
 //Other Math
 Vec3d operator*(const double& lhs, const Vec3d& rhs);

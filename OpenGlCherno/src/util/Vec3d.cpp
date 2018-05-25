@@ -65,12 +65,16 @@ Vec3d Vec3d::operator/(const double& rhs) const {
 //Array {x, y, z}
 double Vec3d::operator[](const int & rhs) const {
 	switch(rhs) {
-		case 0:return x;
+		case 0: return x;
 		case 1: return y;
-		case 2:return z;
+		case 2: return z;
 		default:
 			return -1;
 	}
+}
+
+Vec3d::operator glm::vec3() const {
+	return glm::vec3(x, y, z);
 }
 
 Vec3d operator*(const double & lhs, const Vec3d & rhs) {

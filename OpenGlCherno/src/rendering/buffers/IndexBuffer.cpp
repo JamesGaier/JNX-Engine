@@ -1,5 +1,5 @@
 #include "IndexBuffer.h"
-#include "../Renderer.h"
+#include "../util/GLUtil.h"
 
 IndexBuffer::IndexBuffer(const unsigned* data, const unsigned count) : m_count(count) {
 

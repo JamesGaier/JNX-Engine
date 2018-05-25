@@ -1,6 +1,5 @@
 #include "Shader.h"
-#include "Renderer.h"
-#include <GL/glew.h>
+#include "../util/GLUtil.h"
 #include <iostream>
 #include <string>
 #include <fstream>

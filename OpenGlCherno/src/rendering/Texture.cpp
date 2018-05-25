@@ -1,6 +1,5 @@
 #include "Texture.h"
 #include "stb_image/stb_image.h"
-
 #include <iostream>
 
 Texture::Texture(const std::string& path, bool keepLocal) : 

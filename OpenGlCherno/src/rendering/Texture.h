@@ -1,7 +1,7 @@
 #ifndef _TEXTURE
 #define _TEXTURE
 
-#include "Renderer.h"
+#include "../util/GLUtil.h"
 
 class Texture {
 private:

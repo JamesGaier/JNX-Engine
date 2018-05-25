@@ -1,9 +1,8 @@
 #ifndef _VERTEX_BUFFER_LAYOUT
 #define _VERTEX_BUFFER_LAYOUT
 
+#include "../util/GLUtil.h"
 #include <vector>
-#include <GL/glew.h>
-#include "../Renderer.h"
 
 struct VertexElement {
 	unsigned type;
