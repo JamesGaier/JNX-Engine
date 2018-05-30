@@ -4,15 +4,15 @@
 #include "rendering/Texture.h"
 #include "rendering/Model.h"
 #include "GameObject.h"
+#include "JNX_Engine.h"
 //OpenGL includes
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 //C++ includes
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <ctime>
 
 /* Links to documentation
 http://docs.gl/
@@ -22,49 +22,30 @@ http://glew.sourceforge.net/basic.html
 
 int main() {
 
-	/* Initialize the library */
-	if(!glfwInit())
-		return -1;
+	JNX_Engine jnx(true);
 
-	/* Create a windowed mode window and its OpenGL context */
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
-	if(!window) {
-		glfwTerminate();
-		return -1;
+	if(!jnx.isLoaded()) {
+		return 0;
 	}
 
-	/* Make the window's context current */
-	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1);
-
-	GLCALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
-	if(glewInit() != GLEW_OK) {
-		std::cout << "GLEW init failed!" << std::endl;
-	} else {
-		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
-		std::cout << "GL Shader Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-		std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
-	}
-
-	Model* teapot = new Model;
-	teapot->loadModel("res/models/utah_teapot.obj");
-
+	//Longest part of init sequence
+	Model* teapot = new Model("res/models/utah_teapot.obj");
 	GameObject* go = new GameObject(teapot);
 
-	glm::mat4 proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 100.0f);
+	glm::mat4 proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
 	glm::mat4 view = glm::translate(glm::mat4(), glm::vec3());
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
-
+	
 	Renderer* rend = new Renderer;
 
 	std::cout << std::endl;
 	double lastPrint = glfwGetTime();
 	unsigned numFrames = 0;
 	unsigned long totalFrames = 0;
+	auto vp = proj * view;
 	/* Loop until the user closes the window */
-	while(!glfwWindowShouldClose(window)) {
+	while(jnx.running()) {
 		
 		rend->clear();
 		/* Render here */
@@ -76,10 +57,10 @@ int main() {
 
 		shader->use_program();
 		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
-		shader->setUniformMat4f("u_MVP", proj * view * model);
+		shader->setUniformMat4f("u_MVP", vp * model);
 		go->draw(rend, shader);
 		/* Swap front and back buffers */
-		glfwSwapBuffers(window);
+		jnx.swapBuffers();
 
 		/* Poll for and process events */
 		glfwPollEvents();
@@ -96,8 +77,6 @@ int main() {
 
 	delete shader;
 	delete go;
-
-	glfwTerminate();
 
 	return 0;
 }

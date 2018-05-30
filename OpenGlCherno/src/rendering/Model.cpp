@@ -44,9 +44,9 @@ bool Model::loadModel(const std::string & file, bool is3D) {
 		genBuffers();
 
 		return true;
-	} else {
-		return false;
-	}
+	} 
+	
+	return false;
 }
 
 bool Model::loadSquare(float sideLength) {
@@ -81,6 +81,7 @@ void Model::cleanData() {
 	delete[] vertex_buffer; 
 	delete[] indicies; 
 	delete ib;
+	delete va;
 	delete vb;
 }
 
