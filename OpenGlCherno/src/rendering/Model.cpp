@@ -2,7 +2,6 @@
 
 #include "obj_loader/OBJ_Loader.h"
 
-
 Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 
 	if(file != EMPTY_MODEL_SOURCE) {
@@ -38,11 +37,10 @@ bool Model::loadModel(const std::string & file, bool is3D) {
 			*(indicies + i) = loader.LoadedIndices[i];
 		}
 
-		std::cout << "Successfully loaded " << file << std::endl;
-
 		this->is3D = is3D;
 		genBuffers();
 
+		std::cout << "Successfully loaded " << file << std::endl;
 		return true;
 	} 
 	

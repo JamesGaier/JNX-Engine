@@ -32,8 +32,8 @@ int main() {
 	Model* teapot = new Model("res/models/utah_teapot.obj");
 	GameObject* go = new GameObject(teapot);
 
-	glm::mat4 proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
-	glm::mat4 view = glm::translate(glm::mat4(), glm::vec3());
+	jnx.setProjectionOrtho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
+	jnx.setCameraTranslate(Vec3d());
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
 	
@@ -43,7 +43,6 @@ int main() {
 	double lastPrint = glfwGetTime();
 	unsigned numFrames = 0;
 	unsigned long totalFrames = 0;
-	auto vp = proj * view;
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		
@@ -57,7 +56,7 @@ int main() {
 
 		shader->use_program();
 		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
-		shader->setUniformMat4f("u_MVP", vp * model);
+		shader->setUniformMat4f("u_MVP", jnx.viewProjection() * model);
 		go->draw(rend, shader);
 		/* Swap front and back buffers */
 		jnx.swapBuffers();

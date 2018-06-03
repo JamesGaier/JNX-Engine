@@ -1,8 +1,7 @@
 #include "JNX_Engine.h"
 #include "util/GLUtil.h"
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <iostream>
 
@@ -51,4 +50,15 @@ bool JNX_Engine::init(bool vsync) {
 	loaded = true;
 
 	return true;
+}
+
+void JNX_Engine::setProjectionOrtho( float left, float right, float up, float down, float near, float far) {
+
+	proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
+	projMode = ProjectionMode::ORTHO;
+}
+
+void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
+
+	trans = glm::translate(glm::mat4(), static_cast<glm::vec3>(pos));
 }

@@ -4,6 +4,7 @@
 #include "buffers/VertexBuffer.h"
 #include "VertexArray.h"
 #include "buffers/IndexBuffer.h"
+
 #include <string>
 
 #define EMPTY_MODEL_SOURCE "NONE"
@@ -34,6 +35,7 @@ public:
 
 	bool loadModel(const std::string& file, bool is3D = true);
 	bool loadSquare(float sideLength);
+
 };
 
 #endif // !_MODEL
