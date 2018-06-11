@@ -6,13 +6,13 @@
 
 #include <iostream>
 
-JNX_Engine::JNX_Engine(bool initNow) : loaded(false) {
+JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool initNow) : loaded(false), width(wide), height(high) {
 	if(initNow) {
 		init();
 	}
 }
 
-JNX_Engine::~JNX_Engine() { 
+JNX_Engine::~JNX_Engine() {
 	delete shader;
 	glfwTerminate();
 }
@@ -75,7 +75,7 @@ void JNX_Engine::swapBuffers() {
 
 	numFrames++;
 	totalFrames++;
-	if(lastPrint + 1 <= glfwGetTime()) {
+	if(lastPrint + 1 <= time()) {
 		std::cout << 1000.0 / numFrames << "ms per frame" << std::endl;
 		lastFPS = numFrames;
 		numFrames = 0;
@@ -84,5 +84,21 @@ void JNX_Engine::swapBuffers() {
 }
 
 void JNX_Engine::renderGameObject(GameObject * go) const {
+	go->shaderSettings(shader, viewProjection());
 	go->draw(rend, shader);
+}
+
+void JNX_Engine::renderGameObjects() const {
+	for(unsigned i = 0; i < gameObjects.size(); i++) {
+		renderGameObject(gameObjects[i]);
+	}
+}
+
+void JNX_Engine::updateGameObjects() {
+	
+	for(unsigned i = 0; i < gameObjects.size(); i++) {
+		gameObjects[i]->update(time() - lastDelta);
+	}
+
+	lastDelta = time();
 }

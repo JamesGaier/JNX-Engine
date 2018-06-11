@@ -5,11 +5,11 @@ GameObject::GameObject(Model * m) { setModel(m); }
 
 GameObject::~GameObject() { delete model; }
 
-glm::mat4 GameObject::getTranslateMat() const {
+glm::mat4 GameObject::translateMat() const {
 	return glm::translate(glm::mat4(), static_cast<glm::vec3>(pos));
 }
 
-glm::mat4 GameObject::getScaleMat() const {
+glm::mat4 GameObject::scaleMat() const {
 	return glm::scale(glm::mat4(), static_cast<glm::vec3>(scale));
 }
 
@@ -26,9 +26,21 @@ void GameObject::setRotation(float radians, Vec3d axis) {
 	rotation = glm::rotate(glm::mat4(), radians, static_cast<glm::vec3>(axis));
 }
 
-void GameObject::draw(Renderer* r, Shader* shader) const { 
+void GameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) {
+
+	shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
+	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
+}
+
+void GameObject::draw(Renderer* r, Shader* shader) const {
 	r->draw(model, shader); 
 }
 
-
+void GameObject::update(double delta) {
+	totalDelta += delta;
+	const float RATE = 1;
+	auto x = std::cos(totalDelta / RATE);
+	auto y = std::sin(totalDelta / RATE);
+	setPosition(Vec3d(x, y, 0));
+}
 

@@ -6,7 +6,7 @@ private:
 	unsigned m_rendererID;
 	unsigned m_count;
 public:
-	IndexBuffer(const unsigned* data, const unsigned count);
+	IndexBuffer(unsigned* data, unsigned count);
 	~IndexBuffer();
 
 	void Bind() const;

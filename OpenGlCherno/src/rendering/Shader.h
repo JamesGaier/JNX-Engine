@@ -15,7 +15,7 @@ private:
 	std::unordered_map<std::string, int> uniformCache;
 
 	ShaderProgramSource* parse_shader(const std::string& file_path);
-	unsigned compile_shader(unsigned int type, const std::string& source);
+	unsigned compile_shader(unsigned type, const std::string& source);
 	unsigned create_shader(const ShaderProgramSource* source);
 	int uniform_location(const std::string& name);
 

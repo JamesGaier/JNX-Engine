@@ -5,7 +5,6 @@
 #include "VertexArray.h"
 #include "buffers/IndexBuffer.h"
 
-
 #include <string>
 
 #define EMPTY_MODEL_SOURCE "NONE"
@@ -16,11 +15,11 @@ private:
 	//The factor to multiply by to get all vectors normalized
 	float normalFactor;
 
-	unsigned int VERTEX_BUFFER_COUNT;
+	unsigned VERTEX_BUFFER_COUNT;
 	float* vertex_buffer;
 
-	unsigned int INDICE_COUNT;
-	unsigned int* indicies;
+	unsigned INDICE_COUNT;
+	unsigned* indicies;
 
 	VertexBuffer* vb;
 	VertexArray* va;

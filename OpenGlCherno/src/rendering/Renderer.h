@@ -2,7 +2,7 @@
 #define _RENDERER
 
 #include "buffers/IndexBuffer.h"
-#include "buffers/VertexBuffer.h"
+#include "VertexArray.h"
 #include "Shader.h"
 #include "Model.h"
 #include <GL/glew.h>

@@ -98,7 +98,7 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 	return read_shader;
 }
 
-unsigned Shader::compile_shader(unsigned int type, const std::string& source) {
+unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 
 	unsigned int id = glCreateShader(type);
 	const char* src = source.c_str();

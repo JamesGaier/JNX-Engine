@@ -3,10 +3,10 @@
 
 class VertexBuffer {
 private:
-	unsigned int m_rendererID;
+	unsigned m_rendererID;
 public:
 	//Size means you use sizeof in the parameter
-	VertexBuffer(const void* data, const unsigned int size);
+	VertexBuffer(void* data, unsigned size);
 	~VertexBuffer();
 
 	void Bind() const;

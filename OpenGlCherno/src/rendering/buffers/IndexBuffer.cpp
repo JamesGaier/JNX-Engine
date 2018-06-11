@@ -1,7 +1,7 @@
 #include "IndexBuffer.h"
 #include "../util/GLUtil.h"
 
-IndexBuffer::IndexBuffer(const unsigned* data, const unsigned count) : m_count(count) {
+IndexBuffer::IndexBuffer(unsigned* data, unsigned count) : m_count(count) {
 
 	ASSERT(sizeof(unsigned) == sizeof(GLuint));
 

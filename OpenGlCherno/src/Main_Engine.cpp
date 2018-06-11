@@ -1,14 +1,9 @@
 #define _USE_MATH_DEFINES
+#include "JNX_Engine.h"
 #include "util/GLUtil.h"
-#include "rendering/Renderer.h"
-#include "rendering/Shader.h"
 #include "rendering/Texture.h"
 #include "rendering/Model.h"
 #include "GameObject.h"
-#include "JNX_Engine.h"
-//OpenGL includes
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 //C++ includes
 #include <iostream>
 #include <string>
@@ -24,33 +19,30 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 
 int main() {
 
-	JNX_Engine jnx;
+	JNX_Engine jnx(640, 480);
 
-	if(!jnx.isLoaded()) {
+	if(!jnx.isLoaded()) 
 		return 0;
-	}
-
+	
 	//Longest part of init sequence
 	Model* circle = new Model("res/models/circle.obj");
 	GameObject* go = new GameObject(circle);
 
-	jnx.setProjectionPerspective(glm::radians(45.0f), 4.0f / 3.0f);
+	jnx.setProjectionPerspective(glm::radians(45.0f));
 	jnx.setCameraTranslate(Vec3d(0, 0, -5));
 	jnx.loadShader("res/shaders/basic.shader");
+
+	jnx.registerGameObject(go);
+
+	std::cout << std::endl;
 
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		
 		jnx.cleanBuffers();
 		/* Render here */
-		const int RATE = 20;
-		float x = std::cosf(jnx.totalFrameCount() / static_cast<float>(RATE));
-		float y = std::sinf(jnx.totalFrameCount() / static_cast<float>(RATE));
-		go->setPosition(Vec3d(x, y, 0));
-
-		jnx.shaderManip()->setUniform4f("u_Color", .1f, .3f, .7f, 1);
-		jnx.shaderManip()->setUniformMat4f("u_MVP", jnx.mvp(go));
-		jnx.renderGameObject(go);
+		jnx.updateGameObjects();
+		jnx.renderGameObjects();
 
 		/* Swap front and back buffers */
 		jnx.swapBuffers();
