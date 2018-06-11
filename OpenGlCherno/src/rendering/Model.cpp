@@ -10,8 +10,8 @@ Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 	normalFactor = 1;
 	if(file != EMPTY_MODEL_SOURCE) {
 		loadModel(file);
-		std::cout << "Verteces loaded: " << VERTEX_BUFFER_COUNT << std::endl;
-		std::cout << "Indeces loaded: " << INDICE_COUNT << std::endl;
+		std::cout << "Vertices loaded: " << VERTEX_BUFFER_COUNT << std::endl;
+		std::cout << "Indices loaded: " << INDICE_COUNT << std::endl;
 	}
 }
 

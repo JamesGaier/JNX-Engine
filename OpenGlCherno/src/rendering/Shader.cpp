@@ -34,20 +34,20 @@ int Shader::uniform_location(const std::string& name){
 	GLCALL(int location = glGetUniformLocation(m_shaderID, name.c_str()));
 	ASSERT(location != -1);
 
-	uniformCache[name]=location;
+	uniformCache[name] = location;
 
 	return location;
 }
 
-void Shader::setUniform1f(const std::string & name, const float & val) { 
+void Shader::setUniform1f(const std::string & name, float val) { 
 	GLCALL(glUniform1f(uniform_location(name), val)); 
 }
 
-void Shader::setUniform1i(const std::string & name, const int & val) { 
+void Shader::setUniform1i(const std::string & name, int val) { 
 	GLCALL(glUniform1i(uniform_location(name), val)); 
 }
 
-void Shader::setUniform4f(const std::string& name, const float & a, const float & b, const float & c, const float & d) {
+void Shader::setUniform4f(const std::string& name, float a, float b, float c, float d) {
 	GLCALL(glUniform4f(uniform_location(name), a, b, c, d));
 }
 

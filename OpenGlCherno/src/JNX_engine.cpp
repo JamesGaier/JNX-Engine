@@ -13,16 +13,14 @@ JNX_Engine::JNX_Engine(bool initNow) : loaded(false) {
 }
 
 JNX_Engine::~JNX_Engine() { 
+	delete shader;
 	glfwTerminate();
 }
 
 bool JNX_Engine::init(bool vsync) {
 	
-	if(loaded) 
-		return false;
-	
-	/* Initialize the library */
-	if(!glfwInit())
+	/* Initialize the library if we have not already loaded */
+	if(loaded || !glfwInit())
 		return false;
 
 	/* Create a windowed mode window and its OpenGL context */
@@ -54,7 +52,6 @@ bool JNX_Engine::init(bool vsync) {
 }
 
 void JNX_Engine::setProjectionOrtho( float left, float right, float up, float down, float near, float far) {
-
 	proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
 	projMode = ProjectionMode::ORTHO;
 }
@@ -65,6 +62,27 @@ void JNX_Engine::setProjectionPerspective(float fov, float aspectRatio, float ne
 }
 
 void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
-
 	trans = glm::translate(glm::mat4(), static_cast<glm::vec3>(pos));
+}
+
+void JNX_Engine::loadShader(const std::string & file) {
+	shader = new Shader("res/shaders/basic.shader");
+	shader->use_program();
+}
+
+void JNX_Engine::swapBuffers() {
+	glfwSwapBuffers(window); 
+
+	numFrames++;
+	totalFrames++;
+	if(lastPrint + 1 <= glfwGetTime()) {
+		std::cout << 1000.0 / numFrames << "ms per frame" << std::endl;
+		lastFPS = numFrames;
+		numFrames = 0;
+		lastPrint++;
+	}
+}
+
+void JNX_Engine::renderGameObject(GameObject * go) const {
+	go->draw(rend, shader);
 }

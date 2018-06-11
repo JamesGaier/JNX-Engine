@@ -25,9 +25,9 @@ public:
 
 	void use_program() const;
 	
-	void setUniform1f(const std::string& name, const float& val = 0);
-	void setUniform1i(const std::string& name, const int& val = 0);
-	void setUniform4f(const std::string& name, const float& a, const float& b, const float& c, const float& d);
+	void setUniform1f(const std::string& name, float val = 0);
+	void setUniform1i(const std::string& name, int val = 0);
+	void setUniform4f(const std::string& name, float a,  float b, float c, float d);
 	void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 		
 	inline unsigned renderer_id() const { return m_shaderID; }

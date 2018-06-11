@@ -13,7 +13,10 @@ glm::mat4 GameObject::getScaleMat() const {
 	return glm::scale(glm::mat4(), static_cast<glm::vec3>(scale));
 }
 
-void GameObject::setModel(Model * m) { model = m; }
+void GameObject::setModel(Model * m) { 
+	model = m;
+	setScale(Vec3d(m->scaleFactor()));
+}
 
 void GameObject::setPosition(Vec3d loc) { pos = loc; }
 
