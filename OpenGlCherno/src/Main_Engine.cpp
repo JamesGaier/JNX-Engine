@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "util/GLUtil.h"
 #include "rendering/Renderer.h"
 #include "rendering/Shader.h"
@@ -18,6 +19,7 @@
 http://docs.gl/
 http://www.glfw.org/docs/latest/
 http://glew.sourceforge.net/basic.html
+http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 */
 
 int main() {
@@ -29,11 +31,12 @@ int main() {
 	}
 
 	//Longest part of init sequence
-	Model* teapot = new Model("res/models/utah_teapot.obj");
-	GameObject* go = new GameObject(teapot);
+	Model* circle = new Model("res/models/circle.obj");
+	GameObject* go = new GameObject(circle);
+	go->setScale(Vec3d(20));
 
-	jnx.setProjectionOrtho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
-	jnx.setCameraTranslate(Vec3d());
+	jnx.setProjectionPerspective(glm::radians(45.0f), 4.0f / 3.0f);
+	jnx.setCameraTranslate(Vec3d(0, 0, -3));
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
 	
@@ -48,11 +51,11 @@ int main() {
 		
 		rend->clear();
 		/* Render here */
-		float x = 2*std::cosf(totalFrames/20.0f);
-		float y = 2*std::sinf(totalFrames/20.0f);
+		float x = std::cosf(totalFrames/20.0f);
+		float y = std::sinf(totalFrames/20.0f);
 		go->setPosition(Vec3d(x, y, 0));
 
-		auto model = glm::rotate(go->getTranslateMat(), x, glm::vec3(1, 0, 0));
+		auto model = go->getTranslateMat() * glm::rotate(glm::mat4(),static_cast<float>(M_1_PI), glm::vec3(0, 0, -1)) * go->getScaleMat();
 
 		shader->use_program();
 		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);

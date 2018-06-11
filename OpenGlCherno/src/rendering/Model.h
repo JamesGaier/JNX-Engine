@@ -35,7 +35,6 @@ public:
 
 	bool loadModel(const std::string& file, bool is3D = true);
 	bool loadSquare(float sideLength);
-
 };
 
 #endif // !_MODEL

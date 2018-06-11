@@ -869,6 +869,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="res\models\utah_teapot.obj" />
+    <Object Include="res\models\teapot.obj" />
   </ItemGroup>
 </Project>

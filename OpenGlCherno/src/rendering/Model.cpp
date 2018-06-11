@@ -6,6 +6,8 @@ Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 
 	if(file != EMPTY_MODEL_SOURCE) {
 		loadModel(file);
+		std::cout << "Verteces loaded: " << VERTEX_BUFFER_COUNT << std::endl;
+		std::cout << "Indeces loaded: " << INDICE_COUNT << std::endl;
 	}
 }
 
@@ -42,13 +44,13 @@ bool Model::loadModel(const std::string & file, bool is3D) {
 
 		std::cout << "Successfully loaded " << file << std::endl;
 		return true;
-	} 
+	} else { std::cerr << "File " << file << " could not be loaded" << std::endl; }
 	
 	return false;
 }
 
 bool Model::loadSquare(float sideLength) {
-	if(sideLength == 0) {
+	if(sideLength <= 0) {
 		return false;
 	}
 	

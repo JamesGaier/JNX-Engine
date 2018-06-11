@@ -2,6 +2,7 @@
 #include "util/GLUtil.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include <iostream>
 
@@ -56,6 +57,11 @@ void JNX_Engine::setProjectionOrtho( float left, float right, float up, float do
 
 	proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
 	projMode = ProjectionMode::ORTHO;
+}
+
+void JNX_Engine::setProjectionPerspective(float fov, float aspectRatio, float near, float far) {
+	proj = glm::perspective(fov, aspectRatio, near, far);
+	projMode = ProjectionMode::PERSPECTIVE;
 }
 
 void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
