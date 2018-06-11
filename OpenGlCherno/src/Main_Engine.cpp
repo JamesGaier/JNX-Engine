@@ -33,10 +33,12 @@ int main() {
 	//Longest part of init sequence
 	Model* circle = new Model("res/models/circle.obj");
 	GameObject* go = new GameObject(circle);
-	go->setScale(Vec3d(20));
+	std::cout << "Scale Factor: " << circle->scaleFactor() << std::endl;
+	go->setScale(Vec3d(circle->scaleFactor()));
+	go->setRotation(static_cast<float>(M_1_PI), Vec3d(0, 0, -1));
 
 	jnx.setProjectionPerspective(glm::radians(45.0f), 4.0f / 3.0f);
-	jnx.setCameraTranslate(Vec3d(0, 0, -3));
+	jnx.setCameraTranslate(Vec3d(0, 0, -5));
 
 	Shader* shader = new Shader("res/shaders/basic.shader");
 	
@@ -55,11 +57,9 @@ int main() {
 		float y = std::sinf(totalFrames/20.0f);
 		go->setPosition(Vec3d(x, y, 0));
 
-		auto model = go->getTranslateMat() * glm::rotate(glm::mat4(),static_cast<float>(M_1_PI), glm::vec3(0, 0, -1)) * go->getScaleMat();
-
 		shader->use_program();
 		shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
-		shader->setUniformMat4f("u_MVP", jnx.viewProjection() * model);
+		shader->setUniformMat4f("u_MVP", jnx.viewProjection() * go->getModelMatrix());
 		go->draw(rend, shader);
 		/* Swap front and back buffers */
 		jnx.swapBuffers();

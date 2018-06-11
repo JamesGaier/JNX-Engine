@@ -19,6 +19,10 @@ void GameObject::setPosition(Vec3d loc) { pos = loc; }
 
 void GameObject::setScale(Vec3d axes) { scale = axes; }
 
+void GameObject::setRotation(float radians, Vec3d axis) {
+	rotation = glm::rotate(glm::mat4(), radians, static_cast<glm::vec3>(axis));
+}
+
 void GameObject::draw(Renderer* r, Shader* shader) const { 
 	r->draw(model, shader); 
 }

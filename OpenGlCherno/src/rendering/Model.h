@@ -5,6 +5,7 @@
 #include "VertexArray.h"
 #include "buffers/IndexBuffer.h"
 
+
 #include <string>
 
 #define EMPTY_MODEL_SOURCE "NONE"
@@ -12,7 +13,9 @@
 class Model {
 private:
 	bool is3D;
-	
+	//The factor to multiply by to get all vectors normalized
+	float normalFactor;
+
 	unsigned int VERTEX_BUFFER_COUNT;
 	float* vertex_buffer;
 
@@ -32,6 +35,8 @@ public:
 
 	inline VertexArray* vertexArray() const { return va; }
 	inline IndexBuffer* indexBuffer() const { return ib; }
+	//Scale by this to get all vertecies at most 1 magnitude.
+	inline float scaleFactor() const { return normalFactor; }
 
 	bool loadModel(const std::string& file, bool is3D = true);
 	bool loadSquare(float sideLength);
