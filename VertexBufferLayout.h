@@ -1,8 +1,8 @@
 #ifndef _H_VERTEXBUFFERLAYOUT_
 #define _H_VERTEXBUFFERLAYOUT_
 #include<vector>
-#include<GLFW\glfw3.h>
 #include"renderer.h"
+#include<GLFW\glfw3.h>
 struct VertexBufferElement {
 	unsigned int type;
 	unsigned int count;
@@ -25,24 +25,24 @@ public:
 	VertexBufferLayout()
 		: m_Stride(0) {}
 	
-	~VertexBufferLayout();
+	
 	template<class T>
-	void Push(int count) {
+	void Push(unsigned count) {
 		static_assert(false);
 	}
 	//comment
 	template<>
-	void Push<float>(int count) {
+	void Push<float>(unsigned count) {
 		m_Elements.push_back({ GL_FLOAT,count,GL_FALSE });
 		m_Stride += VertexBufferElement::GetSizeOfType(GL_FLOAT);
 	}
 	template<>
-	void Push<unsigned int>(int count) {
+	void Push<unsigned int>(unsigned count) {
 		m_Elements.push_back({ GL_UNSIGNED_INT,count,GL_FALSE });
 		m_Stride += VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT);
 	}
 	template<>
-	void Push<unsigned char>(int count) {
+	void Push<unsigned char>(unsigned count) {
 		m_Elements.push_back({ GL_UNSIGNED_BYTE,count,GL_TRUE });
 		m_Stride += VertexBufferElement::GetSizeOfType(GL_UNSIGNED_BYTE);
 	}
