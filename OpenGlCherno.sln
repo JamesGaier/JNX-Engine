@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGlCherno", "OpenGlCherno\OpenGlCherno.vcxproj", "{DEBAFC6A-9E6B-48A6-9D1A-875BA7094B81}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGlCherno", "OpenGlCherno.vcxproj", "{DEBAFC6A-9E6B-48A6-9D1A-875BA7094B81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3FDE4D7F-71CD-4FFE-97CD-73C5E9D82D06}
+		SolutionGuid = {FC6679BB-2CDF-4111-81B3-E0F8D4DC5892}
 	EndGlobalSection
 EndGlobal
