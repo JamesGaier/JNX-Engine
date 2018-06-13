@@ -78,7 +78,7 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 			}
 
 		} else {
-			shaders[static_cast<int> (current)] << line << '\n';
+			shaders[static_cast<int> (current)] << line << std::endl;
 
 			if(line.find("version") != std::string::npos) {
 				if(current == READ_MODE::VERTEX) {
@@ -100,7 +100,12 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 
 unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 
-	unsigned int id = glCreateShader(type);
+	unsigned id = glCreateShader(type);
+	
+	/*
+	This points to the same section of data as the source string.
+	It will be deleted with the struct.
+	*/
 	const char* src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);

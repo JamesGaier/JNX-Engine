@@ -37,7 +37,7 @@ public:
 	//Scale by this to get all vertecies at most 1 magnitude.
 	inline float scaleFactor() const { return normalFactor; }
 
-	bool loadModel(const std::string& file, bool is3D = true);
+	bool loadModel(const std::string& file);
 	bool loadSquare(float sideLength);
 };
 

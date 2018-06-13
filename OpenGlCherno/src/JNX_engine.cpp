@@ -66,7 +66,7 @@ void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
 }
 
 void JNX_Engine::loadShader(const std::string & file) {
-	shader = new Shader("res/shaders/basic.shader");
+	shader = new Shader(file);
 	shader->use_program();
 }
 

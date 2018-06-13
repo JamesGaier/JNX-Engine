@@ -9,22 +9,24 @@ inline float magnitude(objl::Vector3 vec) {
 Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 	normalFactor = 1;
 	if(file != EMPTY_MODEL_SOURCE) {
-		loadModel(file);
-		std::cout << "Vertices loaded: " << VERTEX_BUFFER_COUNT << std::endl;
-		std::cout << "Indices loaded: " << INDICE_COUNT << std::endl;
+		if(loadModel(file)) {
+			std::cout << "Successfully loaded " << file << std::endl;
+		} else { 
+			std::cerr << "File " << file << " could not be loaded" << std::endl; 
+		}
 	}
 }
 
 Model::~Model() { cleanData(); }
 
-bool Model::loadModel(const std::string & file, bool is3D) {
+bool Model::loadModel(const std::string & file) {
 	
 	objl::Loader loader;
 
 	if(loader.LoadFile(file)) {
 		cleanData();
 
-		VERTEX_BUFFER_COUNT = loader.LoadedVertices.size() * (2 + is3D);
+		VERTEX_BUFFER_COUNT = loader.LoadedVertices.size() * 3;
 		vertex_buffer = new float[VERTEX_BUFFER_COUNT];
 
 		int currentIndex = 0;
@@ -50,12 +52,11 @@ bool Model::loadModel(const std::string & file, bool is3D) {
 			*(indicies + i) = loader.LoadedIndices[i];
 		}
 
-		this->is3D = is3D;
+		is3D = true;
 		genBuffers();
 
-		std::cout << "Successfully loaded " << file << std::endl;
 		return true;
-	} else { std::cerr << "File " << file << " could not be loaded" << std::endl; }
+	} 
 	
 	return false;
 }
