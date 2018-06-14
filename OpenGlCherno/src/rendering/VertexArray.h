@@ -3,7 +3,10 @@
 
 #include "buffers/VertexBuffer.h"
 #include "buffers/VertexBufferLayout.h"
-
+/*
+* Purpose: allows for more complex vertex data
+* @author Nicholas Baron
+*/
 class VertexArray {
 private:
 	unsigned m_rendererID;

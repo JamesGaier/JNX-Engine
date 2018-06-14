@@ -8,7 +8,10 @@
 #include <string>
 
 #define EMPTY_MODEL_SOURCE "NONE"
-
+/*
+* Purpose: handle for OpenGL's VertexBuffer and IndexBuffer
+* @author Nicholas Baron
+*/
 class Model {
 private:
 	bool is3D;

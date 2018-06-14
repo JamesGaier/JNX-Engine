@@ -6,7 +6,10 @@
 #include <string>
 #include <unordered_map>
 #include <glm/glm.hpp>
-
+/*
+* Purpose: handle to program the GPU
+* @author Nicholas Baron
+*/
 struct ShaderProgramSource {
 	std::string vertex, fragment;
 };

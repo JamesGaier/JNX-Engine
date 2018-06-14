@@ -6,7 +6,11 @@
 #include "Shader.h"
 #include "Model.h"
 #include <GL/glew.h>
-
+/*
+* Purpose: central file for rendering methods
+* @author Nicholas Baron
+*
+*/
 //To Consider: Renderer may not need to be a class
 class Renderer {
 
