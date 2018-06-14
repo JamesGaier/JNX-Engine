@@ -1,16 +1,19 @@
 #ifndef _H_INPUT_
 #define _H_INPUT_
+
+#include <GLFW/glfw3.h>
+
 /* 
 *	Purpose: gets and processes mouse input
 *	@author James Gaier
 */
 class Input {
 private:
-	int mouseX, mouseY;
+	double mouseX, mouseY;
 public:
-	int getMouseX() const;
-	int getMouseY() const;
-	void update();
-	void setMousePosition(int x, int y);
+	double getMouseX() const;
+	double getMouseY() const;
+	void update(GLFWwindow* win);
+	void setMousePosition(GLFWwindow* win, double x, double y);
 };
 #endif
