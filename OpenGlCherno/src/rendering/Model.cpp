@@ -7,7 +7,7 @@ inline float magnitude(objl::Vector3 vec) {
 }
 
 Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
-	normalFactor = 1;
+	normalFactor = 0;
 	if(file != EMPTY_MODEL_SOURCE) {
 		if(loadModel(file)) {
 			std::cout << "Successfully loaded " << file << std::endl;

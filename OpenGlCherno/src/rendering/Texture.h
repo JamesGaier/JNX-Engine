@@ -17,8 +17,8 @@ public:
 	void Bind(unsigned slot = 0) const;
 	inline void Unbind() const { GLCALL(glBindTexture(GL_TEXTURE_2D, 0)); }
 
-	inline unsigned width() const { return m_width; }
-	inline unsigned height() const { return m_width; }
+	inline int width() const { return m_width; }
+	inline int height() const { return m_width; }
 };
 
 #endif
