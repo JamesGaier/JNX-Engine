@@ -25,8 +25,8 @@ private:
 	VertexArray* va;
 	IndexBuffer* ib;
 
-	void cleanData();
-	void genBuffers();
+	inline void cleanData();
+	inline void genBuffers();
 
 public:
 	Model(const std::string& file = EMPTY_MODEL_SOURCE, bool is3D = false);

@@ -20,7 +20,6 @@ public:
 	glm::mat4 translateMat() const;
 	glm::mat4 scaleMat() const;
 	inline glm::mat4 rotationMat() const { return rotation; }
-
 	inline glm::mat4 modelMatrix() const {return translateMat() * rotationMat() * scaleMat();}
 
 	void setModel(Model* m);

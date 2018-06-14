@@ -1,6 +1,8 @@
 #ifndef _SHADER
 #define _SHADER
 
+#include "../util/GLUtil.h"
+
 #include <string>
 #include <unordered_map>
 #include <glm/glm.hpp>
@@ -21,9 +23,9 @@ private:
 
 public:
 	Shader(const std::string& filename);
-	~Shader();
+	inline ~Shader() { glDeleteProgram(m_shaderID); }
 
-	void use_program() const;
+	inline void use_program() const { GLCALL(glUseProgram(m_shaderID)); }
 	
 	void setUniform1f(const std::string& name, float val = 0);
 	void setUniform1i(const std::string& name, int val = 0);

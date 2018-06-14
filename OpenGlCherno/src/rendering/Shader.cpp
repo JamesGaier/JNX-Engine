@@ -15,14 +15,6 @@ Shader::Shader(const std::string& filename) {
 	std::cout << "Shader created from " << filename << std::endl;
 }
 
-Shader::~Shader() {
-	glDeleteProgram(m_shaderID);
-}
-
-void Shader::use_program() const{ 
-	GLCALL(glUseProgram(m_shaderID)); 
-}
-
 int Shader::uniform_location(const std::string& name){
 	
 	auto got = uniformCache.find(name);

@@ -14,12 +14,6 @@ Vec3d::Vec3d(double all) {
 	setZ(all);
 }
 
-Vec3d::Vec3d() {
-	setX(0);
-	setY(0);
-	setZ(0);
-}
-
 Vec3d::Vec3d(const Vec3d & copy) {
 	setX(copy.x);
 	setY(copy.y);
@@ -43,23 +37,35 @@ double Vec3d::magnitudeSquared() const {
 }
 
 Vec3d Vec3d::normalized() const {
-	return *this/(sqrt(magnitudeSquared()));
+	Vec3d copy(*this);
+	copy /= sqrt(magnitudeSquared());
+	return copy;
 }
 
-Vec3d Vec3d::operator+(const Vec3d & rhs) const {
-	return Vec3d(x + rhs.x, y + rhs.y, z + rhs.z);
+void Vec3d::operator+=(const Vec3d & rhs) {
+	double tempX = x, tempY = y, tempZ = z;
+
+	x = tempX + rhs.x;
+	y = tempY + rhs.y;
+	z = tempZ + rhs.z;
 }
 
-Vec3d Vec3d::operator-(const Vec3d & rhs) const {
-	return *this + (-1 * rhs);
+void Vec3d::operator-=(const Vec3d & rhs) {
+	Vec3d copy(rhs);
+	copy *= -1;
+	*this += copy;
 }
 
-Vec3d Vec3d::operator*(const double& rhs) const {
-	return Vec3d(x*rhs, y*rhs, z*rhs);
+void Vec3d::operator*=(const double& rhs) {
+	double tempX = x, tempY = y, tempZ = z;
+
+	x = tempX * rhs;
+	y = tempY * rhs;
+	z = tempZ * rhs;
 }
 
-Vec3d Vec3d::operator/(const double& rhs) const {
-	return (*this)*(1 / rhs);
+void Vec3d::operator/=(const double& rhs) {
+	(*this)*=(1 / rhs);
 }
 
 //Array {x, y, z}
@@ -75,10 +81,6 @@ double Vec3d::operator[](const int & rhs) const {
 
 Vec3d::operator glm::vec3() const {
 	return glm::vec3(x, y, z);
-}
-
-Vec3d operator*(const double & lhs, const Vec3d & rhs) {
-	return rhs * lhs;
 }
 
 std::ostream & operator<<(std::ostream & out, const Vec3d & rhs) {

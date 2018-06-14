@@ -25,7 +25,6 @@ Texture::Texture(const std::string& path, bool keepLocal) :
 }
 
 Texture::~Texture() { 
-	
 	GLCALL(glDeleteTextures(1, &m_ID));
 	if(m_kept) delete[] m_localBuffer; 
 }

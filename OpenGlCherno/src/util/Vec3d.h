@@ -9,8 +9,7 @@ private:
 	double x, y, z;
 public:
 	Vec3d(double x, double y, double z);
-	Vec3d(double all); // Set all to the same value
-	Vec3d(); //Zero vector
+	Vec3d(double all = 0); // Set all to the same value
 	Vec3d(const Vec3d& copy);
 	void setX(double x);
 	void setY(double y);
@@ -20,18 +19,15 @@ public:
 	double magnitudeSquared() const;
 	Vec3d normalized() const;
 	
-	Vec3d operator+(const Vec3d& rhs) const;
-	Vec3d operator-(const Vec3d& rhs) const;
-	Vec3d operator*(const double& rhs) const;
-	Vec3d operator/(const double& rhs) const;
+	void operator+=(const Vec3d& rhs);
+	void operator-=(const Vec3d& rhs);
+	void operator*=(const double& rhs);
+	void operator/=(const double& rhs);
 	
 	//Accessor
 	double operator[](const int& rhs) const;
 	operator glm::vec3() const;
 };
-//Other Math
-Vec3d operator*(const double& lhs, const Vec3d& rhs);
-
 //Input and Output
 std::ostream& operator<<(std::ostream& output, const Vec3d& rhs);
 std::istream& operator>>(std::istream& input, Vec3d& rhs);
