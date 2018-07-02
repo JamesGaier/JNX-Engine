@@ -2,7 +2,10 @@
 #define _TEXTURE
 
 #include "../util/GLUtil.h"
-
+/*
+* Purpose: easy manipulation of textures
+* @author Nicholas Baron
+*/
 class Texture {
 private:
 	unsigned m_ID;

@@ -3,7 +3,10 @@
 
 #include "../util/GLUtil.h"
 #include <vector>
-
+/*
+* Purpose: custom vertex data
+* @author Nicholas Baron
+*/
 struct VertexElement {
 	unsigned type;
 	unsigned count;

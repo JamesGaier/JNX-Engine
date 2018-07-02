@@ -4,7 +4,10 @@
 #include "util/Vec3d.h"
 #include "rendering/Model.h"
 #include "rendering/Renderer.h"
-
+/*
+* Purpose: superclass for all game objects
+* @author Nicholas Baron
+*/
 class GameObject {
 private:
 	Vec3d pos;

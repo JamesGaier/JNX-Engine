@@ -12,7 +12,11 @@
 
 #define Z_NEAR 0.1f
 #define Z_FAR 100
-
+/*
+* Purpose: Central include for JNX engine
+* @author Nicholas Baron
+*
+*/
 enum class ProjectionMode {ORTHO, PERSPECTIVE};
 
 class JNX_Engine {

@@ -1,6 +1,9 @@
 #ifndef _VERTEX_BUFFER
 #define _VERTEX_BUFFER
-
+/*
+* Purpose: easy handle for the OpenGL VertexBuffer
+* @author Nicholas Baron
+*/
 class VertexBuffer {
 private:
 	unsigned m_rendererID;

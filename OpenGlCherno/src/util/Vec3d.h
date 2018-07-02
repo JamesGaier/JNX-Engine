@@ -3,7 +3,10 @@
 
 #include <iostream>
 #include <glm/glm.hpp>
-
+/*
+* Purpose: High precision 3d vector
+* @author Nicholas Baron
+*/
 class Vec3d {
 private:
 	double x, y, z;

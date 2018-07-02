@@ -9,7 +9,10 @@
 #define GLCALL(x) gl_clean_errors();\
 x;\
 ASSERT(gl_check_error(#x, __FILE__, __LINE__))
-
+/*
+* Purpose: helper methods for OpenGL
+* @author Nicholas Baron
+*/
 inline void gl_clean_errors() { while(glGetError() != GL_NO_ERROR); }
 
 inline bool gl_check_error(const char* func, const char* file, const unsigned line) {
