@@ -24,9 +24,11 @@ int main() {
 	if(!jnx.isLoaded()) 
 		return 0;
 	
+	std::cout << std::endl;
+
 	//Longest part of init sequence
-	Model* circle = new Model("res/models/circle.obj");
-	GameObject* go = new GameObject(circle);
+	auto circle = new Model("res/models/teapot.obj");
+	auto go = new GameObject(circle);
 
 	jnx.setProjectionPerspective(glm::radians(45.0f));
 	jnx.setCameraTranslate(Vec3d(0, 0, -5));

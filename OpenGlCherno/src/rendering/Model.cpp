@@ -13,6 +13,7 @@ Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 			std::cout << "Successfully loaded " << file << std::endl;
 		} else { 
 			std::cerr << "File " << file << " could not be loaded" << std::endl; 
+			ASSERT (false);
 		}
 	}
 }
@@ -26,13 +27,13 @@ bool Model::loadModel(const std::string & file) {
 	if(loader.LoadFile(file)) {
 		cleanData();
 
-		VERTEX_BUFFER_COUNT = loader.LoadedVertices.size() * 3;
+		VERTEX_BUFFER_COUNT = static_cast<unsigned>(loader.LoadedVertices.size() * 3);
 		vertex_buffer = new float[VERTEX_BUFFER_COUNT];
 
 		int currentIndex = 0;
 		float farthestVertex = 0;
-		for(unsigned i = 0; i < loader.LoadedVertices.size(); i++) {
-			objl::Vector3 data = loader.LoadedVertices[i].Position;
+		for each (const auto& vert in loader.LoadedVertices){
+			const auto& data = vert.Position;
 			vertex_buffer[currentIndex] = data.X;
 			vertex_buffer[currentIndex + 1] = data.Y;
 			vertex_buffer[currentIndex + 2] = data.Z;
@@ -45,7 +46,7 @@ bool Model::loadModel(const std::string & file) {
 		}
 		normalFactor = 1 / farthestVertex;
 
-		INDICE_COUNT = loader.LoadedIndices.size();
+		INDICE_COUNT = static_cast<unsigned>(loader.LoadedIndices.size());
 		indicies = new unsigned int[INDICE_COUNT];
 
 		for(unsigned i = 0; i < loader.LoadedIndices.size(); i++) {

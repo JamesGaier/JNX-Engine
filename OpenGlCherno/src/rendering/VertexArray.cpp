@@ -20,7 +20,7 @@ void VertexArray::addBuffer(const VertexBuffer* vb, const VertexBufferLayout* la
 
 	for(unsigned i = 0; i < elements.size(); i++) {
 
-		const auto e = elements[i];
+		const auto& e = elements[i];
 		GLCALL(glEnableVertexAttribArray(i));
 		GLCALL(glVertexAttribPointer(i, e.count, e.type, e.normalized ? GL_TRUE : GL_FALSE, layout->stride(), (const void*)offset));
 

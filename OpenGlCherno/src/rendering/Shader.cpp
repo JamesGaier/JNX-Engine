@@ -8,7 +8,7 @@
 
 Shader::Shader(const std::string& filename) {
 
-	auto* source = parse_shader(filename);
+	auto source = parse_shader(filename);
 	m_shaderID = create_shader(source);
 	delete source;
 
@@ -84,7 +84,7 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 
 	input.close();
 
-	ShaderProgramSource* read_shader = new ShaderProgramSource;
+	auto read_shader = new ShaderProgramSource;
 	read_shader->fragment = shaders[READ_MODE::FRAGMENT].str();
 	read_shader->vertex = shaders[READ_MODE::VERTEX].str();
 	return read_shader;
@@ -92,7 +92,7 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 
 unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 
-	unsigned id = glCreateShader(type);
+	auto id = glCreateShader(type);
 	
 	/*
 	This points to the same section of data as the source string.
@@ -107,7 +107,7 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 	if(result == GL_FALSE) {
 		int length;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-		char* message = new char[length];
+		auto message = new char[length];
 		glGetShaderInfoLog(id, length, &length, message);
 		std::cout << "Error compiling " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader: " << std::endl << message << std::endl;
 		delete[] message;
@@ -120,9 +120,9 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 
 unsigned Shader::create_shader(const ShaderProgramSource* source) {
 
-	unsigned program = glCreateProgram();
-	unsigned vs = compile_shader(GL_VERTEX_SHADER, source->vertex);
-	unsigned fs = compile_shader(GL_FRAGMENT_SHADER, source->fragment);
+	auto program = glCreateProgram();
+	auto vs = compile_shader(GL_VERTEX_SHADER, source->vertex);
+	auto fs = compile_shader(GL_FRAGMENT_SHADER, source->fragment);
 
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);

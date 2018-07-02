@@ -66,7 +66,7 @@ void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
 }
 
 void JNX_Engine::loadShader(const std::string & file) {
-	shader = new Shader(file);
+	shader = new Shader (file);
 	shader->use_program();
 }
 
@@ -89,15 +89,15 @@ void JNX_Engine::renderGameObject(GameObject * go) const {
 }
 
 void JNX_Engine::renderGameObjects() const {
-	for(unsigned i = 0; i < gameObjects.size(); i++) {
-		renderGameObject(gameObjects[i]);
+	for each (const auto& go in gameObjects ) {
+		renderGameObject (go);
 	}
 }
 
 void JNX_Engine::updateGameObjects() {
 	
-	for(unsigned i = 0; i < gameObjects.size(); i++) {
-		gameObjects[i]->update(time() - lastDelta);
+	for each ( const auto& go in gameObjects ) {
+		go->update(time() - lastDelta);
 	}
 
 	lastDelta = time();
