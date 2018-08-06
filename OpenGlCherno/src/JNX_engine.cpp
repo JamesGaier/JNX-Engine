@@ -1,15 +1,14 @@
 #include "JNX_Engine.h"
 #include "util/GLUtil.h"
 
-
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 
 #include <iostream>
 
-JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool initNow) : loaded(false), width(wide), height(high) {
+JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow) : loaded(false), width(wide), height(high) {
 	if(initNow) {
-		init();
+		init(vsync);
 	}
 }
 
@@ -19,7 +18,7 @@ JNX_Engine::~JNX_Engine() {
 }
 
 bool JNX_Engine::init(bool vsync) {
-	
+
 	/* Initialize the library if we have not already loaded */
 	if(loaded || !glfwInit())
 		return false;
@@ -33,8 +32,12 @@ bool JNX_Engine::init(bool vsync) {
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
-	if(vsync) 
+
+	if(vsync) {
 		glfwSwapInterval(1);
+	} else {
+		glfwSwapInterval(0);
+	}
 
 	GLCALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
@@ -77,7 +80,7 @@ void JNX_Engine::swapBuffers() {
 	numFrames++;
 	totalFrames++;
 	if(lastPrint + 1 <= time()) {
-		std::cout << 1000.0 / numFrames << "ms per frame" << std::endl;
+		std::cout << 1000.0 / numFrames << "ms per frame (" << numFrames << " FPS)" << std::endl;
 		lastFPS = numFrames;
 		numFrames = 0;
 		lastPrint++;

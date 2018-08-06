@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 
 /* 
-*	Purpose: gets and processes mouse input
+*	Purpose: gets and processes input
 *	@author James Gaier
 */
 class Input {

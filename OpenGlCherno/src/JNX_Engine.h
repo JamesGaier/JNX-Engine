@@ -41,7 +41,7 @@ private:
 	unsigned lastFPS;
 	unsigned long totalFrames;
 public:
-	JNX_Engine(unsigned wide, unsigned high, bool initNow = true);
+	JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow = true);
 	~JNX_Engine();
 	bool init(bool vsync = true);
 	
