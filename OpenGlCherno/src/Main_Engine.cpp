@@ -28,9 +28,7 @@ int main() {
 	jnx.loadShader("res/shaders/basic.shader");
 	
 	//Longest part of init sequence
-	auto circle = new Model("res/models/teapot.obj");
-	auto go = new GameObject(circle);
-
+	auto go = new GameObject("res/models/teapot.obj");
 	jnx.registerGameObject(go);
 
 	std::cout << std::endl;

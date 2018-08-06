@@ -156,6 +156,7 @@
     <ClCompile Include="src\rendering\buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Main_Engine.cpp" />
     <ClCompile Include="src\rendering\Renderer.cpp" />
+    <ClCompile Include="src\util\TextUtil.cpp" />
     <ClCompile Include="src\util\Vec3d.cpp" />
     <ClCompile Include="src\rendering\VertexArray.cpp" />
     <ClCompile Include="src\rendering\Texture.cpp" />
@@ -288,6 +289,7 @@
     <ClInclude Include="src\rendering\buffers\VertexBuffer.h" />
     <ClInclude Include="src\rendering\Renderer.h" />
     <ClInclude Include="src\util\GLUtil.h" />
+    <ClInclude Include="src\util\TextUtil.h" />
     <ClInclude Include="src\util\Vec3d.h" />
     <ClInclude Include="src\rendering\VertexArray.h" />
     <ClInclude Include="src\rendering\buffers\VertexBufferLayout.h" />

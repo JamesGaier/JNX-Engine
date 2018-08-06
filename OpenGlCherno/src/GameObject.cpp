@@ -3,6 +3,11 @@
 
 GameObject::GameObject(Model * m) { setModel(m); }
 
+GameObject::GameObject(const std::string & modelLocation) {
+	auto m = new Model(modelLocation);
+	setModel(m);
+}
+
 GameObject::~GameObject() { delete model; }
 
 glm::mat4 GameObject::translateMat() const {

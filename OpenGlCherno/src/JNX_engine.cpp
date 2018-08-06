@@ -24,7 +24,7 @@ bool JNX_Engine::init(bool vsync) {
 		return false;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(800, 600, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(width, height, "Hello World", NULL, NULL);
 	if(!window) {
 		glfwTerminate();
 		return false;
@@ -42,7 +42,7 @@ bool JNX_Engine::init(bool vsync) {
 	GLCALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 	if(glewInit() != GLEW_OK) {
-		std::cout << "GLEW init failed!" << std::endl;
+		std::cerr << "GLEW init failed!" << std::endl;
 		return false;
 	}
 	
@@ -56,7 +56,7 @@ bool JNX_Engine::init(bool vsync) {
 }
 
 void JNX_Engine::setProjectionOrtho( float left, float right, float up, float down, float near, float far) {
-	proj = glm::ortho(-10.0f, 10.0f, -7.5f, 7.5f, .3f, 500.0f);
+	proj = glm::ortho(left, right, up, down, near, far);
 	projMode = ProjectionMode::ORTHO;
 }
 

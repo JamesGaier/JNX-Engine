@@ -1,9 +1,11 @@
 #include "Shader.h"
 #include "../util/GLUtil.h"
+#include "../util/TextUtil.h"
+
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <sstream>
+#include <vector>
 #include <unordered_map>
 
 Shader::Shader(const std::string& filename) {
@@ -48,19 +50,19 @@ void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix)
 }
 
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
-	std::ifstream input(file_path);
-	if(!input) {
-		std::cout << "Could not find file " << file_path << std::endl;
-		input.close();
+	
+	std::vector<std::string> shaderText;
+	if(!loadTextFromFile(file_path, shaderText)) {
+		std::cerr << "Could not find file " << file_path << std::endl;
+		throw "SHADER NOT FOUND";
 	}
 
 	enum READ_MODE {
 		NONE = -1, VERTEX = 0, FRAGMENT = 1
 	} current = READ_MODE::NONE;
 
-	std::string line;
 	std::stringstream shaders[2];
-	while(getline(input, line)) {
+	for each (const std::string& line in shaderText) {
 		if(line.find("#shader") != std::string::npos) {
 
 			if(line.find("vertex") != std::string::npos) {
@@ -81,8 +83,6 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 			}
 		}
 	}
-
-	input.close();
 
 	auto read_shader = new ShaderProgramSource;
 	read_shader->fragment = shaders[READ_MODE::FRAGMENT].str();
@@ -109,7 +109,7 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		auto message = new char[length];
 		glGetShaderInfoLog(id, length, &length, message);
-		std::cout << "Error compiling " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader: " << std::endl << message << std::endl;
+		std::cerr << "Compilation error in the " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader: " << std::endl << message << std::endl;
 		delete[] message;
 		glDeleteShader(id);
 		return 0;

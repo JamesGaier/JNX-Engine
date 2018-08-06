@@ -18,6 +18,7 @@ private:
 	double totalDelta = 0;
 public:
 	GameObject(Model* m);
+	GameObject(const std::string& modelLocation);
 	virtual ~GameObject();
 
 	glm::mat4 translateMat() const;
