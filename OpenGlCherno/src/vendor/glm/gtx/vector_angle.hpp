@@ -24,17 +24,15 @@
 #	pragma message("GLM: GLM_GTX_vector_angle extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_vector_angle
 	/// @{
-
 	//! Returns the absolute angle between two vectors.
 	//! Parameters need to be normalized.
 	/// @see gtx_vector_angle extension.
 	template <typename vecType>
 	GLM_FUNC_DECL typename vecType::value_type angle(
-		vecType const & x, 
+		vecType const & x,
 		vecType const & y);
 
 	//! Returns the oriented angle between two 2d vectors.

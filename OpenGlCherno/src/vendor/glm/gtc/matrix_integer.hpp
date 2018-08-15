@@ -26,11 +26,9 @@
 #	pragma message("GLM: GLM_GTC_matrix_integer extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_matrix_integer
 	/// @{
-
 	/// High-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat2x2<int, highp>				highp_imat2;
@@ -79,7 +77,6 @@ namespace glm
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<int, highp>				highp_imat4x4;
 
-
 	/// Medium-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat2x2<int, mediump>			mediump_imat2;
@@ -91,7 +88,6 @@ namespace glm
 	/// Medium-precision signed integer 4x4 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<int, mediump>			mediump_imat4;
-
 
 	/// Medium-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
@@ -129,11 +125,10 @@ namespace glm
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<int, mediump>			mediump_imat4x4;
 
-
 	/// Low-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat2x2<int, lowp>				lowp_imat2;
-	
+
 	/// Low-precision signed integer 3x3 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat3x3<int, lowp>				lowp_imat3;
@@ -141,7 +136,6 @@ namespace glm
 	/// Low-precision signed integer 4x4 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<int, lowp>				lowp_imat4;
-
 
 	/// Low-precision signed integer 2x2 matrix.
 	/// @see gtc_matrix_integer
@@ -179,10 +173,9 @@ namespace glm
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<int, lowp>				lowp_imat4x4;
 
-
 	/// High-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
-	typedef tmat2x2<uint, highp>				highp_umat2;	
+	typedef tmat2x2<uint, highp>				highp_umat2;
 
 	/// High-precision unsigned integer 3x3 matrix.
 	/// @see gtc_matrix_integer
@@ -228,7 +221,6 @@ namespace glm
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<uint, highp>				highp_umat4x4;
 
-
 	/// Medium-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat2x2<uint, mediump>			mediump_umat2;
@@ -240,7 +232,6 @@ namespace glm
 	/// Medium-precision unsigned integer 4x4 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<uint, mediump>			mediump_umat4;
-
 
 	/// Medium-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
@@ -278,11 +269,10 @@ namespace glm
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<uint, mediump>			mediump_umat4x4;
 
-
 	/// Low-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat2x2<uint, lowp>				lowp_umat2;
-	
+
 	/// Low-precision unsigned integer 3x3 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat3x3<uint, lowp>				lowp_umat3;
@@ -290,7 +280,6 @@ namespace glm
 	/// Low-precision unsigned integer 4x4 matrix.
 	/// @see gtc_matrix_integer
 	typedef tmat4x4<uint, lowp>				lowp_umat4;
-
 
 	/// Low-precision unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
@@ -432,7 +421,7 @@ namespace glm
 	typedef lowp_umat4x3							umat4x3;
 	typedef lowp_umat4x4							umat4x4;
 #else //if(defined(GLM_PRECISION_MEDIUMP_UINT))
-	
+
 	/// Unsigned integer 2x2 matrix.
 	/// @see gtc_matrix_integer
 	typedef mediump_umat2							umat2;

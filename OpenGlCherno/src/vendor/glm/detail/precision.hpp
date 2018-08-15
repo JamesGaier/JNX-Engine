@@ -5,19 +5,17 @@
 
 #include "setup.hpp"
 
-namespace glm
-{
-	enum precision
-	{
+namespace glm {
+	enum precision {
 		packed_highp,
 		packed_mediump,
 		packed_lowp,
 
 #		if GLM_HAS_ALIGNED_TYPE
-			aligned_highp,
-			aligned_mediump,
-			aligned_lowp,
-			aligned = aligned_highp,
+		aligned_highp,
+		aligned_mediump,
+		aligned_lowp,
+		aligned = aligned_highp,
 #		endif
 
 		highp = packed_highp,
@@ -26,38 +24,33 @@ namespace glm
 		packed = packed_highp,
 
 #		if GLM_HAS_ALIGNED_TYPE && defined(GLM_FORCE_ALIGNED)
-			defaultp = aligned_highp
+		defaultp = aligned_highp
 #		else
-			defaultp = highp
+		defaultp = highp
 #		endif
 	};
-	
-namespace detail
-{
-	template <glm::precision P>
-	struct is_aligned
-	{
-		static const bool value = false;
-	};
+
+	namespace detail {
+		template <glm::precision P>
+		struct is_aligned {
+			static const bool value = false;
+		};
 
 #	if GLM_HAS_ALIGNED_TYPE
 		template<>
-		struct is_aligned<glm::aligned_lowp>
-		{
+		struct is_aligned<glm::aligned_lowp> {
 			static const bool value = true;
 		};
 
 		template<>
-		struct is_aligned<glm::aligned_mediump>
-		{
+		struct is_aligned<glm::aligned_mediump> {
 			static const bool value = true;
 		};
 
 		template<>
-		struct is_aligned<glm::aligned_highp>
-		{
+		struct is_aligned<glm::aligned_highp> {
 			static const bool value = true;
 		};
 #	endif
-}//namespace detail
+	}//namespace detail
 }//namespace glm

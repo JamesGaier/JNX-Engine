@@ -18,7 +18,6 @@ JNX_Engine::~JNX_Engine() {
 }
 
 bool JNX_Engine::init(bool vsync) {
-
 	/* Initialize the library if we have not already loaded */
 	if(loaded || !glfwInit())
 		return false;
@@ -45,17 +44,17 @@ bool JNX_Engine::init(bool vsync) {
 		std::cerr << "GLEW init failed!" << std::endl;
 		return false;
 	}
-	
+
 	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 	std::cout << "GL Shader Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 	std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
-	
+
 	loaded = true;
 
 	return true;
 }
 
-void JNX_Engine::setProjectionOrtho( float left, float right, float up, float down, float near, float far) {
+void JNX_Engine::setProjectionOrtho(float left, float right, float up, float down, float near, float far) {
 	proj = glm::ortho(left, right, up, down, near, far);
 	projMode = ProjectionMode::ORTHO;
 }
@@ -70,12 +69,12 @@ void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
 }
 
 void JNX_Engine::loadShader(const std::string & file) {
-	shader = new Shader (file);
+	shader = new Shader(file);
 	shader->use_program();
 }
 
 void JNX_Engine::swapBuffers() {
-	glfwSwapBuffers(window); 
+	glfwSwapBuffers(window);
 
 	numFrames++;
 	totalFrames++;
@@ -93,14 +92,13 @@ void JNX_Engine::renderGameObject(GameObject * go) const {
 }
 
 void JNX_Engine::renderGameObjects() const {
-	for each (const auto& go in gameObjects ) {
-		renderGameObject (go);
+	for each (const auto& go in gameObjects) {
+		renderGameObject(go);
 	}
 }
 
 void JNX_Engine::updateGameObjects() {
-	
-	for each ( const auto& go in gameObjects ) {
+	for each (const auto& go in gameObjects) {
 		go->update(time() - lastDelta);
 	}
 

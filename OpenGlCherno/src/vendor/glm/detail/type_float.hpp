@@ -5,37 +5,35 @@
 
 #include "setup.hpp"
 
-namespace glm{
-namespace detail
-{
-	typedef float				float32;
-	typedef double				float64;
-}//namespace detail
-	
+namespace glm {
+	namespace detail {
+		typedef float				float32;
+		typedef double				float64;
+	}//namespace detail
+
 	typedef float				lowp_float_t;
 	typedef float				mediump_float_t;
 	typedef double				highp_float_t;
 
 	/// @addtogroup core_precision
 	/// @{
-
-	/// Low precision floating-point numbers. 
+	/// Low precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.4 Floats</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef lowp_float_t		lowp_float;
 
 	/// Medium precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.4 Floats</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef mediump_float_t		mediump_float;
 
 	/// High precision floating-point numbers.
 	/// There is no guarantee on the actual precision.
-	/// 
+	///
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.1.4 Floats</a>
 	/// @see <a href="http://www.opengl.org/registry/doc/GLSLangSpec.4.20.8.pdf">GLSL 4.20.8 specification, section 4.7.2 Precision Qualifier</a>
 	typedef highp_float_t		highp_float;
@@ -63,5 +61,4 @@ namespace detail
 #endif//GLM_STATIC_ASSERT_NULL
 
 	/// @}
-
 }//namespace glm

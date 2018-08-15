@@ -6,9 +6,9 @@
 ///
 /// @defgroup gtx_bit GLM_GTX_bit
 /// @ingroup gtx
-/// 
+///
 /// @brief Allow to perform bit operations on integer values
-/// 
+///
 /// <glm/gtx/bit.hpp> need to be included to use these functionalities.
 
 #pragma once
@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_bit extension is deprecated, include GLM_GTC_bitfield and GLM_GTC_integer instead")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_bit
 	/// @{
-
 	/// @see gtx_bit
 	template <typename genIUType>
 	GLM_FUNC_DECL genIUType highestBitValue(genIUType Value);
@@ -90,6 +88,4 @@ namespace glm
 	/// @}
 } //namespace glm
 
-
 #include "bit.inl"
-

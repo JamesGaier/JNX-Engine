@@ -1,11 +1,9 @@
 /// @ref gtx_integer
 /// @file glm/gtx/integer.inl
 
-namespace glm
-{
+namespace glm {
 	// pow
-	GLM_FUNC_QUALIFIER int pow(int x, int y)
-	{
+	GLM_FUNC_QUALIFIER int pow(int x, int y) {
 		if(y == 0)
 			return 1;
 		int result = x;
@@ -15,15 +13,13 @@ namespace glm
 	}
 
 	// sqrt: From Christopher J. Musial, An integer square root, Graphics Gems, 1990, page 387
-	GLM_FUNC_QUALIFIER int sqrt(int x)
-	{
+	GLM_FUNC_QUALIFIER int sqrt(int x) {
 		if(x <= 1) return x;
 
 		int NextTrial = x >> 1;
 		int CurrentAnswer;
 
-		do
-		{
+		do {
 			CurrentAnswer = NextTrial;
 			NextTrial = (NextTrial + x / NextTrial) >> 1;
 		} while(NextTrial < CurrentAnswer);
@@ -32,46 +28,42 @@ namespace glm
 	}
 
 // Henry Gordon Dietz: http://aggregate.org/MAGIC/
-namespace detail
-{
-	GLM_FUNC_QUALIFIER unsigned int ones32(unsigned int x)
-	{
-		/* 32-bit recursive reduction using SWAR...
-		but first step is mapping 2-bit values
-		into sum of 2 1-bit values in sneaky way
-		*/
-		x -= ((x >> 1) & 0x55555555);
-		x = (((x >> 2) & 0x33333333) + (x & 0x33333333));
-		x = (((x >> 4) + x) & 0x0f0f0f0f);
-		x += (x >> 8);
-		x += (x >> 16);
-		return(x & 0x0000003f);
-	}
-}//namespace detail
+	namespace detail {
+		GLM_FUNC_QUALIFIER unsigned int ones32(unsigned int x) {
+			/* 32-bit recursive reduction using SWAR...
+			but first step is mapping 2-bit values
+			into sum of 2 1-bit values in sneaky way
+			*/
+			x -= ((x >> 1) & 0x55555555);
+			x = (((x >> 2) & 0x33333333) + (x & 0x33333333));
+			x = (((x >> 4) + x) & 0x0f0f0f0f);
+			x += (x >> 8);
+			x += (x >> 16);
+			return(x & 0x0000003f);
+		}
+	}//namespace detail
 
-	// Henry Gordon Dietz: http://aggregate.org/MAGIC/
-/*
-	GLM_FUNC_QUALIFIER unsigned int floor_log2(unsigned int x)
-	{
-		x |= (x >> 1);
-		x |= (x >> 2);
-		x |= (x >> 4);
-		x |= (x >> 8);
-		x |= (x >> 16);
+		// Henry Gordon Dietz: http://aggregate.org/MAGIC/
+	/*
+		GLM_FUNC_QUALIFIER unsigned int floor_log2(unsigned int x)
+		{
+			x |= (x >> 1);
+			x |= (x >> 2);
+			x |= (x >> 4);
+			x |= (x >> 8);
+			x |= (x >> 16);
 
-		return _detail::ones32(x) >> 1;
-	}
-*/
-	// mod
-	GLM_FUNC_QUALIFIER int mod(int x, int y)
-	{
+			return _detail::ones32(x) >> 1;
+		}
+	*/
+		// mod
+	GLM_FUNC_QUALIFIER int mod(int x, int y) {
 		return x - y * (x / y);
 	}
 
 	// factorial (!12 max, integer only)
 	template <typename genType>
-	GLM_FUNC_QUALIFIER genType factorial(genType const & x)
-	{
+	GLM_FUNC_QUALIFIER genType factorial(genType const & x) {
 		genType Temp = x;
 		genType Result;
 		for(Result = 1; Temp > 1; --Temp)
@@ -81,8 +73,7 @@ namespace detail
 
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tvec2<T, P> factorial(
-		tvec2<T, P> const & x)
-	{
+		tvec2<T, P> const & x) {
 		return tvec2<T, P>(
 			factorial(x.x),
 			factorial(x.y));
@@ -90,8 +81,7 @@ namespace detail
 
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tvec3<T, P> factorial(
-		tvec3<T, P> const & x)
-	{
+		tvec3<T, P> const & x) {
 		return tvec3<T, P>(
 			factorial(x.x),
 			factorial(x.y),
@@ -100,8 +90,7 @@ namespace detail
 
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tvec4<T, P> factorial(
-		tvec4<T, P> const & x)
-	{
+		tvec4<T, P> const & x) {
 		return tvec4<T, P>(
 			factorial(x.x),
 			factorial(x.y),
@@ -109,23 +98,20 @@ namespace detail
 			factorial(x.w));
 	}
 
-	GLM_FUNC_QUALIFIER uint pow(uint x, uint y)
-	{
+	GLM_FUNC_QUALIFIER uint pow(uint x, uint y) {
 		uint result = x;
 		for(uint i = 1; i < y; ++i)
 			result *= x;
 		return result;
 	}
 
-	GLM_FUNC_QUALIFIER uint sqrt(uint x)
-	{
+	GLM_FUNC_QUALIFIER uint sqrt(uint x) {
 		if(x <= 1) return x;
 
 		uint NextTrial = x >> 1;
 		uint CurrentAnswer;
 
-		do
-		{
+		do {
 			CurrentAnswer = NextTrial;
 			NextTrial = (NextTrial + x / NextTrial) >> 1;
 		} while(NextTrial < CurrentAnswer);
@@ -133,23 +119,20 @@ namespace detail
 		return CurrentAnswer;
 	}
 
-	GLM_FUNC_QUALIFIER uint mod(uint x, uint y)
-	{
+	GLM_FUNC_QUALIFIER uint mod(uint x, uint y) {
 		return x - y * (x / y);
 	}
 
 #if(GLM_COMPILER & (GLM_COMPILER_VC | GLM_COMPILER_GCC))
 
-	GLM_FUNC_QUALIFIER unsigned int nlz(unsigned int x) 
-	{
+	GLM_FUNC_QUALIFIER unsigned int nlz(unsigned int x) {
 		return 31u - findMSB(x);
 	}
 
 #else
 
 	// Hackers Delight: http://www.hackersdelight.org/HDcode/nlz.c.txt
-	GLM_FUNC_QUALIFIER unsigned int nlz(unsigned int x) 
-	{
+	GLM_FUNC_QUALIFIER unsigned int nlz(unsigned int x) {
 		int y, m, n;
 
 		y = -int(x >> 16);      // If left half of x is 0,
@@ -178,5 +161,4 @@ namespace detail
 	}
 
 #endif//(GLM_COMPILER)
-
 }//namespace glm

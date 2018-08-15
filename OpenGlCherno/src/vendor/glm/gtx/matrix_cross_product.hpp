@@ -20,17 +20,15 @@
 #	pragma message("GLM: GLM_GTX_matrix_cross_product extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_matrix_cross_product
 	/// @{
-
 	//! Build a cross product matrix.
 	//! From GLM_GTX_matrix_cross_product extension.
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat3x3<T, P> matrixCross3(
 		tvec3<T, P> const & x);
-		
+
 	//! Build a cross product matrix.
 	//! From GLM_GTX_matrix_cross_product extension.
 	template <typename T, precision P>

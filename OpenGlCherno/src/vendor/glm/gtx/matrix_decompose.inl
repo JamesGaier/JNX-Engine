@@ -1,34 +1,30 @@
 /// @ref gtx_matrix_decompose
 /// @file glm/gtx/matrix_decompose.inl
 
-namespace glm{
-namespace detail
-{
-	/// Make a linear combination of two vectors and return the result.
-	// result = (a * ascl) + (b * bscl)
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tvec3<T, P> combine(
-		tvec3<T, P> const & a, 
-		tvec3<T, P> const & b,
-		T ascl, T bscl)
-	{
-		return (a * ascl) + (b * bscl);
-	}
+namespace glm {
+	namespace detail {
+		/// Make a linear combination of two vectors and return the result.
+		// result = (a * ascl) + (b * bscl)
+		template <typename T, precision P>
+		GLM_FUNC_QUALIFIER tvec3<T, P> combine(
+			tvec3<T, P> const & a,
+			tvec3<T, P> const & b,
+			T ascl, T bscl) {
+			return (a * ascl) + (b * bscl);
+		}
+
+		template <typename T, precision P>
+		GLM_FUNC_QUALIFIER tvec3<T, P> scale(tvec3<T, P> const& v, T desiredLength) {
+			return v * desiredLength / length(v);
+		}
+	}//namespace detail
+
+		// Matrix decompose
+		// http://www.opensource.apple.com/source/WebCore/WebCore-514/platform/graphics/transforms/TransformationMatrix.cpp
+		// Decomposes the mode matrix to translations,rotation scale components
 
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tvec3<T, P> scale(tvec3<T, P> const& v, T desiredLength)
-	{
-		return v * desiredLength / length(v);
-	}
-}//namespace detail
-
-	// Matrix decompose
-	// http://www.opensource.apple.com/source/WebCore/WebCore-514/platform/graphics/transforms/TransformationMatrix.cpp
-	// Decomposes the mode matrix to translations,rotation scale components
-
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER bool decompose(tmat4x4<T, P> const & ModelMatrix, tvec3<T, P> & Scale, tquat<T, P> & Orientation, tvec3<T, P> & Translation, tvec3<T, P> & Skew, tvec4<T, P> & Perspective)
-	{
+	GLM_FUNC_QUALIFIER bool decompose(tmat4x4<T, P> const & ModelMatrix, tvec3<T, P> & Scale, tquat<T, P> & Orientation, tvec3<T, P> & Translation, tvec3<T, P> & Skew, tvec4<T, P> & Perspective) {
 		tmat4x4<T, P> LocalMatrix(ModelMatrix);
 
 		// Normalize the matrix.
@@ -36,11 +32,11 @@ namespace detail
 			return false;
 
 		for(length_t i = 0; i < 4; ++i)
-		for(length_t j = 0; j < 4; ++j)
-			LocalMatrix[i][j] /= LocalMatrix[3][3];
+			for(length_t j = 0; j < 4; ++j)
+				LocalMatrix[i][j] /= LocalMatrix[3][3];
 
-		// perspectiveMatrix is used to solve for perspective, but it also provides
-		// an easy way to test for singularity of the upper 3x3 component.
+			// perspectiveMatrix is used to solve for perspective, but it also provides
+			// an easy way to test for singularity of the upper 3x3 component.
 		tmat4x4<T, P> PerspectiveMatrix(LocalMatrix);
 
 		for(length_t i = 0; i < 3; i++)
@@ -52,8 +48,7 @@ namespace detail
 			return false;
 
 		// First, isolate perspective.  This is the messiest.
-		if(LocalMatrix[0][3] != static_cast<T>(0) || LocalMatrix[1][3] != static_cast<T>(0) || LocalMatrix[2][3] != static_cast<T>(0))
-		{
+		if(LocalMatrix[0][3] != static_cast<T>(0) || LocalMatrix[1][3] != static_cast<T>(0) || LocalMatrix[2][3] != static_cast<T>(0)) {
 			// rightHandSide is the right hand side of the equation.
 			tvec4<T, P> RightHandSide;
 			RightHandSide[0] = LocalMatrix[0][3];
@@ -73,9 +68,7 @@ namespace detail
 			// Clear the perspective partition
 			LocalMatrix[0][3] = LocalMatrix[1][3] = LocalMatrix[2][3] = static_cast<T>(0);
 			LocalMatrix[3][3] = static_cast<T>(1);
-		}
-		else
-		{
+		} else {
 			// No perspective.
 			Perspective = tvec4<T, P>(0, 0, 0, 1);
 		}
@@ -121,10 +114,8 @@ namespace detail
 		// Check for a coordinate system flip.  If the determinant
 		// is -1, then negate the matrix and the scaling factors.
 		Pdum3 = cross(Row[1], Row[2]); // v3Cross(row[1], row[2], Pdum3);
-		if(dot(Row[0], Pdum3) < 0)
-		{
-			for(length_t i = 0; i < 3; i++)
-			{
+		if(dot(Row[0], Pdum3) < 0) {
+			for(length_t i = 0; i < 3; i++) {
 				Scale[i] *= static_cast<T>(-1);
 				Row[i] *= static_cast<T>(-1);
 			}
@@ -151,35 +142,28 @@ namespace detail
 
 		t = Row[0][0] + Row[1][1] + Row[2][2] + static_cast<T>(1);
 
-		if(t > static_cast<T>(1e-4))
-		{
+		if(t > static_cast<T>(1e-4)) {
 			s = static_cast<T>(0.5) / sqrt(t);
 			w = static_cast<T>(0.25) / s;
 			x = (Row[2][1] - Row[1][2]) * s;
 			y = (Row[0][2] - Row[2][0]) * s;
 			z = (Row[1][0] - Row[0][1]) * s;
-		}
-		else if(Row[0][0] > Row[1][1] && Row[0][0] > Row[2][2])
-		{ 
-			s = sqrt (static_cast<T>(1) + Row[0][0] - Row[1][1] - Row[2][2]) * static_cast<T>(2); // S=4*qx 
+		} else if(Row[0][0] > Row[1][1] && Row[0][0] > Row[2][2]) {
+			s = sqrt(static_cast<T>(1) + Row[0][0] - Row[1][1] - Row[2][2]) * static_cast<T>(2); // S=4*qx
 			x = static_cast<T>(0.25) * s;
-			y = (Row[0][1] + Row[1][0]) / s; 
-			z = (Row[0][2] + Row[2][0]) / s; 
+			y = (Row[0][1] + Row[1][0]) / s;
+			z = (Row[0][2] + Row[2][0]) / s;
 			w = (Row[2][1] - Row[1][2]) / s;
-		}
-		else if(Row[1][1] > Row[2][2])
-		{ 
-			s = sqrt (static_cast<T>(1) + Row[1][1] - Row[0][0] - Row[2][2]) * static_cast<T>(2); // S=4*qy
-			x = (Row[0][1] + Row[1][0]) / s; 
+		} else if(Row[1][1] > Row[2][2]) {
+			s = sqrt(static_cast<T>(1) + Row[1][1] - Row[0][0] - Row[2][2]) * static_cast<T>(2); // S=4*qy
+			x = (Row[0][1] + Row[1][0]) / s;
 			y = static_cast<T>(0.25) * s;
-			z = (Row[1][2] + Row[2][1]) / s; 
+			z = (Row[1][2] + Row[2][1]) / s;
 			w = (Row[0][2] - Row[2][0]) / s;
-		}
-		else
-		{ 
+		} else {
 			s = sqrt(static_cast<T>(1) + Row[2][2] - Row[0][0] - Row[1][1]) * static_cast<T>(2); // S=4*qz
 			x = (Row[0][2] + Row[2][0]) / s;
-			y = (Row[1][2] + Row[2][1]) / s; 
+			y = (Row[1][2] + Row[2][1]) / s;
 			z = static_cast<T>(0.25) * s;
 			w = (Row[1][0] - Row[0][1]) / s;
 		}

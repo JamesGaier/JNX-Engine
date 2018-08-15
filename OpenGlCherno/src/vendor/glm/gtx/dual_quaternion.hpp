@@ -25,14 +25,11 @@
 #	pragma message("GLM: GLM_GTX_dual_quaternion extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_dual_quaternion
 	/// @{
-
 	template <typename T, precision P = defaultp>
-	struct tdualquat
-	{
+	struct tdualquat {
 		// -- Implementation detail --
 
 		typedef T value_type;
@@ -46,7 +43,7 @@ namespace glm
 
 		typedef length_t length_type;
 		/// Return the count of components of a dual quaternion
-		GLM_FUNC_DECL static length_type length(){return 2;}
+		GLM_FUNC_DECL static length_type length() { return 2; }
 
 		GLM_FUNC_DECL part_type & operator[](length_type i);
 		GLM_FUNC_DECL part_type const & operator[](length_type i) const;
@@ -172,7 +169,6 @@ namespace glm
 	template <typename T, precision P>
 	GLM_FUNC_DECL tdualquat<T, P> dualquat_cast(tmat3x4<T, P> const & x);
 
-
 	/// Dual-quaternion of low single-precision floating-point numbers.
 	///
 	/// @see gtx_dual_quaternion
@@ -187,7 +183,6 @@ namespace glm
 	///
 	/// @see gtx_dual_quaternion
 	typedef tdualquat<float, highp>		highp_dualquat;
-
 
 	/// Dual-quaternion of low single-precision floating-point numbers.
 	///
@@ -204,7 +199,6 @@ namespace glm
 	/// @see gtx_dual_quaternion
 	typedef tdualquat<float, highp>		highp_fdualquat;
 
-
 	/// Dual-quaternion of low double-precision floating-point numbers.
 	///
 	/// @see gtx_dual_quaternion
@@ -219,7 +213,6 @@ namespace glm
 	///
 	/// @see gtx_dual_quaternion
 	typedef tdualquat<double, highp>	highp_ddualquat;
-
 
 #if(!defined(GLM_PRECISION_HIGHP_FLOAT) && !defined(GLM_PRECISION_MEDIUMP_FLOAT) && !defined(GLM_PRECISION_LOWP_FLOAT))
 	/// Dual-quaternion of floating-point numbers.
@@ -243,7 +236,6 @@ namespace glm
 #else
 #	error "GLM error: multiple default precision requested for single-precision floating-point types"
 #endif
-
 
 #if(!defined(GLM_PRECISION_HIGHP_DOUBLE) && !defined(GLM_PRECISION_MEDIUMP_DOUBLE) && !defined(GLM_PRECISION_LOWP_DOUBLE))
 	/// Dual-quaternion of default double-precision floating-point numbers.

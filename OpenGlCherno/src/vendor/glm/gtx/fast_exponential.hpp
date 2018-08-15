@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_fast_exponential extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_fast_exponential
 	/// @{
-
 	/// Faster than the common pow function but less accurate.
 	/// @see gtx_fast_exponential
 	template <typename genType>

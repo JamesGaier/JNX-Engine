@@ -17,14 +17,14 @@
 * @author Nicholas Baron
 *
 */
-enum class ProjectionMode {ORTHO, PERSPECTIVE};
+enum class ProjectionMode { ORTHO, PERSPECTIVE };
 
 class JNX_Engine {
 private:
 	GLFWwindow* window;
 	Shader* shader;
 	Renderer* rend = new Renderer;
-	
+
 	std::vector<GameObject*> gameObjects;
 
 	unsigned width, height;
@@ -44,7 +44,7 @@ public:
 	JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow = true);
 	~JNX_Engine();
 	bool init(bool vsync = true);
-	
+
 	inline bool isLoaded() const { return loaded; }
 	inline bool running() const { return !glfwWindowShouldClose(window); }
 	inline unsigned long totalFrameCount() const { return totalFrames; }
@@ -56,7 +56,7 @@ public:
 	void renderGameObjects() const;
 	void updateGameObjects();
 
-	void setProjectionOrtho( float left, float right, float up, float down, float near = Z_NEAR, float far = Z_FAR);
+	void setProjectionOrtho(float left, float right, float up, float down, float near = Z_NEAR, float far = Z_FAR);
 	//FOV needs to be in radians
 	inline void setProjectionPerspective(float fov) { setProjectionPerspective(fov, aspectRatio()); }
 	//FOV needs to be in radians

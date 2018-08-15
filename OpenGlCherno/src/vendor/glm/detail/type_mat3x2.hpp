@@ -10,11 +10,9 @@
 #include <limits>
 #include <cstddef>
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P = defaultp>
-	struct tmat3x2
-	{
+	struct tmat3x2 {
 		typedef tvec2<T, P> col_type;
 		typedef tvec3<T, P> row_type;
 		typedef tmat3x2<T, P> type;
@@ -49,10 +47,10 @@ namespace glm
 			typename X1, typename Y1,
 			typename X2, typename Y2,
 			typename X3, typename Y3>
-		GLM_FUNC_DECL tmat3x2(
-			X1 x1, Y1 y1,
-			X2 x2, Y2 y2,
-			X3 x3, Y3 y3);
+			GLM_FUNC_DECL tmat3x2(
+				X1 x1, Y1 y1,
+				X2 x2, Y2 y2,
+				X3 x3, Y3 y3);
 
 		template <typename V1, typename V2, typename V3>
 		GLM_FUNC_DECL tmat3x2(
@@ -77,7 +75,7 @@ namespace glm
 		// -- Accesses --
 
 		typedef length_t length_type;
-		GLM_FUNC_DECL static length_type length(){return 3;}
+		GLM_FUNC_DECL static length_type length() { return 3; }
 
 		GLM_FUNC_DECL col_type & operator[](length_type i);
 		GLM_FUNC_DECL col_type const & operator[](length_type i) const;
@@ -165,7 +163,6 @@ namespace glm
 
 	template <typename T, precision P>
 	GLM_FUNC_DECL bool operator!=(tmat3x2<T, P> const & m1, tmat3x2<T, P> const & m2);
-
 }//namespace glm
 
 #ifndef GLM_EXTERNAL_TEMPLATE

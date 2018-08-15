@@ -4,7 +4,6 @@
 #include <string>
 
 bool loadTextFromFile(const std::string& location, std::vector<std::string>& data) {
-	
 	std::ifstream file(location.c_str());
 	if(!file) {
 		return false;

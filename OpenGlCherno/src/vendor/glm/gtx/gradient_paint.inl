@@ -1,8 +1,7 @@
 /// @ref gtx_gradient_paint
 /// @file glm/gtx/gradient_paint.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER T radialGradient
 	(
@@ -10,8 +9,7 @@ namespace glm
 		T const & Radius,
 		tvec2<T, P> const & Focal,
 		tvec2<T, P> const & Position
-	)
-	{
+	) {
 		tvec2<T, P> F = Focal - Center;
 		tvec2<T, P> D = Position - Focal;
 		T Radius2 = pow2(Radius);
@@ -29,8 +27,7 @@ namespace glm
 		tvec2<T, P> const & Point0,
 		tvec2<T, P> const & Point1,
 		tvec2<T, P> const & Position
-	)
-	{
+	) {
 		tvec2<T, P> Dist = Point1 - Point0;
 		return (Dist.x * (Position.x - Point0.x) + Dist.y * (Position.y - Point0.y)) / glm::dot(Dist, Dist);
 	}

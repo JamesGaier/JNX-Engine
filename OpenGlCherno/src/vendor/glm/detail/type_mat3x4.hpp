@@ -10,11 +10,9 @@
 #include <limits>
 #include <cstddef>
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P = defaultp>
-	struct tmat3x4
-	{
+	struct tmat3x4 {
 		typedef tvec4<T, P> col_type;
 		typedef tvec3<T, P> row_type;
 		typedef tmat3x4<T, P> type;
@@ -49,10 +47,10 @@ namespace glm
 			typename X1, typename Y1, typename Z1, typename W1,
 			typename X2, typename Y2, typename Z2, typename W2,
 			typename X3, typename Y3, typename Z3, typename W3>
-		GLM_FUNC_DECL tmat3x4(
-			X1 x1, Y1 y1, Z1 z1, W1 w1,
-			X2 x2, Y2 y2, Z2 z2, W2 w2,
-			X3 x3, Y3 y3, Z3 z3, W3 w3);
+			GLM_FUNC_DECL tmat3x4(
+				X1 x1, Y1 y1, Z1 z1, W1 w1,
+				X2 x2, Y2 y2, Z2 z2, W2 w2,
+				X3 x3, Y3 y3, Z3 z3, W3 w3);
 
 		template <typename V1, typename V2, typename V3>
 		GLM_FUNC_DECL tmat3x4(
@@ -77,7 +75,7 @@ namespace glm
 		// -- Accesses --
 
 		typedef length_t length_type;
-		GLM_FUNC_DECL static length_type length(){return 3;}
+		GLM_FUNC_DECL static length_type length() { return 3; }
 
 		GLM_FUNC_DECL col_type & operator[](length_type i);
 		GLM_FUNC_DECL col_type const & operator[](length_type i) const;
@@ -144,13 +142,13 @@ namespace glm
 	GLM_FUNC_DECL typename tmat3x4<T, P>::row_type operator*(typename tmat3x4<T, P>::col_type const & v, tmat3x4<T, P> const & m);
 
 	template <typename T, precision P>
-	GLM_FUNC_DECL tmat4x4<T, P> operator*(tmat3x4<T, P> const & m1,	tmat4x3<T, P> const & m2);
+	GLM_FUNC_DECL tmat4x4<T, P> operator*(tmat3x4<T, P> const & m1, tmat4x3<T, P> const & m2);
 
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat2x4<T, P> operator*(tmat3x4<T, P> const & m1, tmat2x3<T, P> const & m2);
 
 	template <typename T, precision P>
-	GLM_FUNC_DECL tmat3x4<T, P> operator*(tmat3x4<T, P> const & m1,	tmat3x3<T, P> const & m2);
+	GLM_FUNC_DECL tmat3x4<T, P> operator*(tmat3x4<T, P> const & m1, tmat3x3<T, P> const & m2);
 
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat3x4<T, P> operator/(tmat3x4<T, P> const & m, T scalar);

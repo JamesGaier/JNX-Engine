@@ -1,21 +1,18 @@
 /// @ref gtx_intersect
 /// @file glm/gtx/intersect.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename genType>
 	GLM_FUNC_QUALIFIER bool intersectRayPlane
 	(
 		genType const & orig, genType const & dir,
 		genType const & planeOrig, genType const & planeNormal,
 		typename genType::value_type & intersectionDistance
-	)
-	{
+	) {
 		typename genType::value_type d = glm::dot(dir, planeNormal);
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 
-		if(d < -Epsilon)
-		{
+		if(d < -Epsilon) {
 			intersectionDistance = glm::dot(planeOrig - orig, planeNormal) / d;
 			return true;
 		}
@@ -29,8 +26,7 @@ namespace glm
 		genType const & orig, genType const & dir,
 		genType const & v0, genType const & v1, genType const & v2,
 		genType & baryPosition
-	)
-	{
+	) {
 		genType e1 = v1 - v0;
 		genType e2 = v2 - v0;
 
@@ -69,8 +65,7 @@ namespace glm
 		genType const & orig, genType const & dir,
 		genType const & vert0, genType const & vert1, genType const & vert2,
 		genType & position
-	)
-	{
+	) {
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 
 		genType edge1 = vert1 - vert0;
@@ -80,20 +75,20 @@ namespace glm
 
 		float det = dot(edge1, pvec);
 
-		if (det > -Epsilon && det < Epsilon)
+		if(det > -Epsilon && det < Epsilon)
 			return false;
 		float inv_det = typename genType::value_type(1) / det;
 
 		genType tvec = orig - vert0;
 
 		position.y = dot(tvec, pvec) * inv_det;
-		if (position.y < typename genType::value_type(0) || position.y > typename genType::value_type(1))
+		if(position.y < typename genType::value_type(0) || position.y > typename genType::value_type(1))
 			return false;
 
 		genType qvec = cross(tvec, edge1);
 
 		position.z = dot(dir, qvec) * inv_det;
-		if (position.z < typename genType::value_type(0) || position.y + position.z > typename genType::value_type(1))
+		if(position.z < typename genType::value_type(0) || position.y + position.z > typename genType::value_type(1))
 			return false;
 
 		position.x = dot(edge2, qvec) * inv_det;
@@ -107,17 +102,15 @@ namespace glm
 		genType const & rayStarting, genType const & rayNormalizedDirection,
 		genType const & sphereCenter, const typename genType::value_type sphereRadiusSquered,
 		typename genType::value_type & intersectionDistance
-	)
-	{
+	) {
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 		genType diff = sphereCenter - rayStarting;
 		typename genType::value_type t0 = dot(diff, rayNormalizedDirection);
 		typename genType::value_type dSquared = dot(diff, diff) - t0 * t0;
-		if( dSquared > sphereRadiusSquered )
-		{
+		if(dSquared > sphereRadiusSquered) {
 			return false;
 		}
-		typename genType::value_type t1 = sqrt( sphereRadiusSquered - dSquared );
+		typename genType::value_type t1 = sqrt(sphereRadiusSquered - dSquared);
 		intersectionDistance = t0 > t1 + Epsilon ? t0 - t1 : t0 + t1;
 		return intersectionDistance > Epsilon;
 	}
@@ -128,11 +121,9 @@ namespace glm
 		genType const & rayStarting, genType const & rayNormalizedDirection,
 		genType const & sphereCenter, const typename genType::value_type sphereRadius,
 		genType & intersectionPosition, genType & intersectionNormal
-	)
-	{
+	) {
 		typename genType::value_type distance;
-		if( intersectRaySphere( rayStarting, rayNormalizedDirection, sphereCenter, sphereRadius * sphereRadius, distance ) )
-		{
+		if(intersectRaySphere(rayStarting, rayNormalizedDirection, sphereCenter, sphereRadius * sphereRadius, distance)) {
 			intersectionPosition = rayStarting + rayNormalizedDirection * distance;
 			intersectionNormal = (intersectionPosition - sphereCenter) / sphereRadius;
 			return true;
@@ -145,21 +136,19 @@ namespace glm
 	(
 		genType const & point0, genType const & point1,
 		genType const & sphereCenter, typename genType::value_type sphereRadius,
-		genType & intersectionPoint1, genType & intersectionNormal1, 
+		genType & intersectionPoint1, genType & intersectionNormal1,
 		genType & intersectionPoint2, genType & intersectionNormal2
-	)
-	{
+	) {
 		typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
 		genType dir = normalize(point1 - point0);
 		genType diff = sphereCenter - point0;
 		typename genType::value_type t0 = dot(diff, dir);
 		typename genType::value_type dSquared = dot(diff, diff) - t0 * t0;
-		if( dSquared > sphereRadius * sphereRadius )
-		{
+		if(dSquared > sphereRadius * sphereRadius) {
 			return false;
 		}
-		typename genType::value_type t1 = sqrt( sphereRadius * sphereRadius - dSquared );
-		if( t0 < t1 + Epsilon )
+		typename genType::value_type t1 = sqrt(sphereRadius * sphereRadius - dSquared);
+		if(t0 < t1 + Epsilon)
 			t1 = -t1;
 		intersectionPoint1 = point0 + dir * (t0 - t1);
 		intersectionNormal1 = (intersectionPoint1 - sphereCenter) / sphereRadius;

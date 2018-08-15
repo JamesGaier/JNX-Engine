@@ -9,7 +9,6 @@
 #include <unordered_map>
 
 Shader::Shader(const std::string& filename) {
-
 	auto source = parse_shader(filename);
 	m_shaderID = create_shader(source);
 	delete source;
@@ -17,14 +16,13 @@ Shader::Shader(const std::string& filename) {
 	std::cout << "Shader created from " << filename << std::endl;
 }
 
-int Shader::uniform_location(const std::string& name){
-	
+int Shader::uniform_location(const std::string& name) {
 	auto got = uniformCache.find(name);
 
 	if(got != uniformCache.end()) {
 		return got->second;
 	}
-	
+
 	GLCALL(int location = glGetUniformLocation(m_shaderID, name.c_str()));
 	ASSERT(location != -1);
 
@@ -33,12 +31,12 @@ int Shader::uniform_location(const std::string& name){
 	return location;
 }
 
-void Shader::setUniform1f(const std::string & name, float val) { 
-	GLCALL(glUniform1f(uniform_location(name), val)); 
+void Shader::setUniform1f(const std::string & name, float val) {
+	GLCALL(glUniform1f(uniform_location(name), val));
 }
 
-void Shader::setUniform1i(const std::string & name, int val) { 
-	GLCALL(glUniform1i(uniform_location(name), val)); 
+void Shader::setUniform1i(const std::string & name, int val) {
+	GLCALL(glUniform1i(uniform_location(name), val));
 }
 
 void Shader::setUniform4f(const std::string& name, float a, float b, float c, float d) {
@@ -50,7 +48,6 @@ void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix)
 }
 
 ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
-	
 	std::vector<std::string> shaderText;
 	if(!loadTextFromFile(file_path, shaderText)) {
 		std::cerr << "Could not find file " << file_path << std::endl;
@@ -64,13 +61,11 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 	std::stringstream shaders[2];
 	for each (const std::string& line in shaderText) {
 		if(line.find("#shader") != std::string::npos) {
-
 			if(line.find("vertex") != std::string::npos) {
 				current = READ_MODE::VERTEX;
 			} else if(line.find("fragment") != std::string::npos) {
 				current = READ_MODE::FRAGMENT;
 			}
-
 		} else {
 			shaders[static_cast<int> (current)] << line << std::endl;
 
@@ -91,9 +86,8 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 }
 
 unsigned Shader::compile_shader(unsigned type, const std::string& source) {
-
 	auto id = glCreateShader(type);
-	
+
 	/*
 	This points to the same section of data as the source string.
 	It will be deleted with the struct.
@@ -119,7 +113,6 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 }
 
 unsigned Shader::create_shader(const ShaderProgramSource* source) {
-
 	auto program = glCreateProgram();
 	auto vs = compile_shader(GL_VERTEX_SHADER, source->vertex);
 	auto fs = compile_shader(GL_FRAGMENT_SHADER, source->fragment);

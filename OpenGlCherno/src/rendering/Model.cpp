@@ -11,9 +11,9 @@ Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 	if(file != EMPTY_MODEL_SOURCE) {
 		if(loadModel(file)) {
 			std::cout << "Successfully loaded " << file << std::endl;
-		} else { 
-			std::cerr << "File " << file << " could not be loaded" << std::endl; 
-			ASSERT (false);
+		} else {
+			std::cerr << "File " << file << " could not be loaded" << std::endl;
+			ASSERT(false);
 		}
 	}
 }
@@ -21,7 +21,6 @@ Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
 Model::~Model() { cleanData(); }
 
 bool Model::loadModel(const std::string & file) {
-	
 	objl::Loader loader;
 
 	if(loader.LoadFile(file)) {
@@ -32,12 +31,12 @@ bool Model::loadModel(const std::string & file) {
 
 		int currentIndex = 0;
 		float farthestVertex = 0;
-		for each (const auto& vert in loader.LoadedVertices){
+		for each (const auto& vert in loader.LoadedVertices) {
 			const auto& data = vert.Position;
 			vertex_buffer[currentIndex] = data.X;
 			vertex_buffer[currentIndex + 1] = data.Y;
 			vertex_buffer[currentIndex + 2] = data.Z;
-			
+
 			if(magnitude(data) > farthestVertex) {
 				farthestVertex = magnitude(data);
 			}
@@ -57,8 +56,8 @@ bool Model::loadModel(const std::string & file) {
 		genBuffers();
 
 		return true;
-	} 
-	
+	}
+
 	return false;
 }
 
@@ -66,7 +65,7 @@ bool Model::loadSquare(float sideLength) {
 	if(sideLength <= 0) {
 		return false;
 	}
-	
+
 	cleanData();
 
 	float halfSide = sideLength / 2;
@@ -74,9 +73,9 @@ bool Model::loadSquare(float sideLength) {
 	VERTEX_BUFFER_COUNT = 8;
 	vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
 		-halfSide, -halfSide,
-		halfSide, -halfSide,
-		halfSide, halfSide,
-		-halfSide, halfSide
+			halfSide, -halfSide,
+			halfSide, halfSide,
+			-halfSide, halfSide
 	};
 
 	INDICE_COUNT = 6;
@@ -90,16 +89,15 @@ bool Model::loadSquare(float sideLength) {
 	return true;
 }
 
-void Model::cleanData() { 
-	delete[] vertex_buffer; 
-	delete[] indicies; 
+void Model::cleanData() {
+	delete[] vertex_buffer;
+	delete[] indicies;
 	delete ib;
 	delete va;
 	delete vb;
 }
 
 void Model::genBuffers() {
-
 	vb = new VertexBuffer(vertex_buffer, VERTEX_BUFFER_COUNT * sizeof(float));
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2 + is3D);
@@ -108,5 +106,4 @@ void Model::genBuffers() {
 	va->addBuffer(vb, vbl);
 
 	ib = new IndexBuffer(indicies, INDICE_COUNT);
-
 }

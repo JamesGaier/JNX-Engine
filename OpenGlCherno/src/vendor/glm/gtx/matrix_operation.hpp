@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_matrix_operation extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_matrix_operation
 	/// @{
-
 	//! Build a diagonal matrix.
 	//! From GLM_GTX_matrix_operation extension.
 	template <typename T, precision P>

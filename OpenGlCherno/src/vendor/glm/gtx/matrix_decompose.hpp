@@ -24,12 +24,10 @@
 #	pragma message("GLM: GLM_GTX_matrix_decompose extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_matrix_decompose
 	/// @{
-
-	/// Decomposes a model matrix to translations, rotation and scale components 
+	/// Decomposes a model matrix to translations, rotation and scale components
 	/// @see gtx_matrix_decompose
 	template <typename T, precision P>
 	GLM_FUNC_DECL bool decompose(

@@ -5,10 +5,10 @@ layout(location = 0) in vec4 position;
 
 uniform mat4 u_MVP;
 
-void main(){
+void main() {
 	gl_Position = u_MVP * position;
 };
- 
+
 #shader fragment
 #version 330 core
 
@@ -16,6 +16,6 @@ out vec4 color;
 
 uniform vec4 u_Color;
 
-void main(){
+void main() {
 	color = u_Color;
 };

@@ -14,11 +14,9 @@
 #endif //GLM_SWIZZLE
 #include <cstddef>
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P = defaultp>
-	struct tvec1
-	{
+	struct tvec1 {
 		// -- Implementation detail --
 
 		typedef T value_type;
@@ -28,7 +26,7 @@ namespace glm
 		// -- Data --
 
 #		if GLM_HAS_ONLY_XYZW
-			T x;
+		T x;
 
 #		elif GLM_HAS_ALIGNED_TYPE
 #			if GLM_COMPILER & GLM_COMPILER_GCC
@@ -40,12 +38,11 @@ namespace glm
 #				pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
 #				pragma clang diagnostic ignored "-Wnested-anon-types"
 #			endif
-		
-			union
-			{
-				T x;
-				T r;
-				T s;
+
+		union {
+			T x;
+			T r;
+			T s;
 /*
 #				if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
 					_GLM_SWIZZLE1_2_MEMBERS(T, P, tvec2, x)
@@ -58,8 +55,8 @@ namespace glm
 					_GLM_SWIZZLE1_4_MEMBERS(T, P, tvec4, r)
 					_GLM_SWIZZLE1_4_MEMBERS(T, P, tvec4, s)
 #				endif//GLM_SWIZZLE*/
-			};
-		
+		};
+
 #			if GLM_COMPILER & GLM_COMPILER_CLANG
 #				pragma clang diagnostic pop
 #			endif
@@ -67,7 +64,7 @@ namespace glm
 #				pragma GCC diagnostic pop
 #			endif
 #		else
-			union {T x, r, s;};
+		union { T x, r, s; };
 /*
 #			if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
 				GLM_SWIZZLE_GEN_VEC_FROM_VEC1(T, P, tvec2, tvec2, tvec3, tvec4)
@@ -78,7 +75,7 @@ namespace glm
 
 		/// Return the count of components of the vector
 		typedef length_t length_type;
-		GLM_FUNC_DECL static length_type length(){return 1;}
+		GLM_FUNC_DECL static length_type length() { return 1; }
 
 		GLM_FUNC_DECL T & operator[](length_type i);
 		GLM_FUNC_DECL T const & operator[](length_type i) const;

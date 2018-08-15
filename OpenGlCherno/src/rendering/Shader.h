@@ -29,12 +29,12 @@ public:
 	inline ~Shader() { glDeleteProgram(m_shaderID); }
 
 	inline void use_program() const { GLCALL(glUseProgram(m_shaderID)); }
-	
+
 	void setUniform1f(const std::string& name, float val = 0);
 	void setUniform1i(const std::string& name, int val = 0);
-	void setUniform4f(const std::string& name, float a,  float b, float c, float d);
+	void setUniform4f(const std::string& name, float a, float b, float c, float d);
 	void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
-		
+
 	inline unsigned renderer_id() const { return m_shaderID; }
 };
 

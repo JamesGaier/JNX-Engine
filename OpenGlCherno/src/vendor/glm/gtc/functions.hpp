@@ -1,15 +1,15 @@
 /// @ref gtc_functions
 /// @file glm/gtc/functions.hpp
-/// 
+///
 /// @see core (dependence)
 /// @see gtc_half_float (dependence)
 /// @see gtc_quaternion (dependence)
 ///
 /// @defgroup gtc_functions GLM_GTC_functions
 /// @ingroup gtc
-/// 
+///
 /// @brief List of useful common functions.
-/// 
+///
 /// <glm/gtc/functions.hpp> need to be included to use these functionalities.
 
 #pragma once
@@ -23,11 +23,9 @@
 #	pragma message("GLM: GLM_GTC_functions extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_functions
 	/// @{
-
 	/// 1D gauss function
 	///
 	/// @see gtc_epsilon
@@ -50,4 +48,3 @@ namespace glm
 }//namespace glm
 
 #include "functions.inl"
-

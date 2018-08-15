@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_color_space_YCoCg extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_color_space_YCoCg
 	/// @{
-
 	/// Convert a color from RGB color space to YCoCg color space.
 	/// @see gtx_color_space_YCoCg
 	template <typename T, precision P>

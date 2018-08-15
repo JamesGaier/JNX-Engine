@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_gradient_paint extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_gradient_paint
 	/// @{
-
 	/// Return a color from a radial gradient.
 	/// @see - gtx_gradient_paint
 	template <typename T, precision P>

@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_std_based_type extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_std_based_type
 	/// @{
-
 	/// Vector type based of one std::size_t component.
 	/// @see GLM_GTX_std_based_type
 	typedef tvec1<std::size_t, defaultp>		size1;

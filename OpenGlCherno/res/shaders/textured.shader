@@ -6,11 +6,11 @@ layout(location = 1) in vec2 texCoord;
 
 out vec2 v_TexCoord;
 
-void main(){
+void main() {
 	gl_Position = position;
 	v_TexCoord = texCoord;
 };
- 
+
 #shader fragment
 #version 330 core
 
@@ -21,6 +21,6 @@ in vec2 v_TexCoord;
 uniform vec4 u_Color;
 uniform sampler u_Texture;
 
-void main(){
+void main() {
 	color = texture(u_Texture, v_texCoord);
 };

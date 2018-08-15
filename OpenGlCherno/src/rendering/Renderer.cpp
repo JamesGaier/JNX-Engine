@@ -5,7 +5,6 @@
 #include "../util/GLUtil.h"
 
 void Renderer::draw(const VertexArray* va, const IndexBuffer* ib, const Shader* shader) const {
-	
 	shader->use_program();
 	va->Bind();
 	ib->Bind();
@@ -15,5 +14,3 @@ void Renderer::draw(const VertexArray* va, const IndexBuffer* ib, const Shader* 
 void Renderer::draw(const Model* m, const Shader* shader) const {
 	draw(m->vertexArray(), m->indexBuffer(), shader);
 }
-
-

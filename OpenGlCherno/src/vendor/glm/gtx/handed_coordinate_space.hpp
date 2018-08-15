@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_handed_coordinate_space extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_handed_coordinate_space
 	/// @{
-
 	//! Return if a trihedron right handed or not.
 	//! From GLM_GTX_handed_coordinate_space extension.
 	template <typename T, precision P>

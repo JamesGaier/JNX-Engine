@@ -23,15 +23,13 @@
 #include "../vec4.hpp"
 #include "../gtc/vec1.hpp"
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P> struct tvec1;
 	template <typename T, precision P> struct tvec2;
 	template <typename T, precision P> struct tvec3;
 	template <typename T, precision P> struct tvec4;
 	/// @addtogroup gtc_type_aligned
 	/// @{
-
 	// -- *vec1 --
 
 	typedef tvec1<float, aligned_highp>		aligned_highp_vec1;

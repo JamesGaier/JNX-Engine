@@ -172,7 +172,6 @@ namespace objl {
 	struct Mesh {
 		// Default Constructor
 		Mesh() {
-
 		}
 		// Variable Set Constructor
 		Mesh(std::vector<Vertex>& _Vertices, std::vector<unsigned int>& _Indices) {
@@ -329,7 +328,6 @@ namespace objl {
 	public:
 		// Default Constructor
 		Loader() {
-
 		}
 		~Loader() {
 			LoadedMeshes.clear();
@@ -345,7 +343,6 @@ namespace objl {
 			// If the file is not an .obj file return false
 			if(Path.substr(Path.size() - 4, 4) != ".obj")
 				return false;
-
 
 			std::ifstream file(Path);
 
@@ -490,7 +487,6 @@ namespace objl {
 
 						indnum = (unsigned int) ((LoadedVertices.size()) - vVerts.size()) + iIndices[i];
 						LoadedIndices.push_back(indnum);
-
 					}
 				}
 				// Get Mesh Material Name
@@ -539,7 +535,6 @@ namespace objl {
 							pathtomat += temp[i] + "/";
 						}
 					}
-
 
 					pathtomat += algorithm::tail(curline);
 
@@ -600,7 +595,7 @@ namespace objl {
 		std::vector<Material> LoadedMaterials;
 
 	private:
-		// Generate vertices from a list of positions, 
+		// Generate vertices from a list of positions,
 		//	tcoords, normals and a face line
 		void GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts,
 								   const std::vector<Vector3>& iPositions,
@@ -686,8 +681,8 @@ namespace objl {
 			}
 
 			// take care of missing normals
-			// these may not be truly acurate but it is the 
-			// best they get for not compiling a mesh with normals	
+			// these may not be truly acurate but it is the
+			// best they get for not compiling a mesh with normals
 			if(noNormal) {
 				Vector3 A = oVerts[0].Position - oVerts[1].Position;
 				Vector3 B = oVerts[2].Position - oVerts[1].Position;

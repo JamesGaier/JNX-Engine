@@ -1,16 +1,14 @@
 /// @ref gtx_extend
 /// @file glm/gtx/extend.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType extend
 	(
-		genType const & Origin, 
-		genType const & Source, 
+		genType const & Origin,
+		genType const & Source,
 		genType const & Distance
-	)
-	{
+	) {
 		return Origin + (Source - Origin) * Distance;
 	}
 
@@ -20,8 +18,7 @@ namespace glm
 		tvec2<T, P> const & Origin,
 		tvec2<T, P> const & Source,
 		T const & Distance
-	)
-	{
+	) {
 		return Origin + (Source - Origin) * Distance;
 	}
 
@@ -31,8 +28,7 @@ namespace glm
 		tvec3<T, P> const & Origin,
 		tvec3<T, P> const & Source,
 		T const & Distance
-	)
-	{
+	) {
 		return Origin + (Source - Origin) * Distance;
 	}
 
@@ -42,8 +38,7 @@ namespace glm
 		tvec4<T, P> const & Origin,
 		tvec4<T, P> const & Source,
 		T const & Distance
-	)
-	{
+	) {
 		return Origin + (Source - Origin) * Distance;
 	}
 }//namespace glm

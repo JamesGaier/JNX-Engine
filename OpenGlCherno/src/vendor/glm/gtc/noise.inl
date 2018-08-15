@@ -1,29 +1,26 @@
 /// @ref gtc_noise
 /// @file glm/gtc/noise.inl
 ///
-// Based on the work of Stefan Gustavson and Ashima Arts on "webgl-noise": 
-// https://github.com/ashima/webgl-noise 
-// Following Stefan Gustavson's paper "Simplex noise demystified": 
+// Based on the work of Stefan Gustavson and Ashima Arts on "webgl-noise":
+// https://github.com/ashima/webgl-noise
+// Following Stefan Gustavson's paper "Simplex noise demystified":
 // http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 
-namespace glm{
-namespace gtc
-{
-	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER tvec4<T, P> grad4(T const & j, tvec4<T, P> const & ip)
-	{
-		tvec3<T, P> pXYZ = floor(fract(tvec3<T, P>(j) * tvec3<T, P>(ip)) * T(7)) * ip[2] - T(1);
-		T pW = static_cast<T>(1.5) - dot(abs(pXYZ), tvec3<T, P>(1));
-		tvec4<T, P> s = tvec4<T, P>(lessThan(tvec4<T, P>(pXYZ, pW), tvec4<T, P>(0.0)));
-		pXYZ = pXYZ + (tvec3<T, P>(s) * T(2) - T(1)) * s.w; 
-		return tvec4<T, P>(pXYZ, pW);
-	}
-}//namespace gtc
+namespace glm {
+	namespace gtc {
+		template <typename T, precision P>
+		GLM_FUNC_QUALIFIER tvec4<T, P> grad4(T const & j, tvec4<T, P> const & ip) {
+			tvec3<T, P> pXYZ = floor(fract(tvec3<T, P>(j) * tvec3<T, P>(ip)) * T(7)) * ip[2] - T(1);
+			T pW = static_cast<T>(1.5) - dot(abs(pXYZ), tvec3<T, P>(1));
+			tvec4<T, P> s = tvec4<T, P>(lessThan(tvec4<T, P>(pXYZ, pW), tvec4<T, P>(0.0)));
+			pXYZ = pXYZ + (tvec3<T, P>(s) * T(2) - T(1)) * s.w;
+			return tvec4<T, P>(pXYZ, pW);
+		}
+	}//namespace gtc
 
-	// Classic Perlin noise
+		// Classic Perlin noise
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec2<T, P> const & Position)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec2<T, P> const & Position) {
 		tvec4<T, P> Pi = glm::floor(tvec4<T, P>(Position.x, Position.y, Position.x, Position.y)) + tvec4<T, P>(0.0, 0.0, 1.0, 1.0);
 		tvec4<T, P> Pf = glm::fract(tvec4<T, P>(Position.x, Position.y, Position.x, Position.y)) - tvec4<T, P>(0.0, 0.0, 1.0, 1.0);
 		Pi = mod(Pi, tvec4<T, P>(289)); // To avoid truncation effects in permutation
@@ -63,8 +60,7 @@ namespace gtc
 
 	// Classic Perlin noise
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec3<T, P> const & Position)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec3<T, P> const & Position) {
 		tvec3<T, P> Pi0 = floor(Position); // Integer part for indexing
 		tvec3<T, P> Pi1 = Pi0 + T(1); // Integer part + 1
 		Pi0 = detail::mod289(Pi0);
@@ -128,7 +124,7 @@ namespace gtc
 		tvec3<T, P> fade_xyz = detail::fade(Pf0);
 		tvec4<T, P> n_z = mix(tvec4<T, P>(n000, n100, n010, n110), tvec4<T, P>(n001, n101, n011, n111), fade_xyz.z);
 		tvec2<T, P> n_yz = mix(tvec2<T, P>(n_z.x, n_z.y), tvec2<T, P>(n_z.z, n_z.w), fade_xyz.y);
-		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
 		return T(2.2) * n_xyz;
 	}
 	/*
@@ -199,16 +195,15 @@ namespace gtc
 		tvec3<T, P> fade_xyz = fade(Pf0);
 		tvec4<T, P> n_z = mix(tvec4<T, P>(n000, n100, n010, n110), tvec4<T, P>(n001, n101, n011, n111), fade_xyz.z);
 		tvec2<T, P> n_yz = mix(
-			tvec2<T, P>(n_z.x, n_z.y), 
+			tvec2<T, P>(n_z.x, n_z.y),
 			tvec2<T, P>(n_z.z, n_z.w), fade_xyz.y);
-		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x); 
+		T n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
 		return T(2.2) * n_xyz;
 	}
 	*/
 	// Classic Perlin noise
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec4<T, P> const & Position)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec4<T, P> const & Position) {
 		tvec4<T, P> Pi0 = floor(Position);	// Integer part for indexing
 		tvec4<T, P> Pi1 = Pi0 + T(1);		// Integer part + 1
 		Pi0 = mod(Pi0, tvec4<T, P>(289));
@@ -343,8 +338,7 @@ namespace gtc
 
 	// Classic Perlin noise, periodic variant
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec2<T, P> const & Position, tvec2<T, P> const & rep)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec2<T, P> const & Position, tvec2<T, P> const & rep) {
 		tvec4<T, P> Pi = floor(tvec4<T, P>(Position.x, Position.y, Position.x, Position.y)) + tvec4<T, P>(0.0, 0.0, 1.0, 1.0);
 		tvec4<T, P> Pf = fract(tvec4<T, P>(Position.x, Position.y, Position.x, Position.y)) - tvec4<T, P>(0.0, 0.0, 1.0, 1.0);
 		Pi = mod(Pi, tvec4<T, P>(rep.x, rep.y, rep.x, rep.y)); // To create noise with explicit period
@@ -385,8 +379,7 @@ namespace gtc
 
 	// Classic Perlin noise, periodic variant
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec3<T, P> const & Position, tvec3<T, P> const & rep)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec3<T, P> const & Position, tvec3<T, P> const & rep) {
 		tvec3<T, P> Pi0 = mod(floor(Position), rep); // Integer part, modulo period
 		tvec3<T, P> Pi1 = mod(Pi0 + tvec3<T, P>(T(1)), rep); // Integer part + 1, mod period
 		Pi0 = mod(Pi0, tvec3<T, P>(289));
@@ -456,8 +449,7 @@ namespace gtc
 
 	// Classic Perlin noise, periodic version
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T perlin(tvec4<T, P> const & Position, tvec4<T, P> const & rep)
-	{
+	GLM_FUNC_QUALIFIER T perlin(tvec4<T, P> const & Position, tvec4<T, P> const & rep) {
 		tvec4<T, P> Pi0 = mod(floor(Position), rep); // Integer part modulo rep
 		tvec4<T, P> Pi1 = mod(Pi0 + T(1), rep); // Integer part + 1 mod rep
 		tvec4<T, P> Pf0 = fract(Position); // Fractional part for interpolation
@@ -589,17 +581,16 @@ namespace gtc
 	}
 
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T simplex(glm::tvec2<T, P> const & v)
-	{
+	GLM_FUNC_QUALIFIER T simplex(glm::tvec2<T, P> const & v) {
 		tvec4<T, P> const C = tvec4<T, P>(
-			T( 0.211324865405187),  // (3.0 -  sqrt(3.0)) / 6.0
-			T( 0.366025403784439),  //  0.5 * (sqrt(3.0)  - 1.0)
+			T(0.211324865405187),  // (3.0 -  sqrt(3.0)) / 6.0
+			T(0.366025403784439),  //  0.5 * (sqrt(3.0)  - 1.0)
 			T(-0.577350269189626),	// -1.0 + 2.0 * C.x
-			T( 0.024390243902439)); //  1.0 / 41.0
+			T(0.024390243902439)); //  1.0 / 41.0
 
 		// First corner
-		tvec2<T, P> i  = floor(v + dot(v, tvec2<T, P>(C[1])));
-		tvec2<T, P> x0 = v -   i + dot(i, tvec2<T, P>(C[0]));
+		tvec2<T, P> i = floor(v + dot(v, tvec2<T, P>(C[1])));
+		tvec2<T, P> x0 = v - i + dot(i, tvec2<T, P>(C[0]));
 
 		// Other corners
 		//i1.x = step( x0.y, x0.x ); // x0.x > x0.y ? 1.0 : 0.0
@@ -619,10 +610,10 @@ namespace gtc
 
 		tvec3<T, P> m = max(tvec3<T, P>(0.5) - tvec3<T, P>(
 			dot(x0, x0),
-			dot(tvec2<T, P>(x12.x, x12.y), tvec2<T, P>(x12.x, x12.y)), 
+			dot(tvec2<T, P>(x12.x, x12.y), tvec2<T, P>(x12.x, x12.y)),
 			dot(tvec2<T, P>(x12.z, x12.w), tvec2<T, P>(x12.z, x12.w))), tvec3<T, P>(0));
-		m = m * m ;
-		m = m * m ;
+		m = m * m;
+		m = m * m;
 
 		// Gradients: 41 points uniformly over a line, mapped onto a diamond.
 		// The ring size 17*17 = 289 is close to a multiple of 41 (41*7 = 287)
@@ -638,7 +629,7 @@ namespace gtc
 
 		// Compute final noise value at P
 		tvec3<T, P> g;
-		g.x  = a0.x  * x0.x  + h.x  * x0.y;
+		g.x = a0.x  * x0.x + h.x  * x0.y;
 		//g.yz = a0.yz * x12.xz + h.yz * x12.yw;
 		g.y = a0.y * x12.x + h.y * x12.y;
 		g.z = a0.z * x12.z + h.z * x12.w;
@@ -646,8 +637,7 @@ namespace gtc
 	}
 
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T simplex(tvec3<T, P> const & v)
-	{
+	GLM_FUNC_QUALIFIER T simplex(tvec3<T, P> const & v) {
 		tvec2<T, P> const C(1.0 / 6.0, 1.0 / 3.0);
 		tvec4<T, P> const D(0.0, 0.5, 1.0, 2.0);
 
@@ -721,8 +711,7 @@ namespace gtc
 	}
 
 	template <typename T, precision P>
-	GLM_FUNC_QUALIFIER T simplex(tvec4<T, P> const & v)
-	{
+	GLM_FUNC_QUALIFIER T simplex(tvec4<T, P> const & v) {
 		tvec4<T, P> const C(
 			0.138196601125011,  // (5 - sqrt(5))/20  G4
 			0.276393202250021,  // 2 * G4
@@ -733,8 +722,8 @@ namespace gtc
 		T const F4 = static_cast<T>(0.309016994374947451);
 
 		// First corner
-		tvec4<T, P> i  = floor(v + dot(v, vec4(F4)));
-		tvec4<T, P> x0 = v -   i + dot(i, vec4(C.x));
+		tvec4<T, P> i = floor(v + dot(v, vec4(F4)));
+		tvec4<T, P> x0 = v - i + dot(i, vec4(C.x));
 
 		// Other corners
 
@@ -770,7 +759,7 @@ namespace gtc
 		tvec4<T, P> x4 = x0 + C.w;
 
 		// Permutations
-		i = mod(i, tvec4<T, P>(289)); 
+		i = mod(i, tvec4<T, P>(289));
 		T j0 = detail::permute(detail::permute(detail::permute(detail::permute(i.w) + i.z) + i.y) + i.x);
 		tvec4<T, P> j1 = detail::permute(detail::permute(detail::permute(detail::permute(
 			i.w + tvec4<T, P>(i1.w, i2.w, i3.w, T(1))) +
@@ -782,7 +771,7 @@ namespace gtc
 		// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
 		tvec4<T, P> ip = tvec4<T, P>(T(1) / T(294), T(1) / T(49), T(1) / T(7), T(0));
 
-		tvec4<T, P> p0 = gtc::grad4(j0,   ip);
+		tvec4<T, P> p0 = gtc::grad4(j0, ip);
 		tvec4<T, P> p1 = gtc::grad4(j1.x, ip);
 		tvec4<T, P> p2 = gtc::grad4(j1.y, ip);
 		tvec4<T, P> p3 = gtc::grad4(j1.z, ip);
@@ -798,11 +787,11 @@ namespace gtc
 
 		// Mix contributions from the five corners
 		tvec3<T, P> m0 = max(T(0.6) - tvec3<T, P>(dot(x0, x0), dot(x1, x1), dot(x2, x2)), tvec3<T, P>(0));
-		tvec2<T, P> m1 = max(T(0.6) - tvec2<T, P>(dot(x3, x3), dot(x4, x4)             ), tvec2<T, P>(0));
+		tvec2<T, P> m1 = max(T(0.6) - tvec2<T, P>(dot(x3, x3), dot(x4, x4)), tvec2<T, P>(0));
 		m0 = m0 * m0;
 		m1 = m1 * m1;
-		return T(49) * 
-			(dot(m0 * m0, tvec3<T, P>(dot(p0, x0), dot(p1, x1), dot(p2, x2))) + 
-			dot(m1 * m1, tvec2<T, P>(dot(p3, x3), dot(p4, x4))));
+		return T(49) *
+			(dot(m0 * m0, tvec3<T, P>(dot(p0, x0), dot(p1, x1), dot(p2, x2))) +
+			 dot(m1 * m1, tvec2<T, P>(dot(p3, x3), dot(p4, x4))));
 	}
 }//namespace glm

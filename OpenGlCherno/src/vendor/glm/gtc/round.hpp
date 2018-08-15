@@ -25,11 +25,9 @@
 #	pragma message("GLM: GLM_GTC_integer extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_round
 	/// @{
-
 	/// Return true if the value is a power of two number.
 	///
 	/// @see gtc_round
@@ -103,7 +101,7 @@ namespace glm
 	/// Higher multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round
@@ -113,7 +111,7 @@ namespace glm
 	/// Higher multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round
@@ -123,7 +121,7 @@ namespace glm
 	/// Lower multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round
@@ -135,7 +133,7 @@ namespace glm
 	/// Lower multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round
@@ -147,7 +145,7 @@ namespace glm
 	/// Lower multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round
@@ -159,7 +157,7 @@ namespace glm
 	/// Lower multiple number of Source.
 	///
 	/// @tparam genType Floating-point or integer scalar or vector types.
-	/// @param Source 
+	/// @param Source
 	/// @param Multiple Must be a null or positive value
 	///
 	/// @see gtc_round

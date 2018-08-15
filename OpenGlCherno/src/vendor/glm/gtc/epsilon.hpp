@@ -1,15 +1,15 @@
 /// @ref gtc_epsilon
 /// @file glm/gtc/epsilon.hpp
-/// 
+///
 /// @see core (dependence)
 /// @see gtc_half_float (dependence)
 /// @see gtc_quaternion (dependence)
 ///
 /// @defgroup gtc_epsilon GLM_GTC_epsilon
 /// @ingroup gtc
-/// 
+///
 /// @brief Comparison functions for a user defined epsilon values.
-/// 
+///
 /// <glm/gtc/epsilon.hpp> need to be included to use these functionalities.
 
 #pragma once
@@ -22,11 +22,9 @@
 #	pragma message("GLM: GLM_GTC_epsilon extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_epsilon
 	/// @{
-
 	/// Returns the component-wise comparison of |x - y| < epsilon.
 	/// True if this expression is satisfied.
 	///

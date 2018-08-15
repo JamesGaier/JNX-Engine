@@ -13,11 +13,9 @@
 #endif //GLM_SWIZZLE
 #include <cstddef>
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P = defaultp>
-	struct tvec2
-	{
+	struct tvec2 {
 		// -- Implementation detail --
 
 		typedef T value_type;
@@ -27,7 +25,7 @@ namespace glm
 		// -- Data --
 
 #		if GLM_HAS_ONLY_XYZW
-			T x, y;
+		T x, y;
 
 #		elif GLM_HAS_ALIGNED_TYPE
 #			if GLM_COMPILER & GLM_COMPILER_GCC
@@ -39,27 +37,25 @@ namespace glm
 #				pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
 #				pragma clang diagnostic ignored "-Wnested-anon-types"
 #			endif
-		
-			union
-			{
-				struct{ T x, y; };
-				struct{ T r, g; };
-				struct{ T s, t; };
+
+		union {
+			struct { T x, y; };
+			struct { T r, g; };
+			struct { T s, t; };
 
 #				if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
-					_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, x, y)
-					_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, r, g)
-					_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, s, t)
-					_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, x, y)
-					_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, r, g)
-					_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, s, t)
-					_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, x, y)
-					_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, r, g)
-					_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, s, t)
+			_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, x, y)
+				_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, r, g)
+				_GLM_SWIZZLE2_2_MEMBERS(T, P, glm::tvec2, s, t)
+				_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, x, y)
+				_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, r, g)
+				_GLM_SWIZZLE2_3_MEMBERS(T, P, glm::tvec3, s, t)
+				_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, x, y)
+				_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, r, g)
+				_GLM_SWIZZLE2_4_MEMBERS(T, P, glm::tvec4, s, t)
 #				endif//GLM_SWIZZLE
+		};
 
-			};
-		
 #			if GLM_COMPILER & GLM_COMPILER_CLANG
 #				pragma clang diagnostic pop
 #			endif
@@ -67,19 +63,19 @@ namespace glm
 #				pragma GCC diagnostic pop
 #			endif
 #		else
-			union {T x, r, s;};
-			union {T y, g, t;};
+		union { T x, r, s; };
+		union { T y, g, t; };
 
 #			if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
-				GLM_SWIZZLE_GEN_VEC_FROM_VEC2(T, P, tvec2, tvec2, tvec3, tvec4)
+		GLM_SWIZZLE_GEN_VEC_FROM_VEC2(T, P, tvec2, tvec2, tvec3, tvec4)
 #			endif//GLM_SWIZZLE
 #		endif
 
 		// -- Component accesses --
 
 		/// Return the count of components of the vector
-		typedef length_t length_type;
-		GLM_FUNC_DECL static length_type length(){return 2;}
+			typedef length_t length_type;
+		GLM_FUNC_DECL static length_type length() { return 2; }
 
 		GLM_FUNC_DECL T & operator[](length_type i);
 		GLM_FUNC_DECL T const & operator[](length_type i) const;
@@ -120,11 +116,10 @@ namespace glm
 
 		// -- Swizzle constructors --
 #		if GLM_HAS_UNRESTRICTED_UNIONS && (GLM_SWIZZLE == GLM_SWIZZLE_ENABLED)
-			template <int E0, int E1>
-			GLM_FUNC_DECL tvec2(detail::_swizzle<2, T, P, glm::tvec2, E0, E1,-1,-2> const& that)
-			{
-				*this = that();
-			}
+		template <int E0, int E1>
+		GLM_FUNC_DECL tvec2(detail::_swizzle<2, T, P, glm::tvec2, E0, E1, -1, -2> const& that) {
+			*this = that();
+		}
 #		endif// GLM_HAS_UNRESTRICTED_UNIONS && (GLM_SWIZZLE == GLM_SWIZZLE_ENABLED)
 
 		// -- Unary arithmetic operators --
@@ -167,41 +162,41 @@ namespace glm
 
 		// -- Unary bit operators --
 
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator%=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator%=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator%=(tvec2<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator&=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator&=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator&=(tvec2<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator|=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator|=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator|=(tvec2<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator^=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator^=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator^=(tvec2<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator<<=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator<<=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator<<=(tvec2<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator>>=(U scalar);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator>>=(tvec1<U, P> const & v);
-		template <typename U> 
+		template <typename U>
 		GLM_FUNC_DECL tvec2<T, P> & operator>>=(tvec2<U, P> const & v);
 	};
 

@@ -14,7 +14,7 @@
 /// takes any of the \ref core_template "core template types". It returns
 /// a pointer to the memory layout of the object. Matrix types store their values
 /// in column-major order.
-/// 
+///
 /// This is useful for uploading data to matrices or copying data to buffer objects.
 ///
 /// Example:
@@ -53,11 +53,9 @@
 #	pragma message("GLM: GLM_GTC_type_ptr extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_type_ptr
 	/// @{
-
 	/// Return the constant address to the data of the input parameter.
 	/// @see gtc_type_ptr
 	template<typename genType>
@@ -122,7 +120,7 @@ namespace glm
 	/// @see gtc_type_ptr
 	template<typename T>
 	GLM_FUNC_DECL tmat4x4<T, defaultp> make_mat4x4(T const * const ptr);
-	
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>
@@ -132,7 +130,7 @@ namespace glm
 	/// @see gtc_type_ptr
 	template<typename T>
 	GLM_FUNC_DECL tmat3x3<T, defaultp> make_mat3(T const * const ptr);
-		
+
 	/// Build a matrix from a pointer.
 	/// @see gtc_type_ptr
 	template<typename T>

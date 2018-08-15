@@ -21,16 +21,14 @@
 #	pragma message("GLM: GLM_GTX_perpendicular extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_perpendicular
 	/// @{
-
 	//! Projects x a perpendicular axis of Normal.
 	//! From GLM_GTX_perpendicular extension.
-	template <typename vecType> 
+	template <typename vecType>
 	GLM_FUNC_DECL vecType perp(
-		vecType const & x, 
+		vecType const & x,
 		vecType const & Normal);
 
 	/// @}

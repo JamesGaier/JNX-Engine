@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_matrix_interpolation extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_matrix_interpolation
 	/// @{
-
 	/// Get the axis and angle of the rotation from a matrix.
 	/// From GLM_GTX_matrix_interpolation extension.
 	template <typename T, precision P>

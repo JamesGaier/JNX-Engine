@@ -13,7 +13,6 @@ struct VertexElement {
 	bool normalized;
 
 	static unsigned sizeOfType(unsigned type) {
-	
 		switch(type) {
 			case GL_FLOAT:
 				return sizeof(GLfloat);
@@ -39,21 +38,18 @@ public:
 
 	template<>
 	void push<float>(unsigned count) {
-
 		m_elements.push_back({GL_FLOAT, count, false});
 		m_stride += VertexElement::sizeOfType(GL_FLOAT) * count;
 	}
 
 	template<>
 	void push<unsigned>(unsigned count) {
-
 		m_elements.push_back({GL_UNSIGNED_INT, count, false});
 		m_stride += VertexElement::sizeOfType(GL_UNSIGNED_INT) * count;
 	}
 
 	template<>
 	void push<unsigned char>(unsigned count) {
-
 		m_elements.push_back({GL_UNSIGNED_BYTE, count, true});
 		m_stride += VertexElement::sizeOfType(GL_UNSIGNED_BYTE) * count;
 	}

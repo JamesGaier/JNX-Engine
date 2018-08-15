@@ -25,11 +25,9 @@
 #	pragma message("GLM: GLM_GTC_color_space extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_color_space
 	/// @{
-
 	/// Convert a linear color to sRGB color using a standard gamma correction.
 	/// IEC 61966-2-1:1999 specification https://www.w3.org/Graphics/Color/srgb
 	template <typename T, precision P, template <typename, precision> class vecType>

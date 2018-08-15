@@ -33,7 +33,7 @@ void Vec3d::setZ(double z) {
 }
 
 double Vec3d::magnitudeSquared() const {
-	return x*x + y*y + z*z;
+	return x * x + y * y + z * z;
 }
 
 Vec3d Vec3d::normalized() const {
@@ -65,7 +65,7 @@ void Vec3d::operator*=(const double& rhs) {
 }
 
 void Vec3d::operator/=(const double& rhs) {
-	(*this)*=(1 / rhs);
+	(*this) *= (1 / rhs);
 }
 
 //Array {x, y, z}
@@ -89,7 +89,6 @@ std::ostream & operator<<(std::ostream & out, const Vec3d & rhs) {
 }
 
 std::istream & operator>>(std::istream & input, Vec3d & rhs) {
-	
 	double value;
 	input >> value;
 	rhs.setX(value);

@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_projection extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_projection
 	/// @{
-
 	/// Projects x on Normal.
 	///
 	/// @see gtx_projection

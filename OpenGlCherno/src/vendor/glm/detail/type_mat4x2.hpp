@@ -10,11 +10,9 @@
 #include <limits>
 #include <cstddef>
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P = defaultp>
-	struct tmat4x2
-	{
+	struct tmat4x2 {
 		typedef tvec2<T, P> col_type;
 		typedef tvec4<T, P> row_type;
 		typedef tmat4x2<T, P> type;
@@ -52,11 +50,11 @@ namespace glm
 			typename X2, typename Y2,
 			typename X3, typename Y3,
 			typename X4, typename Y4>
-		GLM_FUNC_DECL tmat4x2(
-			X1 x1, Y1 y1,
-			X2 x2, Y2 y2,
-			X3 x3, Y3 y3,
-			X4 x4, Y4 y4);
+			GLM_FUNC_DECL tmat4x2(
+				X1 x1, Y1 y1,
+				X2 x2, Y2 y2,
+				X3 x3, Y3 y3,
+				X4 x4, Y4 y4);
 
 		template <typename V1, typename V2, typename V3, typename V4>
 		GLM_FUNC_DECL tmat4x2(
@@ -82,7 +80,7 @@ namespace glm
 		// -- Accesses --
 
 		typedef length_t length_type;
-		GLM_FUNC_DECL static length_type length(){return 4;}
+		GLM_FUNC_DECL static length_type length() { return 4; }
 
 		GLM_FUNC_DECL col_type & operator[](length_type i);
 		GLM_FUNC_DECL col_type const & operator[](length_type i) const;
@@ -134,7 +132,7 @@ namespace glm
 	GLM_FUNC_DECL tmat4x2<T, P> operator-(tmat4x2<T, P> const & m, T scalar);
 
 	template <typename T, precision P>
-	GLM_FUNC_DECL tmat4x2<T, P> operator-(tmat4x2<T, P> const & m1,	tmat4x2<T, P> const & m2);
+	GLM_FUNC_DECL tmat4x2<T, P> operator-(tmat4x2<T, P> const & m1, tmat4x2<T, P> const & m2);
 
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat4x2<T, P> operator*(tmat4x2<T, P> const & m, T scalar);

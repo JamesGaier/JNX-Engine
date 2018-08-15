@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_polar_coordinates extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_polar_coordinates
 	/// @{
-
 	/// Convert Euclidean to Polar coordinates, x is the xz distance, y, the latitude and z the longitude.
 	///
 	/// @see gtx_polar_coordinates

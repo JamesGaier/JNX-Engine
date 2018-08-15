@@ -777,13 +777,12 @@
 
 // User defines: GLM_FORCE_SIZE_T_LENGTH GLM_FORCE_SIZE_FUNC
 
-namespace glm
-{
+namespace glm {
 	using std::size_t;
 #	if defined(GLM_FORCE_SIZE_T_LENGTH)
-		typedef size_t length_t;
+	typedef size_t length_t;
 #	else
-		typedef int length_t;
+	typedef int length_t;
 #	endif
 }//namespace glm
 
@@ -804,14 +803,12 @@ namespace glm
 #endif
 
 #if GLM_HAS_CONSTEXPR_PARTIAL
-	namespace glm
-	{
-		template <typename T, std::size_t N>
-		constexpr std::size_t countof(T const (&)[N])
-		{
-			return N;
-		}
-	}//namespace glm
+namespace glm {
+	template <typename T, std::size_t N>
+	constexpr std::size_t countof(T const (&)[N]) {
+		return N;
+	}
+}//namespace glm
 #	define GLM_COUNTOF(arr) glm::countof(arr)
 #elif defined(_MSC_VER)
 #	define GLM_COUNTOF(arr) _countof(arr)
@@ -822,7 +819,6 @@ namespace glm
 ///////////////////////////////////////////////////////////////////////////////////
 // Uninitialize constructors
 
-namespace glm
-{
-	enum ctor{uninitialize};
+namespace glm {
+	enum ctor { uninitialize };
 }//namespace glm

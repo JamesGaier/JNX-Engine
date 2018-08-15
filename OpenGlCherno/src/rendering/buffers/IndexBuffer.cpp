@@ -2,7 +2,6 @@
 #include "../util/GLUtil.h"
 
 IndexBuffer::IndexBuffer(unsigned* data, unsigned count) : m_count(count) {
-
 	ASSERT(sizeof(unsigned) == sizeof(GLuint));
 
 	GLCALL(glGenBuffers(1, &m_rendererID));

@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_wrap extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_wrap
 	/// @{
-
 	/// Simulate GL_CLAMP OpenGL wrap mode
 	/// @see gtx_wrap extension.
 	template <typename genType>

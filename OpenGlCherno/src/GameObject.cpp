@@ -18,7 +18,7 @@ glm::mat4 GameObject::scaleMat() const {
 	return glm::scale(glm::mat4(), static_cast<glm::vec3>(scale));
 }
 
-void GameObject::setModel(Model * m) { 
+void GameObject::setModel(Model * m) {
 	model = m;
 	setScale(Vec3d(m->scaleFactor()));
 }
@@ -32,13 +32,12 @@ void GameObject::setRotation(float radians, Vec3d axis) {
 }
 
 void GameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) {
-
 	shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
 	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
 }
 
 void GameObject::draw(Renderer* r, Shader* shader) const {
-	r->draw(model, shader); 
+	r->draw(model, shader);
 }
 
 void GameObject::update(double delta) {
@@ -48,4 +47,3 @@ void GameObject::update(double delta) {
 	auto y = std::sin(totalDelta / RATE);
 	setPosition(Vec3d(x, y, 0));
 }
-

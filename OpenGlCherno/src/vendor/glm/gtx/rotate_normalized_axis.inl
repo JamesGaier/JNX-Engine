@@ -1,16 +1,14 @@
 /// @ref gtx_rotate_normalized_axis
 /// @file glm/gtx/rotate_normalized_axis.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tmat4x4<T, P> rotateNormalizedAxis
 	(
 		tmat4x4<T, P> const & m,
 		T const & angle,
 		tvec3<T, P> const & v
-	)
-	{
+	) {
 		T const a = angle;
 		T const c = cos(a);
 		T const s = sin(a);
@@ -43,11 +41,10 @@ namespace glm
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tquat<T, P> rotateNormalizedAxis
 	(
-		tquat<T, P> const & q, 
+		tquat<T, P> const & q,
 		T const & angle,
 		tvec3<T, P> const & v
-	)
-	{
+	) {
 		tvec3<T, P> const Tmp(v);
 
 		T const AngleRad(angle);

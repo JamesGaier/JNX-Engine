@@ -3,7 +3,7 @@
 
 #include <GLFW/glfw3.h>
 
-/* 
+/*
 *	Purpose: gets and processes input
 *	@author James Gaier
 */

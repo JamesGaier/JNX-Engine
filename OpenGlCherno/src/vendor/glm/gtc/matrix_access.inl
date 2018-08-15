@@ -1,16 +1,14 @@
 /// @ref gtc_matrix_access
 /// @file glm/gtc/matrix_access.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType row
 	(
 		genType const & m,
 		length_t index,
 		typename genType::row_type const & x
-	)
-	{
+	) {
 		assert(index >= 0 && index < m[0].length());
 
 		genType Result = m;
@@ -24,8 +22,7 @@ namespace glm
 	(
 		genType const & m,
 		length_t index
-	)
-	{
+	) {
 		assert(index >= 0 && index < m[0].length());
 
 		typename genType::row_type Result;
@@ -40,8 +37,7 @@ namespace glm
 		genType const & m,
 		length_t index,
 		typename genType::col_type const & x
-	)
-	{
+	) {
 		assert(index >= 0 && index < m.length());
 
 		genType Result = m;
@@ -54,8 +50,7 @@ namespace glm
 	(
 		genType const & m,
 		length_t index
-	)
-	{
+	) {
 		assert(index >= 0 && index < m.length());
 
 		return m[index];

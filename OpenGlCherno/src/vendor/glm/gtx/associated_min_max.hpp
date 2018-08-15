@@ -6,7 +6,7 @@
 ///
 /// @defgroup gtx_associated_min_max GLM_GTX_associated_min_max
 /// @ingroup gtx
-/// 
+///
 /// @brief Min and max functions that return associated values not the compared onces.
 /// <glm/gtx/associated_min_max.hpp> need to be included to use these functionalities.
 
@@ -19,11 +19,9 @@
 #	pragma message("GLM: GLM_GTX_associated_min_max extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_associated_min_max
 	/// @{
-
 	/// Minimum comparison between 2 variables and returns 2 associated variable values
 	/// @see gtx_associated_min_max
 	template<typename T, typename U, precision P>

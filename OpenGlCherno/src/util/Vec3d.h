@@ -17,16 +17,16 @@ public:
 	void setX(double x);
 	void setY(double y);
 	void setZ(double z);
-	
-	//Math 
+
+	//Math
 	double magnitudeSquared() const;
 	Vec3d normalized() const;
-	
+
 	void operator+=(const Vec3d& rhs);
 	void operator-=(const Vec3d& rhs);
 	void operator*=(const double& rhs);
 	void operator/=(const double& rhs);
-	
+
 	//Accessor
 	double operator[](const int& rhs) const;
 	operator glm::vec3() const;

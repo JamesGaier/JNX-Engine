@@ -20,11 +20,9 @@
 #	pragma message("GLM: GLM_GTX_euler_angles extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtx_euler_angles
 	/// @{
-
 	/// Creates a 3D 4 * 4 homogeneous rotation matrix from an euler angle X.
 	/// @see gtx_euler_angles
 	template <typename T>
@@ -85,14 +83,14 @@ namespace glm
 		T const & angleZ,
 		T const & angleY);
 
-    /// Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (X * Y * Z).
-    /// @see gtx_euler_angles
-    template <typename T>
-    GLM_FUNC_DECL tmat4x4<T, defaultp> eulerAngleXYZ(
-        T const & t1,
-        T const & t2,
-        T const & t3);
-    
+	/// Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (X * Y * Z).
+	/// @see gtx_euler_angles
+	template <typename T>
+	GLM_FUNC_DECL tmat4x4<T, defaultp> eulerAngleXYZ(
+		T const & t1,
+		T const & t2,
+		T const & t3);
+
 	/// Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z).
 	/// @see gtx_euler_angles
 	template <typename T>
@@ -100,7 +98,7 @@ namespace glm
 		T const & yaw,
 		T const & pitch,
 		T const & roll);
-    
+
 	/// Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z).
 	/// @see gtx_euler_angles
 	template <typename T>
@@ -119,24 +117,24 @@ namespace glm
 	template <typename T>
 	GLM_FUNC_DECL tmat3x3<T, defaultp> orientate3(T const & angle);
 
-	/// Creates a 3D 3 * 3 rotation matrix from euler angles (Y * X * Z). 
+	/// Creates a 3D 3 * 3 rotation matrix from euler angles (Y * X * Z).
 	/// @see gtx_euler_angles
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat3x3<T, P> orientate3(tvec3<T, P> const & angles);
-		
+
 	/// Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z).
 	/// @see gtx_euler_angles
 	template <typename T, precision P>
 	GLM_FUNC_DECL tmat4x4<T, P> orientate4(tvec3<T, P> const & angles);
 
-    /// Extracts the (X * Y * Z) Euler angles from the rotation matrix M
-    /// @see gtx_euler_angles
-    template <typename T>
-    GLM_FUNC_DECL void extractEulerAngleXYZ(tmat4x4<T, defaultp> const & M,
-                                            T & t1,
-                                            T & t2,
-                                            T & t3);
-    
+	/// Extracts the (X * Y * Z) Euler angles from the rotation matrix M
+	/// @see gtx_euler_angles
+	template <typename T>
+	GLM_FUNC_DECL void extractEulerAngleXYZ(tmat4x4<T, defaultp> const & M,
+											T & t1,
+											T & t2,
+											T & t3);
+
 	/// @}
 }//namespace glm
 

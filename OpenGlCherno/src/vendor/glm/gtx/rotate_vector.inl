@@ -1,16 +1,14 @@
 /// @ref gtx_rotate_vector
 /// @file glm/gtx/rotate_vector.inl
 
-namespace glm
-{
+namespace glm {
 	template <typename T, precision P>
 	GLM_FUNC_QUALIFIER tvec3<T, P> slerp
 	(
 		tvec3<T, P> const & x,
 		tvec3<T, P> const & y,
 		T const & a
-	)
-	{
+	) {
 		// get cosine of angle between vectors (-1 -> 1)
 		T CosAlpha = dot(x, y);
 		// get angle (0 -> pi)
@@ -30,8 +28,7 @@ namespace glm
 	(
 		tvec2<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec2<T, P> Result;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
@@ -47,8 +44,7 @@ namespace glm
 		tvec3<T, P> const & v,
 		T const & angle,
 		tvec3<T, P> const & normal
-	)
-	{
+	) {
 		return tmat3x3<T, P>(glm::rotate(angle, normal)) * v;
 	}
 	/*
@@ -69,8 +65,7 @@ namespace glm
 		tvec4<T, P> const & v,
 		T const & angle,
 		tvec3<T, P> const & normal
-	)
-	{
+	) {
 		return rotate(angle, normal) * v;
 	}
 
@@ -79,8 +74,7 @@ namespace glm
 	(
 		tvec3<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec3<T, P> Result(v);
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
@@ -95,13 +89,12 @@ namespace glm
 	(
 		tvec3<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec3<T, P> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
 
-		Result.x =  v.x * Cos + v.z * Sin;
+		Result.x = v.x * Cos + v.z * Sin;
 		Result.z = -v.x * Sin + v.z * Cos;
 		return Result;
 	}
@@ -111,8 +104,7 @@ namespace glm
 	(
 		tvec3<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec3<T, P> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
@@ -127,8 +119,7 @@ namespace glm
 	(
 		tvec4<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec4<T, P> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
@@ -143,13 +134,12 @@ namespace glm
 	(
 		tvec4<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec4<T, P> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
 
-		Result.x =  v.x * Cos + v.z * Sin;
+		Result.x = v.x * Cos + v.z * Sin;
 		Result.z = -v.x * Sin + v.z * Cos;
 		return Result;
 	}
@@ -159,8 +149,7 @@ namespace glm
 	(
 		tvec4<T, P> const & v,
 		T const & angle
-	)
-	{
+	) {
 		tvec4<T, P> Result = v;
 		T const Cos(cos(angle));
 		T const Sin(sin(angle));
@@ -175,8 +164,7 @@ namespace glm
 	(
 		tvec3<T, P> const & Normal,
 		tvec3<T, P> const & Up
-	)
-	{
+	) {
 		if(all(equal(Normal, Up)))
 			return tmat4x4<T, P>(T(1));
 

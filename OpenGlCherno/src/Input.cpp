@@ -12,5 +12,5 @@ void Input::update(GLFWwindow* win) {
 	glfwGetCursorPos(win, &mouseX, &mouseY);
 }
 void Input::setMousePosition(GLFWwindow* win, double x, double y) {
-	glfwSetCursorPos(win, x,y);
+	glfwSetCursorPos(win, x, y);
 }

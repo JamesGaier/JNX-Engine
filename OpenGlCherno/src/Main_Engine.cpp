@@ -15,9 +15,8 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 */
 
 int main() {
-	
-	JNX_Engine jnx(640, 480, true); 
-	
+	JNX_Engine jnx(640, 480, true);
+
 	if(!jnx.isLoaded())
 		return 0;
 
@@ -26,7 +25,7 @@ int main() {
 	jnx.setProjectionPerspective(glm::radians(45.0f));
 	jnx.setCameraTranslate(Vec3d(0, 0, -5));
 	jnx.loadShader("res/shaders/basic.shader");
-	
+
 	//Longest part of init sequence
 	auto go = new GameObject("res/models/teapot.obj");
 	jnx.registerGameObject(go);
@@ -35,7 +34,6 @@ int main() {
 
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
-		
 		jnx.cleanBuffers();
 		/* Render here */
 		jnx.updateGameObjects();

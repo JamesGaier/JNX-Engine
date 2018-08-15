@@ -9,16 +9,14 @@
 #include "../vec3.hpp"
 #include "../vec4.hpp"
 
-namespace glm
-{
+namespace glm {
 	template <>
 	GLM_FUNC_QUALIFIER bool epsilonEqual
 	(
 		float const & x,
 		float const & y,
 		float const & epsilon
-	)
-	{
+	) {
 		return abs(x - y) < epsilon;
 	}
 
@@ -28,8 +26,7 @@ namespace glm
 		double const & x,
 		double const & y,
 		double const & epsilon
-	)
-	{
+	) {
 		return abs(x - y) < epsilon;
 	}
 
@@ -39,8 +36,7 @@ namespace glm
 		float const & x,
 		float const & y,
 		float const & epsilon
-	)
-	{
+	) {
 		return abs(x - y) >= epsilon;
 	}
 
@@ -50,8 +46,7 @@ namespace glm
 		double const & x,
 		double const & y,
 		double const & epsilon
-	)
-	{
+	) {
 		return abs(x - y) >= epsilon;
 	}
 
@@ -61,8 +56,7 @@ namespace glm
 		vecType<T, P> const & x,
 		vecType<T, P> const & y,
 		T const & epsilon
-	)
-	{
+	) {
 		return lessThan(abs(x - y), vecType<T, P>(epsilon));
 	}
 
@@ -72,8 +66,7 @@ namespace glm
 		vecType<T, P> const & x,
 		vecType<T, P> const & y,
 		vecType<T, P> const & epsilon
-	)
-	{
+	) {
 		return lessThan(abs(x - y), vecType<T, P>(epsilon));
 	}
 
@@ -83,8 +76,7 @@ namespace glm
 		vecType<T, P> const & x,
 		vecType<T, P> const & y,
 		T const & epsilon
-	)
-	{
+	) {
 		return greaterThanEqual(abs(x - y), vecType<T, P>(epsilon));
 	}
 
@@ -94,8 +86,7 @@ namespace glm
 		vecType<T, P> const & x,
 		vecType<T, P> const & y,
 		vecType<T, P> const & epsilon
-	)
-	{
+	) {
 		return greaterThanEqual(abs(x - y), vecType<T, P>(epsilon));
 	}
 
@@ -105,8 +96,7 @@ namespace glm
 		tquat<T, P> const & x,
 		tquat<T, P> const & y,
 		T const & epsilon
-	)
-	{
+	) {
 		tvec4<T, P> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
 		return lessThan(abs(v), tvec4<T, P>(epsilon));
 	}
@@ -117,8 +107,7 @@ namespace glm
 		tquat<T, P> const & x,
 		tquat<T, P> const & y,
 		T const & epsilon
-	)
-	{
+	) {
 		tvec4<T, P> v(x.x - y.x, x.y - y.y, x.z - y.z, x.w - y.w);
 		return greaterThanEqual(abs(v), tvec4<T, P>(epsilon));
 	}

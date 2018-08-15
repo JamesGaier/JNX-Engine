@@ -2,9 +2,8 @@
 #include "stb_image/stb_image.h"
 #include <iostream>
 
-Texture::Texture(const std::string& path, bool keepLocal) : 
+Texture::Texture(const std::string& path, bool keepLocal) :
 	m_path(path), m_localBuffer(nullptr), m_width(0), m_height(0), m_BPP(0), m_kept(keepLocal) {
-
 	stbi_set_flip_vertically_on_load(1);
 
 	m_localBuffer = stbi_load(m_path.c_str(), &m_width, &m_height, &m_BPP, 4);
@@ -21,20 +20,18 @@ Texture::Texture(const std::string& path, bool keepLocal) :
 	Unbind();
 
 	if(m_localBuffer && !m_kept) stbi_image_free(m_localBuffer);
-	
 }
 
-Texture::~Texture() { 
+Texture::~Texture() {
 	GLCALL(glDeleteTextures(1, &m_ID));
-	if(m_kept) delete[] m_localBuffer; 
+	if(m_kept) delete[] m_localBuffer;
 }
 
-void Texture::Bind(unsigned slot) const { 
-
+void Texture::Bind(unsigned slot) const {
 	if(slot >= 32) {
 		std::cerr << "Texture slot #" << slot << " does not exist in OpenGL!" << std::endl;
 	}
 
 	GLCALL(glActiveTexture(GL_TEXTURE0 + slot));
-	GLCALL(glBindTexture(GL_TEXTURE_2D, m_ID)); 
+	GLCALL(glBindTexture(GL_TEXTURE_2D, m_ID));
 }

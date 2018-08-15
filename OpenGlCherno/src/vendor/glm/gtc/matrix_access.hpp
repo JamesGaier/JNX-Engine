@@ -5,7 +5,7 @@
 ///
 /// @defgroup gtc_matrix_access GLM_GTC_matrix_access
 /// @ingroup gtc
-/// 
+///
 /// Defines functions to access rows or columns of a matrix easily.
 /// <glm/gtc/matrix_access.hpp> need to be included to use these functionalities.
 
@@ -18,11 +18,9 @@
 #	pragma message("GLM: GLM_GTC_matrix_access extension included")
 #endif
 
-namespace glm
-{
+namespace glm {
 	/// @addtogroup gtc_matrix_access
 	/// @{
-
 	/// Get a specific row of a matrix.
 	/// @see gtc_matrix_access
 	template <typename genType>

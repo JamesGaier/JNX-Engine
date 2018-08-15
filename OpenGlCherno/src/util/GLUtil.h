@@ -19,11 +19,10 @@ inline bool gl_check_error(const char* func, const char* file, const unsigned li
 	bool no_errors = true;
 	while(auto error = glGetError()) {
 		std::cout << "[OpenGL Error] #" << error << " from " << func << " in " << file << " on line " << line << std::endl;
-		std::cout << glewGetErrorString (error) << std::endl;
+		std::cout << glewGetErrorString(error) << std::endl;
 		no_errors = false;
 	}
 	return no_errors;
 }
 
 #endif // !_GLUTIL
-
