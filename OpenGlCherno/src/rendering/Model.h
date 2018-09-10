@@ -29,7 +29,7 @@ private:
 	IndexBuffer* ib;
 
 	inline void cleanData();
-	inline void genBuffers();
+	inline void genBuffers(bool textured = false);
 
 public:
 	static constexpr auto EMPTY_MODEL_SOURCE = "NONE";
@@ -44,7 +44,7 @@ public:
 	inline bool hasDepth() const { return is3D; }
 
 	bool loadModel(const std::string& file);
-	bool loadSquare(float sideLength);
+	bool loadSquare(float sideLength, bool textured = false);
 };
 
 #endif // !_MODEL

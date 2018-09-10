@@ -10,7 +10,6 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-
 /*
 * Purpose: Central include for JNX engine
 * @author Nicholas Baron
@@ -56,7 +55,9 @@ public:
 	void renderGameObjects() const;
 	void updateGameObjects();
 
-	void setProjectionOrtho(float left, float right, float up, float down, float near = Z_NEAR, float far = Z_FAR);
+	void setProjectionOrtho(float left, float right, float up, float down);
+	void setOrthoCoordsFromCenter(float height);
+	void setOrthoCoordsFromTopLeft(float height);
 	//FOV needs to be in radians
 	inline void setProjectionPerspective(float fov) { setProjectionPerspective(fov, aspectRatio()); }
 	//FOV needs to be in radians

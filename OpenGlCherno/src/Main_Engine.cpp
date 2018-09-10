@@ -3,7 +3,7 @@
 #include "util/GLUtil.h"
 #include "rendering/Texture.h"
 #include "rendering/Model.h"
-#include "GameObject.h"
+#include "TexturedGameObject.h"
 //C++ includes
 #include <iostream>
 
@@ -15,15 +15,14 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 */
 
 void ortho(JNX_Engine& jnx) {
-	jnx.setProjectionOrtho(-10, 10, 10, -10);
-	jnx.setCameraTranslate(Vec3d(0,0,-1));
-	jnx.loadShader("res/shaders/basic.shader");
+	
+	constexpr auto high = 10;
+	jnx.setOrthoCoordsFromCenter(high);
+	jnx.loadShader("res/shaders/textured.shader");
 
 	auto sqr = new Model();
-	if(sqr->loadSquare(.5f)) {
-		auto test = new GameObject(sqr);
-		test->setPosition(Vec3d(0));
-		jnx.registerGameObject(test);
+	if(sqr->loadSquare(1.5f, true)) {
+		jnx.registerGameObject(new TexturedGameObject(sqr, "res/textures/test.png"));
 	}
 }
 
@@ -38,7 +37,7 @@ void prespective(JNX_Engine& jnx) {
 
 int main() {
 
-	constexpr bool orthoTest = false;
+	constexpr bool orthoTest = true;
 	JNX_Engine jnx(800, 600, true);
 
 	if(!jnx.isLoaded())

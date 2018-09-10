@@ -55,9 +55,20 @@ bool JNX_Engine::init(bool vsync) {
 	return true;
 }
 
-void JNX_Engine::setProjectionOrtho(float left, float right, float up, float down, float near, float far) {
-	proj = glm::ortho(left, right, up, down, near, far);
+void JNX_Engine::setProjectionOrtho(float left, float right, float up, float down) {
+	proj = glm::ortho(left, right, up, down);
 	projMode = ProjectionMode::ORTHO;
+}
+
+void JNX_Engine::setOrthoCoordsFromCenter(float height) {
+	const auto half = height / 2;
+	setProjectionOrtho(-half * aspectRatio(), half * aspectRatio(), half, -half);
+	setCameraTranslate(Vec3d(0));
+}
+
+void JNX_Engine::setOrthoCoordsFromTopLeft(float height) {
+	setProjectionOrtho(0, height * aspectRatio(), 0, -height);
+	setCameraTranslate(Vec3d(height / 2, height / 2, 0));
 }
 
 void JNX_Engine::setProjectionPerspective(float fov, float aspectRatio, float near, float far) {
@@ -94,22 +105,22 @@ void JNX_Engine::renderGameObject(GameObject * go) const {
 }
 
 void JNX_Engine::renderGameObjects() const {
-	for (const auto& go : gameObjects) {
+	for(const auto& go : gameObjects) {
 		renderGameObject(go);
 	}
 }
 
 void JNX_Engine::updateGameObjects() {
-	for (const auto& go : gameObjects) {
+	for(const auto& go : gameObjects) {
 		go->update(time() - lastDelta);
 	}
 
 	lastDelta = time();
 }
 
-void JNX_Engine::cleanRegisteredGOs(bool deleteCall) { 
-	if(deleteCall) { 
-		for(auto go : gameObjects) { delete go; } 
+void JNX_Engine::cleanRegisteredGOs(bool deleteCall) {
+	if(deleteCall) {
+		for(auto go : gameObjects) { delete go; }
 	}
 	gameObjects.clear();
 }

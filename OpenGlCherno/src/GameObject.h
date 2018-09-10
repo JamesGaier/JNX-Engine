@@ -14,8 +14,7 @@ private:
 	Vec3d scale;
 	glm::mat4 rotation;
 	Model* model;
-	//TODO: Add texture handling
-	double totalDelta = 0;
+
 public:
 	GameObject(Model* m);
 	GameObject(const std::string& modelLocation);
@@ -32,7 +31,7 @@ public:
 	void setRotation(float radians, Vec3d axis);
 
 	virtual void shaderSettings(Shader* shader, const glm::mat4& vpmat);
-	virtual void draw(Renderer* r, Shader* shader) const;
+	virtual void draw(Renderer* r, Shader* shader) const; //This may not need to be virtual
 	virtual void update(double delta);
 };
 

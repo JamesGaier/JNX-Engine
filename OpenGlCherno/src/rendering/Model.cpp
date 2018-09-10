@@ -61,7 +61,7 @@ bool Model::loadModel(const std::string & file) {
 	return false;
 }
 
-bool Model::loadSquare(float sideLength) {
+bool Model::loadSquare(float sideLength, bool textured) {
 	if(sideLength <= 0) {
 		return false;
 	}
@@ -70,14 +70,28 @@ bool Model::loadSquare(float sideLength) {
 
 	const auto halfSide = sideLength / 2;
 
-	VERTEX_BUFFER_COUNT = 8;
-	vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
-		-halfSide, -halfSide,
-			halfSide, -halfSide,
-			halfSide, halfSide,
-			-halfSide, halfSide
-	};
-
+	if(!textured) {
+		VERTEX_BUFFER_COUNT = 8;
+		vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
+			-halfSide, -halfSide,
+				halfSide, -halfSide,
+				halfSide, halfSide,
+				-halfSide, halfSide
+		};
+	} else {
+		VERTEX_BUFFER_COUNT = 16;
+		vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
+			-halfSide, -halfSide,
+				0,0,
+				halfSide, -halfSide,
+				1,0,
+				halfSide, halfSide,
+				1,1,
+				-halfSide, halfSide,
+				0,1
+		};
+	}
+	
 	INDICE_COUNT = 6;
 	indicies = new unsigned[INDICE_COUNT] {
 		0, 1, 2,
@@ -85,7 +99,8 @@ bool Model::loadSquare(float sideLength) {
 	};
 
 	is3D = false;
-	genBuffers();
+	normalFactor = 1;
+	genBuffers(textured);
 
 	return true;
 }
@@ -98,10 +113,12 @@ void Model::cleanData() {
 	delete vb;
 }
 
-void Model::genBuffers() {
+void Model::genBuffers(bool textured) {
 	vb = new VertexBuffer(vertex_buffer, VERTEX_BUFFER_COUNT * sizeof(float));
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2 + is3D);
+	if(textured)
+		vbl->push<float>(2);
 
 	va = new VertexArray;
 	va->addBuffer(vb, vbl);
