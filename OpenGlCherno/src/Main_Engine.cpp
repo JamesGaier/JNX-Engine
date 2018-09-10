@@ -15,7 +15,6 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 */
 
 void ortho(JNX_Engine& jnx) {
-	
 	constexpr auto high = 10;
 	jnx.setOrthoCoordsFromCenter(high);
 	jnx.loadShader("res/shaders/textured.shader");
@@ -36,7 +35,6 @@ void prespective(JNX_Engine& jnx) {
 }
 
 int main() {
-
 	constexpr bool orthoTest = true;
 	JNX_Engine jnx(800, 600, true);
 
@@ -55,7 +53,7 @@ int main() {
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		jnx.cleanBuffers();
-		
+
 		/* Render here */
 		jnx.updateGameObjects();
 		jnx.renderGameObjects();

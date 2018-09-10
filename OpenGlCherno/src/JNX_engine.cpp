@@ -46,13 +46,15 @@ bool JNX_Engine::init(bool vsync) {
 		return false;
 	}
 
-	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
-	std::cout << "GL Shader Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
-	std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
+	Input::registerAsCallback(window);
 
 	loaded = true;
 
-	return true;
+	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+	std::cout << "GL Shader Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+	std::cout << "GLFW Version: " << glfwGetVersionString() << std::endl;
+	std::cout << "JNX Engine Version: " << version() << std::endl;
+	return isLoaded();
 }
 
 void JNX_Engine::setProjectionOrtho(float left, float right, float up, float down) {
@@ -91,8 +93,10 @@ void JNX_Engine::swapBuffers() {
 	numFrames++;
 	totalFrames++;
 	if(lastPrint + 1 <= time()) {
-		using namespace std;
-		cout << setw(10) << setprecision(7) << 1000.0 / static_cast<double>(numFrames) << "ms per frame (" << numFrames << " FPS)" << endl;
+		if(printFrameTime) {
+			using namespace std;
+			cout << setw(10) << setprecision(7) << 1000.0 / static_cast<double>(numFrames) << "ms per frame (" << numFrames << " FPS)" << endl;
+		}
 		lastFPS = numFrames;
 		numFrames = 0;
 		lastPrint++;
@@ -101,7 +105,7 @@ void JNX_Engine::swapBuffers() {
 
 void JNX_Engine::renderGameObject(GameObject * go) const {
 	go->shaderSettings(shader, viewProjection());
-	go->draw(rend, shader);
+	go->draw(shader);
 }
 
 void JNX_Engine::renderGameObjects() const {

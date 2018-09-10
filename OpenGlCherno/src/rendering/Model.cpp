@@ -82,13 +82,13 @@ bool Model::loadSquare(float sideLength, bool textured) {
 		VERTEX_BUFFER_COUNT = 16;
 		vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
 			-halfSide, -halfSide,
-				0,0,
+				0,1,
 				halfSide, -halfSide,
-				1,0,
-				halfSide, halfSide,
 				1,1,
+				halfSide, halfSide,
+				1,0,
 				-halfSide, halfSide,
-				0,1
+				0,0
 		};
 	}
 	

@@ -21,7 +21,7 @@ void TexturedGameObject::update(double delta) {
 	static double totalDelta = 0;
 	totalDelta += delta;
 	
-	constexpr auto RATE = 1.41;
+	constexpr auto RATE = 1.75;
 	auto x = std::cos(totalDelta / RATE);
 	auto y = std::sin(totalDelta / RATE);
 	setPosition(Vec3d(x, y, 0));

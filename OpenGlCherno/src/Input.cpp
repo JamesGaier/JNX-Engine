@@ -1,16 +1,36 @@
-#include"Input.h"
+#include "Input.h"
 /*
 * see .h file for documentation
 */
-double Input::getMouseX() const {
-	return mouseX;
+
+double Input::mouseX, Input::mouseY;
+std::unordered_map<char, bool> Input::downKeys;
+
+std::vector<char> Input::downNow() {
+	std::vector<char> toRet;
+
+	for(auto iter = downKeys.begin(); iter != downKeys.end(); iter++) {
+		if(iter->second) {
+			toRet.push_back(iter->first);
+		}
+	}
+
+	return toRet;
 }
-double Input::getMouseY() const {
-	return mouseY;
-}
-void Input::update(GLFWwindow* win) {
-	glfwGetCursorPos(win, &mouseX, &mouseY);
-}
+
 void Input::setMousePosition(GLFWwindow* win, double x, double y) {
 	glfwSetCursorPos(win, x, y);
+}
+
+void Input::cursor_position_callback(GLFWwindow * window, double xpos, double ypos) {
+	mouseX = xpos;
+	mouseY = ypos;
+}
+
+void Input::key_callback(GLFWwindow * window, int key, int scancode, int action, int mods) {
+	if(action == GLFW_PRESS) {
+		downKeys[key] = true;
+	} else if(action == GLFW_RELEASE) {
+		downKeys[key] = false;
+	}
 }

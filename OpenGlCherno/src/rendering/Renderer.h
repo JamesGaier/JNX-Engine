@@ -11,12 +11,11 @@
 * @author Nicholas Baron
 */
 
-//To Consider: Renderer may not need to be a class
-class Renderer {
-public:
-	inline void clear() const { GLCALL(glClear(GL_COLOR_BUFFER_BIT)); }
-	void draw(const VertexArray* va, const IndexBuffer* ib, const Shader* shader) const;
-	void draw(const Model* m, const Shader* shader) const;
+namespace Renderer {
+
+	inline void clear() { GLCALL(glClear(GL_COLOR_BUFFER_BIT)); }
+	void draw(const VertexArray* va, const IndexBuffer* ib, const Shader* shader);
+	void draw(const Model* m, const Shader* shader);
 };
 
 #endif // !_RENDERER

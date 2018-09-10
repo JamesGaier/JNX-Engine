@@ -31,7 +31,7 @@ public:
 	void setRotation(float radians, Vec3d axis);
 
 	virtual void shaderSettings(Shader* shader, const glm::mat4& vpmat);
-	virtual void draw(Renderer* r, Shader* shader) const; //This may not need to be virtual
+	virtual void draw(Shader* shader) const; //This may not need to be virtual
 	virtual void update(double delta);
 };
 

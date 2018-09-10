@@ -4,8 +4,7 @@
 GameObject::GameObject(Model * m) { setModel(m); }
 
 GameObject::GameObject(const std::string & modelLocation) {
-	auto m = new Model(modelLocation);
-	setModel(m);
+	setModel(new Model(modelLocation));
 }
 
 GameObject::~GameObject() { delete model; }
@@ -36,8 +35,8 @@ void GameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) {
 	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
 }
 
-void GameObject::draw(Renderer* r, Shader* shader) const {
-	r->draw(model, shader);
+void GameObject::draw(Shader* shader) const {
+	Renderer::draw(model, shader);
 }
 
 void GameObject::update(double delta) {

@@ -4,6 +4,7 @@
 #include "util/Vec3d.h"
 #include "rendering/Shader.h"
 #include "rendering/Renderer.h"
+#include "Input.h"
 #include "GameObject.h"
 
 #include <GL/glew.h>
@@ -23,7 +24,6 @@ private:
 
 	GLFWwindow* window;
 	Shader* shader;
-	Renderer* rend = new Renderer;
 
 	std::vector<GameObject*> gameObjects;
 
@@ -38,6 +38,7 @@ private:
 	double lastPrint = time(), lastDelta = time();
 	unsigned numFrames, lastFPS;
 	unsigned long totalFrames;
+	bool printFrameTime = true;
 public:
 	JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow = true);
 	~JNX_Engine();
@@ -46,11 +47,14 @@ public:
 	inline bool isLoaded() const { return loaded; }
 	inline bool running() const { return !glfwWindowShouldClose(window); }
 	inline unsigned long totalFrameCount() const { return totalFrames; }
-	inline void cleanBuffers() const { rend->clear(); }
+	inline void cleanBuffers() const { Renderer::clear(); }
 	inline static double time() { return glfwGetTime(); }
 	inline ProjectionMode currentProjection() const { return projMode; }
 	inline glm::mat4 viewProjection() const { return proj * trans; }
 	inline float aspectRatio() const { return static_cast<float>(width) / height; }
+	inline std::string version() const { return "0.1a"; }
+	inline void setPrintFrameTime(bool val) { printFrameTime = val; }
+
 	void renderGameObject(GameObject* go) const;
 	void renderGameObjects() const;
 	void updateGameObjects();
