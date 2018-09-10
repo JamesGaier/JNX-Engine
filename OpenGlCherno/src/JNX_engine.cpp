@@ -5,6 +5,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include <iostream>
+#include <iomanip>
 
 JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow) : loaded(false), width(wide), height(high) {
 	if(initNow) {
@@ -79,7 +80,8 @@ void JNX_Engine::swapBuffers() {
 	numFrames++;
 	totalFrames++;
 	if(lastPrint + 1 <= time()) {
-		std::cout << 1000.0 / numFrames << "ms per frame (" << numFrames << " FPS)" << std::endl;
+		using namespace std;
+		cout << setw(10) << setprecision(7) << 1000.0 / static_cast<double>(numFrames) << "ms per frame (" << numFrames << " FPS)" << endl;
 		lastFPS = numFrames;
 		numFrames = 0;
 		lastPrint++;
@@ -92,15 +94,22 @@ void JNX_Engine::renderGameObject(GameObject * go) const {
 }
 
 void JNX_Engine::renderGameObjects() const {
-	for each (const auto& go in gameObjects) {
+	for (const auto& go : gameObjects) {
 		renderGameObject(go);
 	}
 }
 
 void JNX_Engine::updateGameObjects() {
-	for each (const auto& go in gameObjects) {
+	for (const auto& go : gameObjects) {
 		go->update(time() - lastDelta);
 	}
 
 	lastDelta = time();
+}
+
+void JNX_Engine::cleanRegisteredGOs(bool deleteCall) { 
+	if(deleteCall) { 
+		for(auto go : gameObjects) { delete go; } 
+	}
+	gameObjects.clear();
 }

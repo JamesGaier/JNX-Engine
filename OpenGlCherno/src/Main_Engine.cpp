@@ -14,27 +14,49 @@ http://glew.sourceforge.net/basic.html
 http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 */
 
+void ortho(JNX_Engine& jnx) {
+	jnx.setProjectionOrtho(-10, 10, 10, -10);
+	jnx.setCameraTranslate(Vec3d(0,0,-1));
+	jnx.loadShader("res/shaders/basic.shader");
+
+	auto sqr = new Model();
+	if(sqr->loadSquare(.5f)) {
+		auto test = new GameObject(sqr);
+		test->setPosition(Vec3d(0));
+		jnx.registerGameObject(test);
+	}
+}
+
+void prespective(JNX_Engine& jnx) {
+	jnx.setProjectionPerspective(glm::radians(45.0f));
+	jnx.setCameraTranslate(Vec3d(0, 0, -5));
+	jnx.loadShader("res/shaders/basic.shader");
+
+	//Longest part of init sequence
+	jnx.registerGameObject(new GameObject("res/models/teapot.obj"));
+}
+
 int main() {
-	JNX_Engine jnx(640, 480, true);
+
+	constexpr bool orthoTest = false;
+	JNX_Engine jnx(800, 600, true);
 
 	if(!jnx.isLoaded())
 		return 0;
 
 	std::cout << std::endl;
 
-	jnx.setProjectionPerspective(glm::radians(45.0f));
-	jnx.setCameraTranslate(Vec3d(0, 0, -5));
-	jnx.loadShader("res/shaders/basic.shader");
-
-	//Longest part of init sequence
-	auto go = new GameObject("res/models/teapot.obj");
-	jnx.registerGameObject(go);
+	if(orthoTest)
+		ortho(jnx);
+	else
+		prespective(jnx);
 
 	std::cout << std::endl;
 
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		jnx.cleanBuffers();
+		
 		/* Render here */
 		jnx.updateGameObjects();
 		jnx.renderGameObjects();
@@ -46,7 +68,7 @@ int main() {
 		glfwPollEvents();
 	}
 
-	delete go;
+	jnx.cleanRegisteredGOs();
 
 	return 0;
 }

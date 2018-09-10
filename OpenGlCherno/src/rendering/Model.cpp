@@ -68,7 +68,7 @@ bool Model::loadSquare(float sideLength) {
 
 	cleanData();
 
-	float halfSide = sideLength / 2;
+	const auto halfSide = sideLength / 2;
 
 	VERTEX_BUFFER_COUNT = 8;
 	vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
@@ -79,11 +79,12 @@ bool Model::loadSquare(float sideLength) {
 	};
 
 	INDICE_COUNT = 6;
-	indicies = new unsigned int[INDICE_COUNT] {
+	indicies = new unsigned[INDICE_COUNT] {
 		0, 1, 2,
 			2, 3, 0
 	};
 
+	is3D = false;
 	genBuffers();
 
 	return true;

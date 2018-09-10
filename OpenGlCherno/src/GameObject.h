@@ -14,7 +14,7 @@ private:
 	Vec3d scale;
 	glm::mat4 rotation;
 	Model* model;
-
+	//TODO: Add texture handling
 	double totalDelta = 0;
 public:
 	GameObject(Model* m);

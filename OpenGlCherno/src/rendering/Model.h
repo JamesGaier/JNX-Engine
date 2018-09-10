@@ -7,7 +7,7 @@
 
 #include <string>
 
-#define EMPTY_MODEL_SOURCE "NONE"
+
 /*
 * Purpose: handle for OpenGL's VertexBuffer and IndexBuffer
 * @author Nicholas Baron
@@ -32,6 +32,8 @@ private:
 	inline void genBuffers();
 
 public:
+	static constexpr auto EMPTY_MODEL_SOURCE = "NONE";
+
 	Model(const std::string& file = EMPTY_MODEL_SOURCE, bool is3D = false);
 	~Model();
 
@@ -39,6 +41,7 @@ public:
 	inline IndexBuffer* indexBuffer() const { return ib; }
 	//Scale by this to get all vertecies at most 1 magnitude.
 	inline float scaleFactor() const { return normalFactor; }
+	inline bool hasDepth() const { return is3D; }
 
 	bool loadModel(const std::string& file);
 	bool loadSquare(float sideLength);

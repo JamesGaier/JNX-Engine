@@ -33,7 +33,9 @@ void GameObject::setRotation(float radians, Vec3d axis) {
 
 void GameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) {
 	shader->setUniform4f("u_Color", .1f, .3f, .7f, 1);
-	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
+	if(model->hasDepth()) {
+		shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
+	}
 }
 
 void GameObject::draw(Renderer* r, Shader* shader) const {
@@ -41,9 +43,11 @@ void GameObject::draw(Renderer* r, Shader* shader) const {
 }
 
 void GameObject::update(double delta) {
-	totalDelta += delta;
-	const float RATE = 1;
-	auto x = std::cos(totalDelta / RATE);
-	auto y = std::sin(totalDelta / RATE);
-	setPosition(Vec3d(x, y, 0));
+	if(model->hasDepth()) {
+		totalDelta += delta;
+		constexpr auto RATE = 1.1;
+		auto x = std::cos(totalDelta / RATE);
+		auto y = std::sin(totalDelta / RATE);
+		setPosition(Vec3d(x, y, 0));
+	}
 }

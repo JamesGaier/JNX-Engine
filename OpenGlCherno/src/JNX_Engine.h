@@ -10,8 +10,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-#define Z_NEAR 0.1f
-#define Z_FAR 100
+
 /*
 * Purpose: Central include for JNX engine
 * @author Nicholas Baron
@@ -21,6 +20,8 @@ enum class ProjectionMode { ORTHO, PERSPECTIVE };
 
 class JNX_Engine {
 private:
+	static constexpr auto Z_NEAR = 0.1f, Z_FAR = 100.0f;
+
 	GLFWwindow* window;
 	Shader* shader;
 	Renderer* rend = new Renderer;
@@ -30,15 +31,13 @@ private:
 	unsigned width, height;
 
 	bool loaded;
-	glm::mat4 proj;
-	glm::mat4 trans;
+	glm::mat4 proj, trans;
 
 	ProjectionMode projMode;
 
-	double lastPrint = time();
-	double lastDelta = time();
-	unsigned numFrames;
-	unsigned lastFPS;
+	//Frame counting variables
+	double lastPrint = time(), lastDelta = time();
+	unsigned numFrames, lastFPS;
 	unsigned long totalFrames;
 public:
 	JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow = true);
@@ -50,6 +49,7 @@ public:
 	inline unsigned long totalFrameCount() const { return totalFrames; }
 	inline void cleanBuffers() const { rend->clear(); }
 	inline static double time() { return glfwGetTime(); }
+	inline ProjectionMode currentProjection() const { return projMode; }
 	inline glm::mat4 viewProjection() const { return proj * trans; }
 	inline float aspectRatio() const { return static_cast<float>(width) / height; }
 	void renderGameObject(GameObject* go) const;
@@ -65,6 +65,7 @@ public:
 	void loadShader(const std::string& file);
 	void swapBuffers();
 	void registerGameObject(GameObject* go) { gameObjects.push_back(go); }
+	void cleanRegisteredGOs(bool deleteCall = true);
 };
 
 #endif
