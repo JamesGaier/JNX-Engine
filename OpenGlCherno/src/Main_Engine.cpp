@@ -17,7 +17,6 @@ http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 void ortho(JNX_Engine& jnx) {
 	constexpr auto high = 10;
 	jnx.setOrthoCoordsFromCenter(high);
-	jnx.loadShader("res/shaders/textured.shader");
 
 	auto sqr = new Model();
 	if(sqr->loadSquare(1.85f, true)) {
@@ -28,9 +27,8 @@ void ortho(JNX_Engine& jnx) {
 void prespective(JNX_Engine& jnx) {
 	jnx.setProjectionPerspective(glm::radians(45.0f));
 	jnx.setCameraTranslate(Vec3d(0, 0, -5));
-	jnx.loadShader("res/shaders/basic.shader");
 
-	jnx.registerGameObject(new GameObject("res/models/teapot.obj"));
+	jnx.registerGameObject(new GameObject("res/models/teapot.obj", "res/shaders/basic.shader"));
 }
 
 int main() {
@@ -63,8 +61,6 @@ int main() {
 		/* Poll for and process events */
 		glfwPollEvents();
 	}
-
-	jnx.cleanRegisteredGOs();
 
 	return 0;
 }

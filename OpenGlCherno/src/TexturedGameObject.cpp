@@ -1,31 +1,33 @@
 #include "TexturedGameObject.h"
 #include "Input.h"
 
-TexturedGameObject::TexturedGameObject(Model* m, const std::string& textureLocation) : GameObject(m) {
+TexturedGameObject::TexturedGameObject(Model* m, const std::string& textureLocation) {
 	texture = new Texture(textureLocation);
+	setModel(m);
+	shader = new Shader("res/shaders/textured.shader");
 }
-
-TexturedGameObject::TexturedGameObject(const std::string& modelLocation) : GameObject(modelLocation) {}
 
 TexturedGameObject::~TexturedGameObject() {
 	delete texture;
 }
 
-void TexturedGameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) {
+void TexturedGameObject::shaderSettings(const glm::mat4& vpmat) const {
+	
+	shader->use_program();
 	texture->Bind(1);
+	
 	shader->setUniform1i("u_Texture", 1);
 	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
 }
 
 void TexturedGameObject::update(double delta) {
-	
 	constexpr auto maxSpeed = 50;
 	constexpr auto speed = 2.55;
 
 	Vec3d move;
 	if(Input::isDown('w')) {
 		move.setY(-delta);
-	}else if(Input::isDown('s')) {
+	} else if(Input::isDown('s')) {
 		move.setY(delta);
 	}
 

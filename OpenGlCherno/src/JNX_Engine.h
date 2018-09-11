@@ -23,8 +23,8 @@ private:
 	static constexpr auto Z_NEAR = 0.1f, Z_FAR = 100.0f;
 
 	GLFWwindow* window;
-	Shader* shader;
 
+	unsigned char maxCurrentRender = 0;
 	std::vector<GameObject*> gameObjects;
 
 	std::string gameName;
@@ -41,7 +41,7 @@ private:
 	unsigned long totalFrames;
 	bool printFrameTime = true;
 public:
-	JNX_Engine(unsigned wide, unsigned high, bool vsync, std::string name = "Hello World", bool initNow = true);
+	JNX_Engine(unsigned wide, unsigned high, bool vsync = false, std::string name = "Hello World", bool initNow = true);
 	~JNX_Engine();
 	bool init(bool vsync = true);
 
@@ -68,7 +68,6 @@ public:
 	//FOV needs to be in radians
 	void setProjectionPerspective(float fov, float aspectRatio, float near = Z_NEAR, float far = Z_FAR);
 	void setCameraTranslate(const Vec3d& pos);
-	void loadShader(const std::string& file);
 	void swapBuffers();
 	void registerGameObject(GameObject* go);
 	void cleanRegisteredGOs(bool deleteCall = true);

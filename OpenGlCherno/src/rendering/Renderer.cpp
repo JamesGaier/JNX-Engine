@@ -5,7 +5,7 @@
 #include "../util/GLUtil.h"
 
 void Renderer::draw(const VertexArray* va, const IndexBuffer* ib, const Shader* shader) {
-	shader->use_program();
+	shader->use_program(); //Ensures that the shader passed in is being used
 	va->Bind();
 	ib->Bind();
 	GLCALL(glDrawElements(GL_TRIANGLES, ib->getCount(), GL_UNSIGNED_INT, nullptr));

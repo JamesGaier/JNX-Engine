@@ -10,10 +10,9 @@ private:
 
 public:
 	TexturedGameObject(Model* m, const std::string& textureLocation);
-	TexturedGameObject(const std::string& modelLocation);
 	virtual ~TexturedGameObject();
 
-	virtual void shaderSettings(Shader* shader, const glm::mat4& vpmat) override;
+	virtual void shaderSettings(const glm::mat4& vpmat) const override;
 	virtual void update(double delta) override;
 };
 

@@ -7,14 +7,14 @@
 #include <iostream>
 #include <iomanip>
 
-JNX_Engine::JNX_Engine( unsigned wide, unsigned high, bool vsync, std::string name, bool initNow) :gameName(name), loaded(false), width(wide), height(high) {
+JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool vsync, std::string name, bool initNow) :gameName(name), loaded(false), width(wide), height(high) {
 	if(initNow) {
 		init(vsync);
 	}
 }
 
 JNX_Engine::~JNX_Engine() {
-	delete shader;
+	cleanRegisteredGOs();
 	glfwTerminate();
 }
 
@@ -82,11 +82,6 @@ void JNX_Engine::setCameraTranslate(const Vec3d & pos) {
 	trans = glm::translate(glm::mat4(), static_cast<glm::vec3>(pos));
 }
 
-void JNX_Engine::loadShader(const std::string & file) {
-	shader = new Shader(file);
-	shader->use_program();
-}
-
 void JNX_Engine::swapBuffers() {
 	glfwSwapBuffers(window);
 
@@ -103,24 +98,26 @@ void JNX_Engine::swapBuffers() {
 	}
 }
 
-void JNX_Engine::registerGameObject(GameObject* go) { 
-	go->onRegistered();
-	if(gameObjects.size() == 0) {
+void JNX_Engine::registerGameObject(GameObject* go) {
+	
+	if(gameObjects.size() == 0 || go->renderLayer() >= maxCurrentRender) {
 		gameObjects.push_back(go);
+		maxCurrentRender = go->renderLayer();
 	} else {
 		const auto it = gameObjects.begin();
 		for(size_t i = 0; i < gameObjects.size(); i++) {
 			if(gameObjects[i]->renderLayer() >= go->renderLayer()) {
-				gameObjects.insert(it + i, go);
-				return;
+				gameObjects.insert(it + (i-1), go);
+				break;
 			}
 		}
 	}
+	go->onRegistered();
 }
 
 void JNX_Engine::renderGameObject(GameObject * go) const {
-	go->shaderSettings(shader, viewProjection());
-	go->draw(shader);
+	go->shaderSettings(viewProjection());
+	go->draw();
 }
 
 void JNX_Engine::renderGameObjects() const {
