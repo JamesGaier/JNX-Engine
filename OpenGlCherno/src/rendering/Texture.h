@@ -14,7 +14,7 @@ private:
 	int m_width, m_height, m_BPP;
 	bool m_kept;
 public:
-	Texture(const std::string& path, bool keepLocal = false);
+	Texture(const std::string& path, bool linearFilter = false, bool keepLocal = false);
 	~Texture();
 
 	void Bind(unsigned slot = 0) const;

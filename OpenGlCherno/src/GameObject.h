@@ -15,11 +15,20 @@ private:
 	glm::mat4 rotation;
 	Model* model;
 
+	//0 for first render (background), greater is last rendered (foreground)
+	unsigned char renderPriority; 
+
+protected:
+	inline const Vec3d& position() const { return pos; }
+	//0 for background, higher fore foreground
+	void setRenderLayer(unsigned char layer) { renderPriority = layer; }
+
 public:
 	GameObject(Model* m);
 	GameObject(const std::string& modelLocation);
 	virtual ~GameObject();
 
+	inline unsigned char renderLayer() const { return renderPriority; }
 	glm::mat4 translateMat() const;
 	glm::mat4 scaleMat() const;
 	inline glm::mat4 rotationMat() const { return rotation; }
@@ -30,6 +39,7 @@ public:
 	void setScale(Vec3d axes);
 	void setRotation(float radians, Vec3d axis);
 
+	virtual void onRegistered() { std::cout << "Registered!" << std::endl; }
 	virtual void shaderSettings(Shader* shader, const glm::mat4& vpmat);
 	virtual void draw(Shader* shader) const; //This may not need to be virtual
 	virtual void update(double delta);

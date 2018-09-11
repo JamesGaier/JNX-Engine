@@ -2,7 +2,7 @@
 #include "stb_image/stb_image.h"
 #include <iostream>
 
-Texture::Texture(const std::string& path, bool keepLocal) :
+Texture::Texture(const std::string& path, bool linearFilter, bool keepLocal) :
 	m_path(path), m_localBuffer(nullptr), m_width(0), m_height(0), m_BPP(0), m_kept(keepLocal) {
 	stbi_set_flip_vertically_on_load(1);
 
@@ -12,7 +12,12 @@ Texture::Texture(const std::string& path, bool keepLocal) :
 	GLCALL(glBindTexture(GL_TEXTURE_2D, m_ID));
 
 	GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)); //TODO: Optionalize bilinear vs nearest
+	//[POSSIBLE] May later be a problem if loading multiple textures
+	if(!linearFilter) {
+		GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	} else {
+		GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	}
 	GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP));
 	GLCALL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP));
 

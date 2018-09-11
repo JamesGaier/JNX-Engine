@@ -17,7 +17,7 @@ Shader::Shader(const std::string& filename) {
 }
 
 int Shader::uniform_location(const std::string& name) {
-	auto got = uniformCache.find(name);
+	const auto got = uniformCache.find(name);
 
 	if(got != uniformCache.end()) {
 		return got->second;

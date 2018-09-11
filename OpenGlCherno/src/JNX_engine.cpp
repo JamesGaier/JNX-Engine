@@ -7,7 +7,7 @@
 #include <iostream>
 #include <iomanip>
 
-JNX_Engine::JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow) : loaded(false), width(wide), height(high) {
+JNX_Engine::JNX_Engine( unsigned wide, unsigned high, bool vsync, std::string name, bool initNow) :gameName(name), loaded(false), width(wide), height(high) {
 	if(initNow) {
 		init(vsync);
 	}
@@ -24,7 +24,7 @@ bool JNX_Engine::init(bool vsync) {
 		return false;
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(width, height, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(width, height, gameName.c_str(), NULL, NULL);
 	if(!window) {
 		glfwTerminate();
 		return false;
@@ -100,6 +100,21 @@ void JNX_Engine::swapBuffers() {
 		lastFPS = numFrames;
 		numFrames = 0;
 		lastPrint++;
+	}
+}
+
+void JNX_Engine::registerGameObject(GameObject* go) { 
+	go->onRegistered();
+	if(gameObjects.size() == 0) {
+		gameObjects.push_back(go);
+	} else {
+		const auto it = gameObjects.begin();
+		for(size_t i = 0; i < gameObjects.size(); i++) {
+			if(gameObjects[i]->renderLayer() >= go->renderLayer()) {
+				gameObjects.insert(it + i, go);
+				return;
+			}
+		}
 	}
 }
 

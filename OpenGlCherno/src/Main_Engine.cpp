@@ -20,7 +20,7 @@ void ortho(JNX_Engine& jnx) {
 	jnx.loadShader("res/shaders/textured.shader");
 
 	auto sqr = new Model();
-	if(sqr->loadSquare(1.5f, true)) {
+	if(sqr->loadSquare(1.85f, true)) {
 		jnx.registerGameObject(new TexturedGameObject(sqr, "res/textures/test.png"));
 	}
 }
@@ -30,13 +30,12 @@ void prespective(JNX_Engine& jnx) {
 	jnx.setCameraTranslate(Vec3d(0, 0, -5));
 	jnx.loadShader("res/shaders/basic.shader");
 
-	//Longest part of init sequence
 	jnx.registerGameObject(new GameObject("res/models/teapot.obj"));
 }
 
 int main() {
 	constexpr bool orthoTest = true;
-	JNX_Engine jnx(800, 600, true);
+	JNX_Engine jnx(800, 600, true, "JNX Test " + JNX_Engine::version());
 
 	if(!jnx.isLoaded())
 		return 0;

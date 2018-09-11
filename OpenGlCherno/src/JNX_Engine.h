@@ -27,6 +27,7 @@ private:
 
 	std::vector<GameObject*> gameObjects;
 
+	std::string gameName;
 	unsigned width, height;
 
 	bool loaded;
@@ -40,7 +41,7 @@ private:
 	unsigned long totalFrames;
 	bool printFrameTime = true;
 public:
-	JNX_Engine(unsigned wide, unsigned high, bool vsync, bool initNow = true);
+	JNX_Engine(unsigned wide, unsigned high, bool vsync, std::string name = "Hello World", bool initNow = true);
 	~JNX_Engine();
 	bool init(bool vsync = true);
 
@@ -52,7 +53,7 @@ public:
 	inline ProjectionMode currentProjection() const { return projMode; }
 	inline glm::mat4 viewProjection() const { return proj * trans; }
 	inline float aspectRatio() const { return static_cast<float>(width) / height; }
-	inline std::string version() const { return "0.1a"; }
+	inline static std::string version() { return "0.1a"; }
 	inline void setPrintFrameTime(bool val) { printFrameTime = val; }
 
 	void renderGameObject(GameObject* go) const;
@@ -69,7 +70,7 @@ public:
 	void setCameraTranslate(const Vec3d& pos);
 	void loadShader(const std::string& file);
 	void swapBuffers();
-	void registerGameObject(GameObject* go) { gameObjects.push_back(go); }
+	void registerGameObject(GameObject* go);
 	void cleanRegisteredGOs(bool deleteCall = true);
 };
 

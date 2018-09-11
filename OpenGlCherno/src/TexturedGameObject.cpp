@@ -1,4 +1,5 @@
 #include "TexturedGameObject.h"
+#include "Input.h"
 
 TexturedGameObject::TexturedGameObject(Model* m, const std::string& textureLocation) : GameObject(m) {
 	texture = new Texture(textureLocation);
@@ -18,11 +19,30 @@ void TexturedGameObject::shaderSettings(Shader* shader, const glm::mat4& vpmat) 
 
 void TexturedGameObject::update(double delta) {
 	
-	static double totalDelta = 0;
-	totalDelta += delta;
-	
-	constexpr auto RATE = 1.75;
-	auto x = std::cos(totalDelta / RATE);
-	auto y = std::sin(totalDelta / RATE);
-	setPosition(Vec3d(x, y, 0));
+	constexpr auto maxSpeed = 50;
+	constexpr auto speed = 2.55;
+
+	Vec3d move;
+	if(Input::isDown('w')) {
+		move.setY(-delta);
+	}else if(Input::isDown('s')) {
+		move.setY(delta);
+	}
+
+	if(Input::isDown('d')) {
+		move.setX(delta);
+	} else if(Input::isDown('a')) {
+		move.setX(-delta);
+	}
+
+	move *= speed;
+	if(move.magnitudeSquared() > maxSpeed * maxSpeed) {
+		auto newMove = move.normalized();
+		newMove *= maxSpeed;
+		move = newMove;
+	}
+
+	auto temp = position();
+	temp += move;
+	setPosition(temp);
 }

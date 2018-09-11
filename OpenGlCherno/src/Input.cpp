@@ -4,7 +4,7 @@
 */
 
 double Input::mouseX, Input::mouseY;
-std::unordered_map<char, bool> Input::downKeys;
+std::unordered_map<unsigned char, bool> Input::downKeys;
 
 std::vector<char> Input::downNow() {
 	std::vector<char> toRet;
@@ -28,6 +28,10 @@ void Input::cursor_position_callback(GLFWwindow * window, double xpos, double yp
 }
 
 void Input::key_callback(GLFWwindow * window, int key, int scancode, int action, int mods) {
+	if((mods & GLFW_MOD_SHIFT) == 0) {
+		key += 0x20; //Make non-shift keys lowercase
+	}
+	
 	if(action == GLFW_PRESS) {
 		downKeys[key] = true;
 	} else if(action == GLFW_RELEASE) {

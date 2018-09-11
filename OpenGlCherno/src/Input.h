@@ -13,7 +13,7 @@ private:
 	static double mouseX, mouseY;
 	static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 
-	static std::unordered_map<char, bool> downKeys;
+	static std::unordered_map<unsigned char, bool> downKeys;
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
@@ -21,7 +21,7 @@ public:
 	inline static double getMouseY() { return mouseY; }
 	inline static Vec3d mousePos() { return Vec3d(mouseX, mouseY, 0); }
 
-	inline static bool isDown(char c) { return downKeys[c]; }
+	inline static bool isDown(unsigned char c) { return downKeys[c]; }
 	static std::vector<char> downNow();
 
 	static void setMousePosition(GLFWwindow* win, double x, double y);
