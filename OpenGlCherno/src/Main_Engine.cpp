@@ -47,6 +47,8 @@ int main() {
 
 	std::cout << std::endl;
 
+	jnx.sortRenderQueue();
+
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		jnx.cleanBuffers();

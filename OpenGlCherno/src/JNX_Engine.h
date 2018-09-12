@@ -11,6 +11,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include <queue>
+
 /*
 * Purpose: Central include for JNX engine
 * @author Nicholas Baron
@@ -25,7 +27,7 @@ private:
 	GLFWwindow* window;
 
 	unsigned char maxCurrentRender = 0;
-	std::vector<GameObject*> gameObjects;
+	std::queue<GameObject*> gameObjects;
 
 	std::string gameName;
 	unsigned width, height;
@@ -40,6 +42,9 @@ private:
 	unsigned numFrames, lastFPS;
 	unsigned long totalFrames;
 	bool printFrameTime = true;
+
+	int minIndex(size_t sortedIndex);
+	void insertMinToRear(int min_index);
 public:
 	JNX_Engine(unsigned wide, unsigned high, bool vsync = false, std::string name = "Hello World", bool initNow = true);
 	~JNX_Engine();
@@ -50,14 +55,15 @@ public:
 	inline unsigned long totalFrameCount() const { return totalFrames; }
 	inline void cleanBuffers() const { Renderer::clear(); }
 	inline static double time() { return glfwGetTime(); }
+	inline size_t numRegisteredObjects() const { return gameObjects.size(); }
 	inline ProjectionMode currentProjection() const { return projMode; }
 	inline glm::mat4 viewProjection() const { return proj * trans; }
 	inline float aspectRatio() const { return static_cast<float>(width) / height; }
-	inline static std::string version() { return "0.1a"; }
+	inline static std::string version() { return "0.1b"; }
 	inline void setPrintFrameTime(bool val) { printFrameTime = val; }
 
 	void renderGameObject(GameObject* go) const;
-	void renderGameObjects() const;
+	void renderGameObjects();
 	void updateGameObjects();
 
 	void setProjectionOrtho(float left, float right, float up, float down);
@@ -69,6 +75,7 @@ public:
 	void setProjectionPerspective(float fov, float aspectRatio, float near = Z_NEAR, float far = Z_FAR);
 	void setCameraTranslate(const Vec3d& pos);
 	void swapBuffers();
+	void sortRenderQueue();
 	void registerGameObject(GameObject* go);
 	void cleanRegisteredGOs(bool deleteCall = true);
 };
