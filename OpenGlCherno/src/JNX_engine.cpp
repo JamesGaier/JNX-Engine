@@ -104,7 +104,7 @@ int JNX_Engine::minIndex(size_t sortedIndex) {
 	const auto size = numRegisteredObjects();
 
 	for(size_t i = 0; i < size; i++) {
-		auto curr = gameObjects.front();
+		const auto curr = gameObjects.front();
 		gameObjects.pop();  // This is dequeue() in C++ STL
 
 		// we add the condition i <= sortedIndex
@@ -142,12 +142,15 @@ void JNX_Engine::sortRenderQueue() {
 		const auto min_index = minIndex(numRegisteredObjects() - i);
 		insertMinToRear(min_index);
 	}
+
+	isRenderSorted = true;
 }
 
 void JNX_Engine::registerGameObject(GameObject* go) {
 	
 	gameObjects.push(go);
 	go->onRegistered();
+	isRenderSorted = false;
 }
 
 void JNX_Engine::renderGameObject(GameObject * go) const {
@@ -156,6 +159,10 @@ void JNX_Engine::renderGameObject(GameObject * go) const {
 }
 
 void JNX_Engine::renderGameObjects() {
+	if(!isRenderSorted && sortRender_flag) {
+		sortRenderQueue();
+	}
+
 	const auto size = numRegisteredObjects();
 	for(size_t i = 0; i < size; i++) {
 		auto go = gameObjects.front();
@@ -185,5 +192,5 @@ void JNX_Engine::cleanRegisteredGOs(bool deleteCall) {
 		}
 		gameObjects.pop();
 	}
-	
+	isRenderSorted = true;
 }

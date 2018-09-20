@@ -19,7 +19,7 @@ void ortho(JNX_Engine& jnx) {
 	jnx.setOrthoCoordsFromCenter(high);
 
 	auto sqr = new Model();
-	if(sqr->loadSquare(1.85f, true)) {
+	if(sqr->loadSquare(1.75f, true)) {
 		jnx.registerGameObject(new TexturedGameObject(sqr, "res/textures/test.png"));
 	}
 }
@@ -47,8 +47,7 @@ int main() {
 
 	std::cout << std::endl;
 
-	jnx.sortRenderQueue();
-
+	jnx.setSortRenderFlag();
 	/* Loop until the user closes the window */
 	while(jnx.running()) {
 		jnx.cleanBuffers();

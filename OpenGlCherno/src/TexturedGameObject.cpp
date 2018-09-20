@@ -18,6 +18,7 @@ void TexturedGameObject::shaderSettings(const glm::mat4& vpmat) const {
 	
 	shader->setUniform1i("u_Texture", 1);
 	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
+	shader->setUniform4f("u_Color", 1, 1, 1, 1);
 }
 
 void TexturedGameObject::update(double delta) {

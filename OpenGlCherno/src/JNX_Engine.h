@@ -26,6 +26,7 @@ private:
 
 	GLFWwindow* window;
 
+	bool isRenderSorted, sortRender_flag;
 	unsigned char maxCurrentRender = 0;
 	std::queue<GameObject*> gameObjects;
 
@@ -50,17 +51,18 @@ public:
 	~JNX_Engine();
 	bool init(bool vsync = true);
 
-	inline bool isLoaded() const { return loaded; }
-	inline bool running() const { return !glfwWindowShouldClose(window); }
-	inline unsigned long totalFrameCount() const { return totalFrames; }
+	inline auto isLoaded() const { return loaded; }
+	inline auto running() const { return !glfwWindowShouldClose(window); }
+	inline auto totalFrameCount() const { return totalFrames; }
 	inline void cleanBuffers() const { Renderer::clear(); }
 	inline static double time() { return glfwGetTime(); }
-	inline size_t numRegisteredObjects() const { return gameObjects.size(); }
-	inline ProjectionMode currentProjection() const { return projMode; }
-	inline glm::mat4 viewProjection() const { return proj * trans; }
-	inline float aspectRatio() const { return static_cast<float>(width) / height; }
+	inline auto numRegisteredObjects() const { return gameObjects.size(); }
+	inline auto currentProjection() const { return projMode; }
+	inline auto viewProjection() const { return proj * trans; }
+	inline auto aspectRatio() const { return static_cast<float>(width) / height; }
 	inline static std::string version() { return "0.1b"; }
 	inline void setPrintFrameTime(bool val) { printFrameTime = val; }
+	inline void setSortRenderFlag(bool val = true) { sortRender_flag = val; }
 
 	void renderGameObject(GameObject* go) const;
 	void renderGameObjects();
