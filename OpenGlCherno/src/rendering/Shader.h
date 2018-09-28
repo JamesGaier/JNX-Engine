@@ -11,7 +11,9 @@
 * @author Nicholas Baron
 */
 struct ShaderProgramSource {
-	std::string vertex, fragment;
+	std::string fragment, vertex;
+	
+	ShaderProgramSource(const std::string& frag, const std::string& vert):fragment(frag), vertex(vert) {}
 };
 
 class Shader {
@@ -19,9 +21,9 @@ private:
 	unsigned m_shaderID;
 	std::unordered_map<std::string, int> uniformCache;
 
-	ShaderProgramSource* parse_shader(const std::string& file_path);
+	ShaderProgramSource parse_shader(const std::string& file_path);
 	unsigned compile_shader(unsigned type, const std::string& source);
-	unsigned create_shader(const ShaderProgramSource* source);
+	unsigned create_shader(const ShaderProgramSource& source);
 	int uniform_location(const std::string& name);
 
 public:

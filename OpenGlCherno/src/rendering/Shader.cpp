@@ -11,7 +11,6 @@
 Shader::Shader(const std::string& filename) {
 	auto source = parse_shader(filename);
 	m_shaderID = create_shader(source);
-	delete source;
 
 	std::cout << "Shader created from " << filename << std::endl;
 }
@@ -47,19 +46,19 @@ void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix)
 	GLCALL(glUniformMatrix4fv(uniform_location(name), 1, GL_FALSE, &matrix[0][0]));
 }
 
-ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
+ShaderProgramSource Shader::parse_shader(const std::string& file_path) {
 	std::vector<std::string> shaderText;
 	if(!loadTextFromFile(file_path, shaderText)) {
 		std::cerr << "Could not find file " << file_path << std::endl;
 		throw "SHADER NOT FOUND";
 	}
 
-	enum READ_MODE {
+	enum READ_MODE : short {
 		NONE = -1, VERTEX = 0, FRAGMENT = 1
 	} current = READ_MODE::NONE;
 
 	std::stringstream shaders[2];
-	for each (const std::string& line in shaderText) {
+	for(const auto& line : shaderText) {
 		if(line.find("#shader") != std::string::npos) {
 			if(line.find("vertex") != std::string::npos) {
 				current = READ_MODE::VERTEX;
@@ -79,9 +78,9 @@ ShaderProgramSource* Shader::parse_shader(const std::string& file_path) {
 		}
 	}
 
-	auto read_shader = new ShaderProgramSource;
-	read_shader->fragment = shaders[READ_MODE::FRAGMENT].str();
-	read_shader->vertex = shaders[READ_MODE::VERTEX].str();
+	auto read_shader = ShaderProgramSource{
+		shaders[READ_MODE::FRAGMENT].str(), shaders[READ_MODE::VERTEX].str()
+	};
 	return read_shader;
 }
 
@@ -92,7 +91,7 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 	This points to the same section of data as the source string.
 	It will be deleted with the struct.
 	*/
-	const char* src = source.c_str();
+	const auto src = source.c_str();
 	glShaderSource(id, 1, &src, nullptr);
 	glCompileShader(id);
 
@@ -112,10 +111,10 @@ unsigned Shader::compile_shader(unsigned type, const std::string& source) {
 	return id;
 }
 
-unsigned Shader::create_shader(const ShaderProgramSource* source) {
+unsigned Shader::create_shader(const ShaderProgramSource& source) {
 	auto program = glCreateProgram();
-	auto vs = compile_shader(GL_VERTEX_SHADER, source->vertex);
-	auto fs = compile_shader(GL_FRAGMENT_SHADER, source->fragment);
+	auto vs = compile_shader(GL_VERTEX_SHADER, source.vertex);
+	auto fs = compile_shader(GL_FRAGMENT_SHADER, source.fragment);
 
 	glAttachShader(program, vs);
 	glAttachShader(program, fs);

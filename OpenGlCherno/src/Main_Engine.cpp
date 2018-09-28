@@ -33,7 +33,7 @@ void prespective(JNX_Engine& jnx) {
 
 int main() {
 	constexpr bool orthoTest = true;
-	JNX_Engine jnx(800, 600, true, "JNX Test " + JNX_Engine::version());
+	auto jnx = JNX_Engine(800, 600, true, "JNX Test " + JNX_Engine::version());
 
 	if(!jnx.isLoaded())
 		return 0;
