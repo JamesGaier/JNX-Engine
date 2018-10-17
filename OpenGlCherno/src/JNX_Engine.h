@@ -27,8 +27,7 @@ private:
 	GLFWwindow* window;
 
 	bool isRenderSorted, sortRender_flag;
-	unsigned char maxCurrentRender = 0;
-	std::queue<GameObject*> gameObjects;
+	std::vector<GameObject*> gameObjects;
 
 	std::string gameName;
 	unsigned width, height;
@@ -44,8 +43,6 @@ private:
 	unsigned long totalFrames;
 	bool printFrameTime = true;
 
-	int minIndex(size_t sortedIndex);
-	void insertMinToRear(int min_index);
 public:
 	JNX_Engine(unsigned wide, unsigned high, bool vsync = false, std::string name = "Hello World", bool initNow = true);
 	~JNX_Engine();
@@ -79,7 +76,7 @@ public:
 	void swapBuffers();
 	void sortRenderQueue();
 	void registerGameObject(GameObject* go);
-	void cleanRegisteredGOs(bool deleteCall = true);
+	void cleanRegisteredGOs();
 };
 
 #endif

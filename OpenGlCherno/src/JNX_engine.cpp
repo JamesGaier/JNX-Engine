@@ -98,57 +98,17 @@ void JNX_Engine::swapBuffers() {
 	}
 }
 
-int JNX_Engine::minIndex(size_t sortedIndex) {
-	int min_index = -1;
-	unsigned char min_val = 255;
-	const auto size = numRegisteredObjects();
-
-	for(size_t i = 0; i < size; i++) {
-		const auto curr = gameObjects.front();
-		gameObjects.pop();  // This is dequeue() in C++ STL
-
-		// we add the condition i <= sortedIndex
-		// because we don't want to traverse
-		// on the sorted part of the queue,
-		// which is the right part.
-		if(curr->renderLayer() <= min_val && i <= sortedIndex) {
-			min_index = i;
-			min_val = curr->renderLayer();
-		}
-		gameObjects.push(curr);  // This is enqueue() in C++ STL
-	}
-	return min_index;
-}
-
-// Moves given minimum element to rear of queue
-void JNX_Engine::insertMinToRear(int min_index) {
-	GameObject* min_val;
-	const auto size = numRegisteredObjects();
-	for(size_t i = 0; i < size; i++) {
-		const auto curr = gameObjects.front();
-		gameObjects.pop();
-		if(i != min_index)
-			gameObjects.push(curr);
-		else
-			min_val = curr;
-	}
-	gameObjects.push(min_val);
-}
-
 void JNX_Engine::sortRenderQueue() {
-
-	if(numRegisteredObjects() == 1) { return; }
-	for(size_t i = 1; i <= numRegisteredObjects(); i++) {
-		const auto min_index = minIndex(numRegisteredObjects() - i);
-		insertMinToRear(min_index);
-	}
+	std::sort(gameObjects.begin(), gameObjects.end(),
+			  [ ](GameObject* i, GameObject* j) {
+		return i->renderLayer() < j->renderLayer();
+	});
 
 	isRenderSorted = true;
 }
 
 void JNX_Engine::registerGameObject(GameObject* go) {
-	
-	gameObjects.push(go);
+	gameObjects.push_back(go);
 	go->onRegistered();
 	isRenderSorted = false;
 }
@@ -163,34 +123,18 @@ void JNX_Engine::renderGameObjects() {
 		sortRenderQueue();
 	}
 
-	const auto size = numRegisteredObjects();
-	for(size_t i = 0; i < size; i++) {
-		auto go = gameObjects.front();
-		gameObjects.pop();
-		renderGameObject(go);
-		gameObjects.push(go);
-	}
+	std::for_each(gameObjects.begin(), gameObjects.end(), JNX_Engine::renderGameObject);
 }
 
 void JNX_Engine::updateGameObjects() {
-	const auto size = numRegisteredObjects();
-	for(size_t i = 0; i < size; i++) {
-		const auto go = gameObjects.front();
-		gameObjects.pop();
-		go->update(time() - lastDelta);
-		gameObjects.push(go);
-	}
+	std::for_each(gameObjects.begin(), gameObjects.end(),
+				  [=](GameObject* go) {go->update(time() - lastDelta); });
 
 	lastDelta = time();
 }
 
-void JNX_Engine::cleanRegisteredGOs(bool deleteCall) {
-	
-	while(numRegisteredObjects() > 0) {
-		if(deleteCall) {
-			delete gameObjects.front();
-		}
-		gameObjects.pop();
-	}
+void JNX_Engine::cleanRegisteredGOs() {
+	gameObjects.clear();
+
 	isRenderSorted = true;
 }
