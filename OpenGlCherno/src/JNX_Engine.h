@@ -27,7 +27,7 @@ private:
 	GLFWwindow* window;
 
 	bool isRenderSorted, sortRender_flag;
-	std::vector<GameObject*> gameObjects;
+	std::vector<std::shared_ptr<GameObject>> gameObjects;
 
 	std::string gameName;
 	unsigned width, height;
@@ -61,7 +61,7 @@ public:
 	inline void setPrintFrameTime(bool val) { printFrameTime = val; }
 	inline void setSortRenderFlag(bool val = true) { sortRender_flag = val; }
 
-	void renderGameObject(GameObject* go) const;
+	void renderGameObject(GameObject& go) const;
 	void renderGameObjects();
 	void updateGameObjects();
 
@@ -75,7 +75,7 @@ public:
 	void setCameraTranslate(const Vec3d& pos);
 	void swapBuffers();
 	void sortRenderQueue();
-	void registerGameObject(GameObject* go);
+	void registerGameObject(std::shared_ptr<GameObject> go);
 	void cleanRegisteredGOs();
 };
 

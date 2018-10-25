@@ -12,8 +12,6 @@
 */
 struct ShaderProgramSource {
 	std::string fragment, vertex;
-	
-	ShaderProgramSource(const std::string& frag, const std::string& vert):fragment(frag), vertex(vert) {}
 };
 
 class Shader {

@@ -100,22 +100,22 @@ void JNX_Engine::swapBuffers() {
 
 void JNX_Engine::sortRenderQueue() {
 	std::sort(gameObjects.begin(), gameObjects.end(),
-			  [ ](GameObject* i, GameObject* j) {
+			  [ ](auto i, auto j) {
 		return i->renderLayer() < j->renderLayer();
 	});
 
 	isRenderSorted = true;
 }
 
-void JNX_Engine::registerGameObject(GameObject* go) {
+void JNX_Engine::registerGameObject(std::shared_ptr<GameObject> go) {
 	gameObjects.push_back(go);
 	go->onRegistered();
 	isRenderSorted = false;
 }
 
-void JNX_Engine::renderGameObject(GameObject * go) const {
-	go->shaderSettings(viewProjection());
-	go->draw();
+void JNX_Engine::renderGameObject(GameObject& go) const {
+	go.shaderSettings(viewProjection());
+	go.draw();
 }
 
 void JNX_Engine::renderGameObjects() {
@@ -123,12 +123,14 @@ void JNX_Engine::renderGameObjects() {
 		sortRenderQueue();
 	}
 
-	std::for_each(gameObjects.begin(), gameObjects.end(), JNX_Engine::renderGameObject);
+	std::for_each(gameObjects.begin(), gameObjects.end(),
+				  [=](auto go) { renderGameObject(*go); }
+	);
 }
 
 void JNX_Engine::updateGameObjects() {
 	std::for_each(gameObjects.begin(), gameObjects.end(),
-				  [=](GameObject* go) {go->update(time() - lastDelta); });
+				  [=](auto go) {go->update(time() - lastDelta); });
 
 	lastDelta = time();
 }

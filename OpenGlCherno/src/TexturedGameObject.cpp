@@ -2,20 +2,15 @@
 #include "Input.h"
 
 TexturedGameObject::TexturedGameObject(Model* m, const std::string& textureLocation) {
-	texture = new Texture(textureLocation);
+	texture = std::make_unique<Texture>(textureLocation);
 	setModel(m);
-	shader = new Shader("res/shaders/textured.shader");
-}
-
-TexturedGameObject::~TexturedGameObject() {
-	delete texture;
+	shader = std::make_unique<Shader>("res/shaders/textured.shader");
 }
 
 void TexturedGameObject::shaderSettings(const glm::mat4& vpmat) const {
-	
 	shader->use_program();
 	texture->Bind(1);
-	
+
 	shader->setUniform1i("u_Texture", 1);
 	shader->setUniformMat4f("u_MVP", vpmat * modelMatrix());
 	shader->setUniform4f("u_Color", 1, 1, 1, 1);

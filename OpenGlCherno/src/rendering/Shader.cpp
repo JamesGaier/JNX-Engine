@@ -47,9 +47,10 @@ void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix)
 }
 
 ShaderProgramSource Shader::parse_shader(const std::string& file_path) {
-	std::vector<std::string> shaderText;
+	using namespace std;
+	vector<string> shaderText;
 	if(!loadTextFromFile(file_path, shaderText)) {
-		std::cerr << "Could not find file " << file_path << std::endl;
+		cerr << "Could not find file " << file_path << endl;
 		throw "SHADER NOT FOUND";
 	}
 
@@ -57,22 +58,22 @@ ShaderProgramSource Shader::parse_shader(const std::string& file_path) {
 		NONE = -1, VERTEX = 0, FRAGMENT = 1
 	} current = READ_MODE::NONE;
 
-	std::stringstream shaders[2];
+	stringstream shaders[2];
 	for(const auto& line : shaderText) {
-		if(line.find("#shader") != std::string::npos) {
-			if(line.find("vertex") != std::string::npos) {
+		if(line.find("#shader") != string::npos) {
+			if(line.find("vertex") != string::npos) {
 				current = READ_MODE::VERTEX;
-			} else if(line.find("fragment") != std::string::npos) {
+			} else if(line.find("fragment") != string::npos) {
 				current = READ_MODE::FRAGMENT;
 			}
 		} else {
-			shaders[static_cast<int> (current)] << line << std::endl;
+			shaders[current] << line << endl;
 
-			if(line.find("version") != std::string::npos) {
+			if(line.find("version") != string::npos) {
 				if(current == READ_MODE::VERTEX) {
-					std::cout << "Vertex shader using GLSL Version " << line.substr(9) << std::endl;
+					cout << "Vertex shader using GLSL Version " << line.substr(9) << endl;
 				} else if(current == READ_MODE::FRAGMENT) {
-					std::cout << "Fragment shader using GLSL Version " << line.substr(9) << std::endl;
+					cout << "Fragment shader using GLSL Version " << line.substr(9) << endl;
 				}
 			}
 		}

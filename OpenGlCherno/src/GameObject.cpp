@@ -3,10 +3,8 @@
 
 GameObject::GameObject(const std::string & modelLocation, const std::string& shaderLocation) {
 	setModel(new Model(modelLocation));
-	shader = new Shader(shaderLocation);
+	shader = std::make_unique<Shader>(shaderLocation);
 }
-
-GameObject::~GameObject() { delete model; delete shader; }
 
 glm::mat4 GameObject::translateMat() const {
 	return glm::translate(glm::mat4(), static_cast<glm::vec3>(pos));
@@ -17,7 +15,7 @@ glm::mat4 GameObject::scaleMat() const {
 }
 
 void GameObject::setModel(Model * m) {
-	model = m;
+	model = std::unique_ptr<Model>(m);
 	setScale(Vec3d(m->scaleFactor()));
 }
 
@@ -36,7 +34,7 @@ void GameObject::shaderSettings(const glm::mat4 & vpmat) const {
 }
 
 void GameObject::draw() const {
-	Renderer::draw(model, shader);
+	Renderer::draw(model.get(), shader.get());
 }
 
 void GameObject::update(double delta) {

@@ -2,8 +2,8 @@
 
 #include "obj_loader/OBJ_Loader.h"
 
-inline float magnitude(objl::Vector3 vec) {
-	return sqrtf((vec.X * vec.X) + (vec.Y * vec.Y) + (vec.Z * vec.Z));
+inline auto magnitudeSquared(objl::Vector3 vec) {
+	return (vec.X * vec.X) + (vec.Y * vec.Y) + (vec.Z * vec.Z);
 }
 
 Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
@@ -30,20 +30,20 @@ bool Model::loadModel(const std::string & file) {
 		vertex_buffer = new float[VERTEX_BUFFER_COUNT];
 
 		int currentIndex = 0;
-		float farthestVertex = 0;
-		for each (const auto& vert in loader.LoadedVertices) {
+		float farthestVertexSquared = 0;
+		for(const auto& vert : loader.LoadedVertices) {
 			const auto& data = vert.Position;
 			vertex_buffer[currentIndex] = data.X;
 			vertex_buffer[currentIndex + 1] = data.Y;
 			vertex_buffer[currentIndex + 2] = data.Z;
 
-			if(magnitude(data) > farthestVertex) {
-				farthestVertex = magnitude(data);
+			if(magnitudeSquared(data) > farthestVertexSquared) {
+				farthestVertexSquared = magnitudeSquared(data);
 			}
 
 			currentIndex += 3;
 		}
-		normalFactor = 1 / farthestVertex;
+		normalFactor = 1 / sqrtf(farthestVertexSquared);
 
 		INDICE_COUNT = static_cast<unsigned>(loader.LoadedIndices.size());
 		indicies = new unsigned int[INDICE_COUNT];
@@ -82,16 +82,16 @@ bool Model::loadSquare(float sideLength, bool textured) {
 		VERTEX_BUFFER_COUNT = 16;
 		vertex_buffer = new float[VERTEX_BUFFER_COUNT] {
 			-halfSide, -halfSide,
-				0,1,
+				0, 1,
 				halfSide, -halfSide,
-				1,1,
+				1, 1,
 				halfSide, halfSide,
-				1,0,
+				1, 0,
 				-halfSide, halfSide,
-				0,0
+				0, 0
 		};
 	}
-	
+
 	INDICE_COUNT = 6;
 	indicies = new unsigned[INDICE_COUNT] {
 		0, 1, 2,

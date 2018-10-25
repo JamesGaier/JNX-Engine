@@ -8,8 +8,7 @@
 * @author Nicholas Baron
 */
 struct VertexElement {
-	unsigned type;
-	unsigned count;
+	unsigned type, count;
 	bool normalized;
 
 	static unsigned sizeOfType(unsigned type) {

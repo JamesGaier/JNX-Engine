@@ -20,6 +20,12 @@ bool loadTextFromFile(const std::string& location, std::vector<std::string>& dat
 }
 
 std::string appendWithSeperator(const std::vector<std::string>& lines, const std::string & sep) {
+	if(lines.size() == 1) {
+		return lines[0];
+	} else if(lines.size() == 0) {
+		return "";
+	}
+
 	std::string toRet;
 
 	for(size_t i = 0; i < lines.size(); i++) {

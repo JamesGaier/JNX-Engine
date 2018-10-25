@@ -13,7 +13,7 @@ private:
 	Vec3d pos = Vec3d(0);
 	Vec3d scale = Vec3d(1);
 	glm::mat4 rotation;
-	Model* model;
+	std::unique_ptr<Model> model;
 
 	//0 for first render (background), greater is last rendered (foreground)
 	unsigned char renderPriority;
@@ -22,12 +22,11 @@ protected:
 	inline const Vec3d& position() const { return pos; }
 	//0 for background, higher for foreground
 	void setRenderLayer(unsigned char layer) { renderPriority = layer; }
-	Shader* shader;
+	std::unique_ptr<Shader> shader;
 
 public:
 	GameObject() {}
 	GameObject(const std::string& modelLocation, const std::string& shaderLocation);
-	virtual ~GameObject();
 
 	inline unsigned char renderLayer() const { return renderPriority; }
 	glm::mat4 translateMat() const;
